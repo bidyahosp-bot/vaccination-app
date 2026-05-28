@@ -1253,6 +1253,34 @@ input, button, textarea, select {
   overflow-wrap: break-word;
 }
 
+/* ==================== توقيع المطور ==================== */
+.developer-credit {
+  text-align: center;
+  padding: 12px 15px;
+  margin: 0 15px;
+  font-size: clamp(11px, 2.8vw, 13px);
+  color: var(--text-light);
+  background: rgba(255,255,255,0.6);
+  border-radius: 50px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+  letter-spacing: 0.5px;
+}
+.developer-credit i {
+  margin-left: 6px;
+  color: var(--lavender);
+  font-size: clamp(10px, 2.5vw, 12px);
+}
+.developer-credit strong {
+  color: var(--pink);
+  font-weight: 800;
+  letter-spacing: 1px;
+  background: linear-gradient(90deg, #f7a8b8, #b8a4d4);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 </style>
 </head>
 <body>
@@ -1364,6 +1392,11 @@ input, button, textarea, select {
     <i class="fas fa-heart"></i>
     معاً نحمي طفلك اليوم .. لنضمن له مستقبلاً صحياً
     <i class="fas fa-heart"></i>
+  </div>
+
+  <div class="developer-credit">
+    <i class="fas fa-code"></i>
+    by: <strong>JOUHARAH.IT</strong>
   </div>
 
   <!-- زر QR Code -->
@@ -2393,5 +2426,6 @@ if (document.readyState === 'loading') {
 }
 
 </script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 </body>
 </html>
