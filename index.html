@@ -1,0 +1,2245 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#5fb8b3">
+<title>جواز التحصين الذكي - مستشفى بدية</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+<style>
+/* ==================== الإعدادات الأساسية ==================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+:root {
+  --mint: #7fcec9;
+  --mint-light: #d4f1ef;
+  --pink: #f7a8b8;
+  --pink-light: #fde2e6;
+  --lavender: #b8a4d4;
+  --lavender-light: #e7defa;
+  --green: #8dcfa5;
+  --green-light: #d5ebe0;
+  --yellow: #f5cf7a;
+  --yellow-light: #fdf2d4;
+  --teal: #6cbac9;
+  --teal-light: #d4eef3;
+  --red-soft: #ff7878;
+  --text-dark: #3a4a5c;
+  --text-light: #6b7888;
+  --bg-soft: #fef9f7;
+  --shadow: 0 4px 20px rgba(0,0,0,0.08);
+  --shadow-hover: 0 8px 30px rgba(0,0,0,0.12);
+}
+
+body {
+  font-family: 'Tajawal', sans-serif;
+  background: linear-gradient(135deg, #fef9f7 0%, #fde9ec 50%, #e8f6f5 100%);
+  color: var(--text-dark);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ==================== الشاشات ==================== */
+.screen {
+  display: none;
+  min-height: 100vh;
+  max-width: 480px;
+  margin: 0 auto;
+  background: var(--bg-soft);
+  position: relative;
+  padding-bottom: 30px;
+  box-shadow: 0 0 40px rgba(0,0,0,0.05);
+}
+.screen.active {
+  display: block;
+  animation: fadeSlide 0.4s ease;
+}
+@keyframes fadeSlide {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==================== الهيدر الرئيسي ==================== */
+.header-banner {
+  background: linear-gradient(135deg, #f7a8b8 0%, #fde2e6 100%);
+  padding: 40px 20px 60px;
+  text-align: center;
+  position: relative;
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+}
+
+.header-content {
+  position: relative;
+  z-index: 2;
+}
+
+.logo-icon {
+  width: 60px;
+  height: 60px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 15px;
+  box-shadow: var(--shadow);
+}
+.logo-icon i {
+  font-size: 28px;
+  color: var(--pink);
+}
+
+.header-banner h1 {
+  color: white;
+  font-size: 28px;
+  font-weight: 800;
+  margin-bottom: 8px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.tagline {
+  color: white;
+  font-size: 15px;
+  opacity: 0.95;
+  font-weight: 500;
+}
+
+/* ==================== الرسم التوضيحي للطفل ==================== */
+.baby-illustration {
+  margin-top: -40px;
+  text-align: center;
+  position: relative;
+  z-index: 3;
+}
+
+.baby-circle {
+  width: 120px;
+  height: 120px;
+  background: linear-gradient(135deg, #fff 0%, #d4f1ef 100%);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow);
+  border: 5px solid white;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.baby-emoji {
+  font-size: 60px;
+}
+
+.hearts-float {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+.hearts-float span {
+  position: absolute;
+  font-size: 20px;
+  animation: heartFloat 4s ease-in-out infinite;
+}
+.hearts-float span:nth-child(1) { left: 30%; top: 20%; animation-delay: 0s; }
+.hearts-float span:nth-child(2) { right: 25%; top: 40%; animation-delay: 1s; }
+.hearts-float span:nth-child(3) { left: 25%; top: 60%; animation-delay: 2s; }
+
+@keyframes heartFloat {
+  0%, 100% { transform: translateY(0) scale(1); opacity: 0.7; }
+  50% { transform: translateY(-15px) scale(1.2); opacity: 1; }
+}
+
+/* ==================== الشعار الترحيبي ==================== */
+.welcome-ribbon {
+  background: linear-gradient(90deg, #7fcec9 0%, #6cbac9 100%);
+  color: white;
+  text-align: center;
+  padding: 15px 20px;
+  margin: 20px 20px 25px;
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  position: relative;
+}
+.welcome-ribbon p { font-size: 13px; font-weight: 500; }
+.welcome-ribbon p.big { font-size: 16px; font-weight: 800; margin-top: 3px; }
+
+/* ==================== شبكة البطاقات ==================== */
+.cards-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding: 0 15px;
+}
+
+.info-card {
+  background: white;
+  border-radius: 18px;
+  padding: 18px 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow);
+  border-top: 4px solid;
+  position: relative;
+  overflow: hidden;
+}
+.info-card:active { transform: scale(0.97); }
+.info-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
+
+.card-mint { border-top-color: var(--mint); }
+.card-lavender { border-top-color: var(--lavender); }
+.card-green { border-top-color: var(--green); }
+.card-yellow { border-top-color: var(--yellow); }
+.card-teal { border-top-color: var(--teal); }
+.card-pink { border-top-color: var(--pink); }
+
+.card-icon-wrap {
+  width: 55px;
+  height: 55px;
+  border-radius: 16px;
+  margin: 0 auto 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  color: white;
+}
+.card-icon-wrap.mint { background: linear-gradient(135deg, #7fcec9, #5fb8b3); }
+.card-icon-wrap.lavender { background: linear-gradient(135deg, #b8a4d4, #9c84c0); }
+.card-icon-wrap.green { background: linear-gradient(135deg, #8dcfa5, #6bb88a); }
+.card-icon-wrap.yellow { background: linear-gradient(135deg, #f5cf7a, #e8b94d); }
+.card-icon-wrap.teal { background: linear-gradient(135deg, #6cbac9, #4ea2b3); }
+.card-icon-wrap.pink { background: linear-gradient(135deg, #f7a8b8, #ee8a9e); }
+
+.info-card h3 {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 5px;
+  color: var(--text-dark);
+}
+.info-card p {
+  font-size: 11px;
+  color: var(--text-light);
+  line-height: 1.4;
+}
+
+/* ==================== شريط التواصل ==================== */
+.contact-bar {
+  margin: 25px 15px 15px;
+  background: linear-gradient(135deg, #fde2e6 0%, #d4f1ef 100%);
+  border-radius: 20px;
+  padding: 15px;
+  display: flex;
+  gap: 10px;
+}
+
+.contact-item {
+  flex: 1;
+  background: white;
+  border-radius: 14px;
+  padding: 12px 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.contact-item:active { transform: scale(0.96); }
+
+.contact-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+.contact-icon.whatsapp { background: #25d366; }
+.contact-icon.youtube { background: #ff0000; }
+
+.contact-text strong { display: block; font-size: 12px; color: var(--text-dark); }
+.contact-text small { font-size: 10px; color: var(--text-light); }
+
+/* ==================== الفوتر ==================== */
+.footer-banner {
+  background: linear-gradient(90deg, #7fcec9 0%, #6cbac9 100%);
+  color: white;
+  text-align: center;
+  padding: 15px;
+  margin: 15px;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: var(--shadow);
+}
+.footer-banner i { margin: 0 8px; animation: pulse 1.5s ease-in-out infinite; }
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+/* ==================== زر QR العائم ==================== */
+.qr-fab {
+  position: fixed;
+  bottom: 20px;
+  left: calc(50% - 220px + 20px);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #7fcec9, #5fb8b3);
+  color: white;
+  border: 4px solid white;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(127, 206, 201, 0.5);
+  z-index: 100;
+  transition: all 0.3s;
+}
+.qr-fab:active { transform: scale(0.9); }
+
+@media (max-width: 520px) {
+  .qr-fab { left: 20px; }
+}
+
+/* ==================== الشاشات الفرعية ==================== */
+.sub-header {
+  background: linear-gradient(135deg, #f7a8b8 0%, #fde2e6 100%);
+  color: white;
+  padding: 20px 15px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+  box-shadow: var(--shadow);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.sub-header.mint-bg { background: linear-gradient(135deg, #7fcec9, #5fb8b3); }
+.sub-header.lavender-bg { background: linear-gradient(135deg, #b8a4d4, #9c84c0); }
+.sub-header.green-bg { background: linear-gradient(135deg, #8dcfa5, #6bb88a); }
+.sub-header.yellow-bg { background: linear-gradient(135deg, #f5cf7a, #e8b94d); }
+.sub-header.teal-bg { background: linear-gradient(135deg, #6cbac9, #4ea2b3); }
+.sub-header.pink-bg { background: linear-gradient(135deg, #f7a8b8, #ee8a9e); }
+.sub-header.red-bg { background: linear-gradient(135deg, #ff7878, #ff5959); }
+
+.back-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.3);
+  border: none;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+}
+.back-btn:active { transform: scale(0.9); }
+
+.sub-header h2 {
+  font-size: 18px;
+  font-weight: 700;
+  flex: 1;
+}
+
+.content-area {
+  padding: 20px 15px;
+}
+.content-area.centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+}
+
+/* ==================== Info Banner ==================== */
+.info-banner {
+  background: white;
+  border-radius: 15px;
+  padding: 15px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-right: 5px solid;
+  box-shadow: var(--shadow);
+}
+.info-banner i { font-size: 24px; flex-shrink: 0; }
+.info-banner p { font-size: 13px; line-height: 1.5; }
+.info-banner.mint { border-right-color: var(--mint); }
+.info-banner.mint i { color: var(--mint); }
+.info-banner.lavender { border-right-color: var(--lavender); }
+.info-banner.lavender i { color: var(--lavender); }
+.info-banner.green { border-right-color: var(--green); }
+.info-banner.green i { color: var(--green); }
+.info-banner.yellow { border-right-color: var(--yellow); }
+.info-banner.yellow i { color: var(--yellow); }
+.info-banner.teal { border-right-color: var(--teal); }
+.info-banner.teal i { color: var(--teal); }
+.info-banner.pink { border-right-color: var(--pink); }
+.info-banner.pink i { color: var(--pink); }
+
+/* ==================== Timeline (جدول التطعيمات) ==================== */
+.timeline {
+  position: relative;
+  padding-right: 30px;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  right: 15px;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, var(--mint), var(--lavender), var(--pink));
+  border-radius: 3px;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 20px;
+  background: white;
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.timeline-item:active { transform: scale(0.98); }
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  right: -23px;
+  top: 22px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: white;
+  border: 4px solid var(--mint);
+  box-shadow: 0 0 0 4px rgba(127,206,201,0.2);
+}
+
+.timeline-age {
+  display: inline-block;
+  background: linear-gradient(135deg, #7fcec9, #5fb8b3);
+  color: white;
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.timeline-vaccines {
+  list-style: none;
+  margin-top: 10px;
+}
+.timeline-vaccines li {
+  padding: 8px 0;
+  border-bottom: 1px dashed #f0f0f0;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.timeline-vaccines li:last-child { border-bottom: none; }
+.timeline-vaccines li i {
+  color: var(--mint);
+  font-size: 12px;
+}
+.timeline-vaccines li.optional i { color: var(--lavender); }
+.timeline-vaccines li.optional::after {
+  content: 'اختياري';
+  font-size: 9px;
+  background: var(--lavender-light);
+  color: var(--lavender);
+  padding: 2px 6px;
+  border-radius: 6px;
+  margin-right: auto;
+  font-weight: 700;
+}
+
+/* ==================== قائمة التطعيمات ==================== */
+.vaccines-list {
+  display: grid;
+  gap: 12px;
+}
+
+.vaccine-card {
+  background: white;
+  border-radius: 18px;
+  padding: 15px;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.vaccine-card:active { transform: scale(0.98); }
+
+.vaccine-card-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #b8a4d4, #9c84c0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+.vaccine-card-content { flex: 1; }
+.vaccine-card-content h4 {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.vaccine-card-content p {
+  font-size: 12px;
+  color: var(--text-light);
+  line-height: 1.4;
+}
+
+.vaccine-card-arrow {
+  color: var(--lavender);
+  font-size: 16px;
+}
+
+/* ==================== شاشة تفاصيل التطعيم ==================== */
+.detail-section {
+  background: white;
+  border-radius: 18px;
+  padding: 20px;
+  margin-bottom: 15px;
+  box-shadow: var(--shadow);
+}
+.detail-section h3 {
+  font-size: 16px;
+  margin-bottom: 12px;
+  color: var(--lavender);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.detail-section h3 i {
+  width: 35px;
+  height: 35px;
+  border-radius: 10px;
+  background: var(--lavender-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+.detail-section p { font-size: 14px; line-height: 1.7; color: var(--text-dark); }
+.detail-section ul { margin-top: 10px; padding-right: 20px; }
+.detail-section ul li { font-size: 13px; line-height: 1.8; color: var(--text-light); }
+
+/* ==================== Tips Grid ==================== */
+.tips-grid {
+  display: grid;
+  gap: 12px;
+}
+.tip-card {
+  background: white;
+  border-radius: 18px;
+  padding: 18px;
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  box-shadow: var(--shadow);
+  border-right: 5px solid var(--green);
+}
+.tip-card-number {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #8dcfa5, #6bb88a);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+.tip-card-content h4 { font-size: 14px; margin-bottom: 5px; }
+.tip-card-content p { font-size: 12px; color: var(--text-light); line-height: 1.5; }
+
+/* ==================== Symptoms ==================== */
+.symptoms-section {
+  margin-bottom: 25px;
+}
+.section-title-green {
+  font-size: 15px;
+  color: var(--green);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 15px;
+  background: var(--green-light);
+  border-radius: 12px;
+}
+.section-title-red {
+  font-size: 15px;
+  color: var(--red-soft);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 15px;
+  background: #ffe5e5;
+  border-radius: 12px;
+}
+
+.symptoms-list {
+  display: grid;
+  gap: 10px;
+}
+.symptom-item {
+  background: white;
+  padding: 12px 15px;
+  border-radius: 14px;
+  font-size: 13px;
+  box-shadow: var(--shadow);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.symptom-item i {
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.symptom-item.normal { border-right: 4px solid var(--green); }
+.symptom-item.normal i { color: var(--green); }
+.symptom-item.alert { border-right: 4px solid var(--red-soft); }
+.symptom-item.alert i { color: var(--red-soft); }
+
+.emergency-card {
+  background: linear-gradient(135deg, #ff7878, #ff5959);
+  color: white;
+  border-radius: 18px;
+  padding: 18px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(255,120,120,0.4);
+  margin-top: 15px;
+}
+.emergency-card i { font-size: 30px; }
+.emergency-card strong { display: block; font-size: 15px; margin-bottom: 4px; }
+.emergency-card p { font-size: 13px; opacity: 0.95; }
+
+/* ==================== Nutrition Grid ==================== */
+.nutrition-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.nutrition-card {
+  background: white;
+  border-radius: 18px;
+  padding: 15px 10px;
+  text-align: center;
+  box-shadow: var(--shadow);
+  border-top: 4px solid var(--teal);
+}
+.nutrition-emoji { font-size: 40px; margin-bottom: 8px; }
+.nutrition-card h4 { font-size: 13px; margin-bottom: 5px; }
+.nutrition-card p { font-size: 11px; color: var(--text-light); line-height: 1.4; }
+
+/* ==================== QR Code ==================== */
+.qr-card {
+  background: white;
+  border-radius: 25px;
+  padding: 30px 20px;
+  text-align: center;
+  box-shadow: var(--shadow);
+  max-width: 320px;
+}
+.qr-card h3 { font-size: 20px; color: var(--mint); margin-bottom: 5px; }
+.qr-card > p { font-size: 13px; color: var(--text-light); margin-bottom: 20px; }
+
+#qrcode {
+  display: inline-block;
+  padding: 15px;
+  background: white;
+  border-radius: 15px;
+  border: 3px dashed var(--mint);
+  margin: 10px 0 15px;
+}
+#qrcode img, #qrcode canvas { display: block; margin: 0 auto; }
+
+.qr-info {
+  font-size: 12px;
+  color: var(--text-light);
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.clinic-info {
+  background: linear-gradient(135deg, #fde2e6, #fef9f7);
+  padding: 12px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: right;
+}
+.clinic-info i {
+  font-size: 22px;
+  color: var(--pink);
+  width: 40px;
+  height: 40px;
+  background: white;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.clinic-info strong { display: block; font-size: 13px; }
+.clinic-info small { font-size: 11px; color: var(--text-light); }
+
+/* ==================== Iron Tracking ==================== */
+.user-type-selector {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  background: white;
+  padding: 6px;
+  border-radius: 15px;
+  box-shadow: var(--shadow);
+}
+.user-btn {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  background: transparent;
+  color: var(--text-light);
+  border-radius: 12px;
+  font-family: 'Tajawal', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.user-btn.active {
+  background: linear-gradient(135deg, #f7a8b8, #ee8a9e);
+  color: white;
+  box-shadow: 0 4px 12px rgba(247,168,184,0.4);
+}
+
+.user-section { display: none; }
+.user-section.active { display: block; animation: fadeSlide 0.3s ease; }
+
+.search-box {
+  display: flex;
+  gap: 8px;
+  margin: 15px 0;
+}
+.search-box input {
+  flex: 1;
+  padding: 12px 15px;
+  border: 2px solid #f0f0f0;
+  border-radius: 12px;
+  font-family: 'Tajawal', sans-serif;
+  font-size: 13px;
+  background: white;
+}
+.search-box input:focus {
+  outline: none;
+  border-color: var(--pink);
+}
+.search-box button {
+  padding: 0 18px;
+  background: linear-gradient(135deg, #f7a8b8, #ee8a9e);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-family: 'Tajawal', sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+}
+.search-box button:active { transform: scale(0.95); }
+
+.nurse-login-box {
+  background: white;
+  border-radius: 20px;
+  padding: 30px 20px;
+  text-align: center;
+  box-shadow: var(--shadow);
+  margin-top: 20px;
+}
+.nurse-login-box i {
+  font-size: 40px;
+  color: var(--pink);
+  margin-bottom: 15px;
+}
+.nurse-login-box h3 { font-size: 18px; margin-bottom: 15px; }
+.nurse-login-box input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 2px solid #f0f0f0;
+  border-radius: 12px;
+  font-family: 'Tajawal', sans-serif;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+.nurse-login-box button {
+  padding: 12px 30px;
+  background: linear-gradient(135deg, #f7a8b8, #ee8a9e);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-family: 'Tajawal', sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 14px;
+}
+.nurse-login-box small {
+  display: block;
+  margin-top: 15px;
+  color: var(--text-light);
+  font-size: 11px;
+}
+
+.add-record-btn {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #8dcfa5, #6bb88a);
+  color: white;
+  border: none;
+  border-radius: 14px;
+  font-family: 'Tajawal', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 12px rgba(141,207,165,0.4);
+}
+
+.add-form {
+  background: white;
+  border-radius: 18px;
+  padding: 20px;
+  box-shadow: var(--shadow);
+  margin-bottom: 15px;
+}
+.add-form h3 { font-size: 15px; margin-bottom: 15px; color: var(--pink); }
+
+.form-grid {
+  display: grid;
+  gap: 12px;
+}
+.form-field label {
+  display: block;
+  font-size: 12px;
+  margin-bottom: 5px;
+  color: var(--text-dark);
+  font-weight: 600;
+}
+.form-field input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 2px solid #f0f0f0;
+  border-radius: 10px;
+  font-family: 'Tajawal', sans-serif;
+  font-size: 13px;
+}
+.form-field input:focus { outline: none; border-color: var(--pink); }
+
+.form-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+.save-btn, .cancel-btn {
+  flex: 1;
+  padding: 11px;
+  border: none;
+  border-radius: 12px;
+  font-family: 'Tajawal', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+}
+.save-btn { background: var(--green); color: white; }
+.cancel-btn { background: #e8e8e8; color: var(--text-dark); }
+
+.legend-box {
+  background: white;
+  border-radius: 14px;
+  padding: 12px;
+  margin: 15px 0;
+  font-size: 12px;
+  box-shadow: var(--shadow);
+}
+.legend-box strong { display: block; margin-bottom: 8px; }
+.legend-item {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 11px;
+  margin: 3px;
+  font-weight: 600;
+}
+.legend-item.normal { background: #d5ebe0; color: #2d7a4a; }
+.legend-item.mild { background: #fdf2d4; color: #b8901a; }
+.legend-item.moderate { background: #fde2c4; color: #c4691a; }
+.legend-item.severe { background: #ffd4d4; color: #c43a3a; }
+
+.records-table {
+  margin-top: 10px;
+}
+.record-row {
+  background: white;
+  border-radius: 14px;
+  padding: 15px;
+  margin-bottom: 10px;
+  box-shadow: var(--shadow);
+  border-right: 5px solid;
+}
+.record-row.normal { border-right-color: #4caf7d; }
+.record-row.mild { border-right-color: #e8b94d; }
+.record-row.moderate { border-right-color: #e89a4d; }
+.record-row.severe { border-right-color: #ff5959; }
+
+.record-row-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.record-name { font-weight: 700; font-size: 14px; }
+.record-status {
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 700;
+}
+.record-status.normal { background: #d5ebe0; color: #2d7a4a; }
+.record-status.mild { background: #fdf2d4; color: #b8901a; }
+.record-status.moderate { background: #fde2c4; color: #c4691a; }
+.record-status.severe { background: #ffd4d4; color: #c43a3a; }
+
+.record-details {
+  font-size: 12px;
+  color: var(--text-light);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin-top: 8px;
+}
+.record-details span i {
+  margin-left: 5px;
+  color: var(--pink);
+}
+
+.record-delete {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  background: #ffe5e5;
+  color: #c43a3a;
+  border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.results-area {
+  margin-top: 15px;
+}
+.no-results {
+  text-align: center;
+  padding: 30px;
+  color: var(--text-light);
+  background: white;
+  border-radius: 15px;
+}
+.no-results i { font-size: 40px; margin-bottom: 10px; color: #ddd; display: block; }
+
+/* ==================== Video List ==================== */
+.video-list {
+  display: grid;
+  gap: 12px;
+}
+.video-card {
+  background: white;
+  border-radius: 16px;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition: all 0.3s;
+}
+.video-card:active { transform: scale(0.98); }
+.video-thumb {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #ff7878, #ff5959);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 24px;
+  flex-shrink: 0;
+}
+.video-meta h4 { font-size: 14px; margin-bottom: 4px; }
+.video-meta p { font-size: 11px; color: var(--text-light); line-height: 1.4; }
+
+/* ==================== Modal ==================== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+.modal-overlay.active { display: flex; animation: fadeSlide 0.2s ease; }
+
+.modal-box {
+  background: white;
+  border-radius: 20px;
+  padding: 25px 20px;
+  text-align: center;
+  max-width: 320px;
+  width: 100%;
+}
+.modal-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--mint-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 15px;
+  font-size: 28px;
+  color: var(--mint);
+}
+.modal-icon.success { background: var(--green-light); color: var(--green); }
+.modal-icon.error { background: #ffe5e5; color: var(--red-soft); }
+.modal-icon.warning { background: var(--yellow-light); color: #b8901a; }
+
+.modal-box h3 { font-size: 18px; margin-bottom: 8px; }
+.modal-box p { font-size: 13px; color: var(--text-light); line-height: 1.6; margin-bottom: 20px; }
+.modal-box button {
+  padding: 10px 30px;
+  background: linear-gradient(135deg, #7fcec9, #5fb8b3);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-family: 'Tajawal', sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* ==================== Wave Shape ==================== */
+.wave-shape {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 30px;
+  background: var(--bg-soft);
+  border-top-left-radius: 50% 100%;
+  border-top-right-radius: 50% 100%;
+}
+
+/* ==================== Responsive ==================== */
+@media (min-width: 521px) {
+  body { padding: 0; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- ====== الشاشة الرئيسية ====== -->
+<div id="main-screen" class="screen active">
+  <div class="header-banner">
+    <div class="header-content">
+      <div class="logo-icon"><i class="fas fa-shield-heart"></i></div>
+      <h1>جواز التحصين الذكي</h1>
+      <p class="tagline">حماية اليوم . صحة الغد</p>
+    </div>
+    <div class="wave-shape"></div>
+  </div>
+
+  <div class="baby-illustration">
+    <div class="baby-circle">
+      <span class="baby-emoji">👶</span>
+    </div>
+    <div class="hearts-float">
+      <span>💗</span><span>💙</span><span>💖</span>
+    </div>
+  </div>
+
+  <div class="welcome-ribbon">
+    <p>مرحباً بك في تطبيق</p>
+    <p class="big">عيادة التحصينات - مستشفى بديّة</p>
+  </div>
+
+  <div class="cards-grid">
+    <!-- البطاقة 1: مواعيد التطعيم -->
+    <div class="info-card card-mint" onclick="openScreen('vaccination-schedule')">
+      <div class="card-icon-wrap mint">
+        <i class="fas fa-calendar-check"></i>
+      </div>
+      <h3>مواعيد التطعيمات</h3>
+      <p>جدول التطعيمات المعتمد من عمر شهرين إلى 4 سنوات</p>
+    </div>
+
+    <!-- البطاقة 2: أسماء التطعيمات -->
+    <div class="info-card card-lavender" onclick="openScreen('vaccines-info')">
+      <div class="card-icon-wrap lavender">
+        <i class="fas fa-syringe"></i>
+      </div>
+      <h3>أنواع التطعيمات وفوائدها</h3>
+      <p>تعرّف على كل تطعيم وأهميته لصحة طفلك</p>
+    </div>
+
+    <!-- البطاقة 3: تعليمات بعد التطعيم -->
+    <div class="info-card card-green" onclick="openScreen('post-vaccine')">
+      <div class="card-icon-wrap green">
+        <i class="fas fa-shield-check"></i>
+      </div>
+      <h3>تعليمات بعد التطعيم</h3>
+      <p>نصائح مهمة للحفاظ على صحة طفلك</p>
+    </div>
+
+    <!-- البطاقة 4: الأعراض الطبيعية -->
+    <div class="info-card card-yellow" onclick="openScreen('symptoms')">
+      <div class="card-icon-wrap yellow">
+        <i class="fas fa-baby"></i>
+      </div>
+      <h3>أعراض طبيعية ومتى تقلق</h3>
+      <p>الأعراض الطبيعية ومتى يجب مراجعة الطبيب</p>
+    </div>
+
+    <!-- البطاقة 5: التغذية -->
+    <div class="info-card card-teal" onclick="openScreen('nutrition')">
+      <div class="card-icon-wrap teal">
+        <i class="fas fa-bowl-food"></i>
+      </div>
+      <h3>تغذية مناسبة بعد التطعيم</h3>
+      <p>أطعمة تعزز مناعة طفلك وتساعد في النمو</p>
+    </div>
+
+    <!-- البطاقة 6: متابعة نقص الحديد -->
+    <div class="info-card card-pink" onclick="openScreen('iron-tracking')">
+      <div class="card-icon-wrap pink">
+        <i class="fas fa-droplet"></i>
+      </div>
+      <h3>متابعة نقص الحديد</h3>
+      <p>سجل فحوصات الحديد للأطفال</p>
+    </div>
+  </div>
+
+  <!-- شريط التواصل السفلي -->
+  <div class="contact-bar">
+    <div class="contact-item" onclick="openWhatsApp()">
+      <div class="contact-icon whatsapp">
+        <i class="fab fa-whatsapp"></i>
+      </div>
+      <div class="contact-text">
+        <strong>تواصلي معنا</strong>
+        <small>واتساب مستشفى بدية</small>
+      </div>
+    </div>
+    <div class="contact-item" onclick="openScreen('awareness-video')">
+      <div class="contact-icon youtube">
+        <i class="fas fa-play"></i>
+      </div>
+      <div class="contact-text">
+        <strong>فيديو توعوي</strong>
+        <small>عن أهمية التطعيمات</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-banner">
+    <i class="fas fa-heart"></i>
+    معاً نحمي طفلك اليوم .. لنضمن له مستقبلاً صحياً
+    <i class="fas fa-heart"></i>
+  </div>
+
+  <!-- زر QR Code -->
+  <button class="qr-fab" onclick="openScreen('qr-screen')">
+    <i class="fas fa-qrcode"></i>
+  </button>
+</div>
+
+<!-- ====== شاشة QR Code ====== -->
+<div id="qr-screen" class="screen">
+  <div class="sub-header">
+    <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-right"></i></button>
+    <h2>جواز التحصين الذكي</h2>
+  </div>
+  <div class="content-area centered">
+    <div class="qr-card">
+      <h3>امسحي الباركود</h3>
+      <p>للحصول على معلومات طفلك</p>
+      <div id="qrcode"></div>
+      <p class="qr-info">كل المعلومات التي تحتاجينها حول تحصينات طفلك في مكان واحد</p>
+      <div class="clinic-info">
+        <i class="fas fa-suitcase-medical"></i>
+        <div>
+          <strong>عيادة التحصينات</strong>
+          <small>مستشفى بدية - نعتني بصحة أطفالنا</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== شاشة جدول التطعيمات ====== -->
+<div id="vaccination-schedule" class="screen">
+  <div class="sub-header mint-bg">
+    <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-right"></i></button>
+    <h2><i class="fas fa-calendar-check"></i> مواعيد التطعيمات</h2>
+  </div>
+  <div class="content-area">
+    <div class="info-banner mint">
+      <i class="fas fa-info-circle"></i>
+      <p>جدول التطعيمات المعتمد في سلطنة عُمان من وزارة الصحة - من عمر شهرين إلى 4 سنوات</p>
+    </div>
+
+    <div class="timeline" id="schedule-timeline">
+      <!-- يتم تعبئتها بالـ JavaScript -->
+    </div>
+  </div>
+</div>
+
+<!-- ====== شاشة أنواع التطعيمات ====== -->
+<div id="vaccines-info" class="screen">
+  <div class="sub-header lavender-bg">
+    <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-right"></i></button>
+    <h2><i class="fas fa-syringe"></i> أنواع التطعيمات وفوائدها</h2>
+  </div>
+  <div class="content-area">
+    <div class="info-banner lavender">
+      <i class="fas fa-info-circle"></i>
+      <p>تعرّفي على كل تطعيم يُعطى لطفلك وفائدته في حمايته من الأمراض</p>
+    </div>
+    <div class="vaccines-list" id="vaccines-list">
+      <!-- يتم تعبئتها بالـ JavaScript -->
+    </div>
+  </div>
+</div>
+
+<!-- ====== شاشة تعليمات بعد التطعيم ====== -->
+<div id="post-vaccine" class="screen">
+  <div class="sub-header green-bg">
+    <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-right"></i></button>
+    <h2><i class="fas fa-shield-check"></i> تعليمات بعد التطعيم</h2>
+  </div>
+  <div class="content-area">
+    <div class="info-banner green">
+      <i class="fas fa-lightbulb"></i>
+      <p>نصائح مهمة يجب اتباعها بعد إعطاء طفلك التطعيم للحفاظ على صحته</p>
+    </div>
+    <div class="tips-grid" id="post-tips"></div>
+  </div>
+</div>
+
+<!-- ====== شاشة الأعراض الطبيعية ====== -->
+<div id="symptoms" class="screen">
+  <div class="sub-header yellow-bg">
+    <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-right"></i></button>
+    <h2><i class="fas fa-baby"></i> أعراض طبيعية ومتى تقلق</h2>
+  </div>
+  <div class="content-area">
+    <div class="symptoms-section">
+      <h3 class="section-title-green"><i class="fas fa-check-circle"></i> أعراض طبيعية (لا داعي للقلق)</h3>
+      <div class="symptoms-list" id="normal-symptoms"></div>
+    </div>
+    <div class="symptoms-section">
+      <h3 class="section-title-red"><i class="fas fa-triangle-exclamation"></i> أعراض تستدعي مراجعة الطبيب فوراً</h3>
+      <div class="symptoms-list" id="alert-symptoms"></div>
+    </div>
+    <div class="emergency-card" onclick="openWhatsApp()">
+      <i class="fas fa-phone-volume"></i>
+      <div>
+        <strong>في حالة الطوارئ</strong>
+        <p>تواصلي مع عيادة التحصينات - مستشفى بدية: 25583240</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== شاشة التغذية ====== -->
+<div id="nutrition" class="screen">
+  <div class="sub-header teal-bg">
+    <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-right"></i></button>
+    <h2><i class="fas fa-bowl-food"></i> تغذية مناسبة بعد التطعيم</h2>
+  </div>
+  <div class="content-area">
+    <div class="info-banner teal">
+      <i class="fas fa-apple-whole"></i>
+      <p>أطعمة مفيدة تعزز مناعة طفلك وتساعد في نموه السليم</p>
+    </div>
+    <div class="nutrition-grid" id="nutrition-grid"></div>
+  </div>
+</div>
+
+<!-- ====== شاشة متابعة نقص الحديد ====== -->
+<div id="iron-tracking" class="screen">
+  <div class="sub-header pink-bg">
+    <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-right"></i></button>
+    <h2><i class="fas fa-droplet"></i> متابعة نقص الحديد</h2>
+  </div>
+  <div class="content-area">
+    <div class="user-type-selector">
+      <button class="user-btn active" id="parent-btn" onclick="switchUserType('parent')">
+        <i class="fas fa-user-group"></i> أولياء الأمور
+      </button>
+      <button class="user-btn" id="nurse-btn" onclick="switchUserType('nurse')">
+        <i class="fas fa-user-nurse"></i> الممرضة
+      </button>
+    </div>
+
+    <!-- قسم أولياء الأمور -->
+    <div id="parent-section" class="user-section active">
+      <div class="info-banner pink">
+        <i class="fas fa-magnifying-glass"></i>
+        <p>ابحثي عن سجل طفلك باستخدام رقم الملف أو رقم الهاتف</p>
+      </div>
+      <div class="search-box">
+        <input type="text" id="parent-search" placeholder="أدخلي رقم ملف الطفل أو رقم هاتف الأم">
+        <button onclick="searchParent()"><i class="fas fa-magnifying-glass"></i> بحث</button>
+      </div>
+      <div id="parent-results" class="results-area"></div>
+    </div>
+
+    <!-- قسم الممرضة -->
+    <div id="nurse-section" class="user-section">
+      <!-- تسجيل دخول الممرضة -->
+      <div id="nurse-login" class="nurse-login-box">
+        <i class="fas fa-lock"></i>
+        <h3>تسجيل دخول الممرضة</h3>
+        <input type="password" id="nurse-password" placeholder="كلمة المرور">
+        <button onclick="nurseLogin()"><i class="fas fa-right-to-bracket"></i> دخول</button>
+        <small>كلمة المرور التجريبية: nurse123</small>
+      </div>
+
+      <!-- لوحة الممرضة -->
+      <div id="nurse-dashboard" style="display:none;">
+        <div class="info-banner pink">
+          <i class="fas fa-clipboard-list"></i>
+          <p>سجل فحوصات نقص الحديد لجميع الأطفال</p>
+        </div>
+
+        <button class="add-record-btn" onclick="toggleAddForm()">
+          <i class="fas fa-plus-circle"></i> إضافة فحص جديد
+        </button>
+
+        <!-- نموذج إضافة -->
+        <div id="add-form" class="add-form" style="display:none;">
+          <h3><i class="fas fa-file-circle-plus"></i> تسجيل فحص جديد</h3>
+          <div class="form-grid">
+            <div class="form-field">
+              <label>رقم الملف</label>
+              <input type="text" id="new-file-no" placeholder="مثال: 1001">
+            </div>
+            <div class="form-field">
+              <label>اسم الطفل</label>
+              <input type="text" id="new-name" placeholder="الاسم الكامل">
+            </div>
+            <div class="form-field">
+              <label>رقم هاتف الأم</label>
+              <input type="tel" id="new-phone" placeholder="مثال: 9XXXXXXX">
+            </div>
+            <div class="form-field">
+              <label>نسبة الحديد (Hb g/dL)</label>
+              <input type="number" step="0.1" id="new-level" placeholder="مثال: 10.5">
+            </div>
+            <div class="form-field">
+              <label>تاريخ الفحص</label>
+              <input type="date" id="new-date">
+            </div>
+          </div>
+          <div class="form-buttons">
+            <button class="save-btn" onclick="saveRecord()"><i class="fas fa-floppy-disk"></i> حفظ</button>
+            <button class="cancel-btn" onclick="toggleAddForm()"><i class="fas fa-xmark"></i> إلغاء</button>
+          </div>
+        </div>
+
+        <div class="search-box">
+          <input type="text" id="nurse-search" placeholder="ابحثي بالاسم أو رقم الملف أو الهاتف" oninput="renderNurseRecords()">
+          <button onclick="renderNurseRecords()"><i class="fas fa-magnifying-glass"></i></button>
+        </div>
+
+        <!-- مفتاح الألوان -->
+        <div class="legend-box">
+          <strong>دلالة الألوان:</strong>
+          <span class="legend-item normal">طبيعي (≥ 11.0)</span>
+          <span class="legend-item mild">نقص خفيف (10.0 - 10.9)</span>
+          <span class="legend-item moderate">نقص متوسط (8.0 - 9.9)</span>
+          <span class="legend-item severe">نقص شديد (< 8.0)</span>
+        </div>
+
+        <div id="records-table" class="records-table"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== شاشة الفيديو التوعوي ====== -->
+<div id="awareness-video" class="screen">
+  <div class="sub-header red-bg">
+    <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-right"></i></button>
+    <h2><i class="fas fa-play-circle"></i> فيديو توعوي</h2>
+  </div>
+  <div class="content-area">
+    <div class="info-banner" style="background:#fff3f0;border-right-color:#ff6b6b;">
+      <i class="fas fa-circle-info"></i>
+      <p>شاهدي مجموعة فيديوهات توعوية عن أهمية التطعيمات ونقص الحديد عند الأطفال</p>
+    </div>
+    <div class="video-list">
+      <div class="video-card" onclick="openVideo('https://www.youtube.com/results?search_query=أهمية+التطعيمات+للأطفال')">
+        <div class="video-thumb"><i class="fab fa-youtube"></i></div>
+        <div class="video-meta">
+          <h4>أهمية التطعيمات للأطفال</h4>
+          <p>لماذا تطعيم طفلك ضروري لحمايته من الأمراض الخطيرة</p>
+        </div>
+      </div>
+      <div class="video-card" onclick="openVideo('https://www.youtube.com/results?search_query=نقص+الحديد+عند+الأطفال')">
+        <div class="video-thumb"><i class="fab fa-youtube"></i></div>
+        <div class="video-meta">
+          <h4>نقص الحديد عند الأطفال</h4>
+          <p>الأسباب، الأعراض، والوقاية من فقر الدم</p>
+        </div>
+      </div>
+      <div class="video-card" onclick="openVideo('https://www.youtube.com/results?search_query=تغذية+الطفل+الصحية')">
+        <div class="video-thumb"><i class="fab fa-youtube"></i></div>
+        <div class="video-meta">
+          <h4>التغذية السليمة للأطفال</h4>
+          <p>أطعمة تعزز مناعة طفلك وتساعد في نموه</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== شاشة تفاصيل التطعيم ====== -->
+<div id="vaccine-detail" class="screen">
+  <div class="sub-header lavender-bg">
+    <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-right"></i></button>
+    <h2 id="vd-title">تفاصيل التطعيم</h2>
+  </div>
+  <div class="content-area" id="vd-content"></div>
+</div>
+
+<!-- ====== Modal للتنبيهات ====== -->
+<div id="modal-overlay" class="modal-overlay" onclick="closeModal()">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <div class="modal-icon" id="modal-icon"><i class="fas fa-circle-info"></i></div>
+    <h3 id="modal-title">عنوان</h3>
+    <p id="modal-message">رسالة</p>
+    <button onclick="closeModal()">حسناً</button>
+  </div>
+</div>
+
+<script>
+// ==================== جدول التطعيمات في سلطنة عُمان ====================
+const vaccinationSchedule = [
+  {
+    age: "عمر شهرين",
+    icon: "fa-baby",
+    vaccines: [
+      { name: "الجرعة الأولى ضد شلل الأطفال (IPV/OPV)", optional: false },
+      { name: "الجرعة الأولى من اللقاح الخماسي (الدفتيريا، التيتانوس، السعال الديكي، الكبد B، المستدمية النزلية)", optional: false },
+      { name: "الجرعة الأولى ضد المكورات الرئوية (PCV)", optional: false },
+      { name: "الجرعة الأولى ضد فيروس الروتا", optional: true }
+    ]
+  },
+  {
+    age: "عمر 4 شهور",
+    icon: "fa-baby",
+    vaccines: [
+      { name: "الجرعة الثانية ضد شلل الأطفال", optional: false },
+      { name: "الجرعة الثانية من اللقاح الخماسي", optional: false },
+      { name: "الجرعة الثانية ضد المكورات الرئوية (PCV)", optional: false },
+      { name: "الجرعة الثانية ضد فيروس الروتا", optional: true }
+    ]
+  },
+  {
+    age: "عمر 6 شهور",
+    icon: "fa-baby",
+    vaccines: [
+      { name: "الجرعة الثالثة ضد شلل الأطفال (OPV)", optional: false },
+      { name: "الجرعة الثالثة من اللقاح الخماسي", optional: false },
+      { name: "الجرعة الثالثة ضد المكورات الرئوية (اختيارية)", optional: true }
+    ]
+  },
+  {
+    age: "عمر 9 شهور",
+    icon: "fa-child",
+    vaccines: [
+      { name: "جرعة فيتامين A الأولى", optional: false }
+    ]
+  },
+  {
+    age: "عمر 12 شهراً (سنة)",
+    icon: "fa-cake-candles",
+    vaccines: [
+      { name: "الجرعة الأولى من الحصبة والحصبة الألمانية والنكاف (MMR-1)", optional: false },
+      { name: "جرعة معززة ضد المكورات الرئوية (PCV Booster)", optional: false },
+      { name: "الجرعة الأولى ضد الجديري المائي (Varicella)", optional: false },
+      { name: "الجرعة الأولى ضد الكبد الوبائي A", optional: true }
+    ]
+  },
+  {
+    age: "عمر 18 شهراً",
+    icon: "fa-child",
+    vaccines: [
+      { name: "جرعة منشطة ضد شلل الأطفال", optional: false },
+      { name: "جرعة منشطة ضد الدفتيريا والتيتانوس والسعال الديكي (DTP)", optional: false },
+      { name: "الجرعة الثانية من الحصبة والحصبة الألمانية والنكاف (MMR-2)", optional: false },
+      { name: "جرعة فيتامين A الثانية", optional: false }
+    ]
+  },
+  {
+    age: "عمر سنتين (24 شهراً)",
+    icon: "fa-child-reaching",
+    vaccines: [
+      { name: "الجرعة الأولى ضد الحمى الشوكية (MenACWY)", optional: true },
+      { name: "الجرعة الثانية ضد الكبد الوبائي A", optional: true }
+    ]
+  },
+  {
+    age: "عمر 4 سنوات (دخول المدرسة)",
+    icon: "fa-school",
+    vaccines: [
+      { name: "جرعة منشطة ضد شلل الأطفال (OPV Booster)", optional: false },
+      { name: "جرعة منشطة من اللقاح الثلاثي (DT)", optional: false },
+      { name: "جرعة منشطة للدرن (BCG)", optional: true },
+      { name: "الجرعة الثانية ضد الحمى الشوكية", optional: true }
+    ]
+  }
+];
+
+// ==================== أنواع التطعيمات وفوائدها ====================
+const vaccinesInfo = [
+  {
+    id: "polio",
+    name: "تطعيم شلل الأطفال (OPV / IPV)",
+    icon: "fa-shield-virus",
+    short: "يحمي من فيروس شلل الأطفال الذي يسبب الشلل الدائم",
+    benefits: [
+      "يحمي طفلك من فيروس شلل الأطفال الذي قد يسبب شللاً دائماً",
+      "يُعطى على عدة جرعات لضمان أعلى مستوى من الحماية",
+      "ساهم في القضاء شبه التام على المرض عالمياً"
+    ],
+    schedule: "يُعطى عند الولادة، شهرين، 4 شهور، 6 شهور، 9 شهور، 18 شهراً، وعند دخول المدرسة",
+    sideEffects: "آمن جداً، نادراً ما يسبب آثاراً جانبية",
+    disease: "شلل الأطفال (Poliomyelitis) - مرض فيروسي يهاجم الجهاز العصبي ويسبب شللاً دائماً"
+  },
+  {
+    id: "dtp",
+    name: "اللقاح الخماسي / الثلاثي (DTP)",
+    icon: "fa-syringe",
+    short: "يحمي من الدفتيريا والتيتانوس والسعال الديكي",
+    benefits: [
+      "الحماية من الدفتيريا التي تسبب التهابات شديدة في الحلق",
+      "الوقاية من التيتانوس (الكزاز) الذي يسبب تشنجات عضلية خطيرة",
+      "الحماية من السعال الديكي الذي يسبب نوبات سعال شديدة عند الرضع"
+    ],
+    schedule: "ثلاث جرعات في الشهرين، 4 شهور، 6 شهور، ثم جرعة معززة في 18 شهراً، وأخرى عند دخول المدرسة",
+    sideEffects: "احمرار خفيف وانتفاخ في مكان الحقن، حمى خفيفة (أعراض طبيعية تزول خلال 24-48 ساعة)",
+    disease: "ثلاثة أمراض بكتيرية خطيرة تهدد حياة الأطفال خصوصاً الرضع"
+  },
+  {
+    id: "hepb",
+    name: "تطعيم الالتهاب الكبدي ب (Hepatitis B)",
+    icon: "fa-shield-heart",
+    short: "يحمي من فيروس الكبد B الذي يسبب تليف وسرطان الكبد",
+    benefits: [
+      "يحمي طفلك من الإصابة بالتهاب الكبد المزمن",
+      "يقلل خطر الإصابة بتليف الكبد وسرطان الكبد مستقبلاً",
+      "حماية تستمر مدى الحياة في معظم الحالات"
+    ],
+    schedule: "ضمن اللقاح الخماسي في الشهرين، 4 شهور، 6 شهور (الجرعة الأولى عند الولادة)",
+    sideEffects: "ألم خفيف في مكان الحقن، نادراً ما يسبب حمى",
+    disease: "التهاب الكبد الفيروسي B - مرض مزمن قد يؤدي لتليف وسرطان الكبد"
+  },
+  {
+    id: "hib",
+    name: "تطعيم المستدمية النزلية (Hib)",
+    icon: "fa-virus-slash",
+    short: "يحمي من بكتيريا تسبب الالتهاب السحائي والالتهاب الرئوي",
+    benefits: [
+      "الحماية من الالتهاب السحائي البكتيري الخطير",
+      "الوقاية من التهاب الرئة والتهاب لسان المزمار",
+      "تقليل خطر الإصابة بعدوى الدم البكتيرية"
+    ],
+    schedule: "ضمن اللقاح الخماسي في الشهرين، 4 شهور، 6 شهور",
+    sideEffects: "احمرار وانتفاخ خفيف في مكان الحقن",
+    disease: "عدوى بكتيرية خطيرة قد تسبب التهاب السحايا وتؤدي للوفاة أو الإعاقة الدائمة"
+  },
+  {
+    id: "pcv",
+    name: "تطعيم المكورات الرئوية (PCV)",
+    icon: "fa-lungs",
+    short: "يحمي من بكتيريا تسبب الالتهاب الرئوي والتهاب الأذن",
+    benefits: [
+      "الحماية من الالتهاب الرئوي البكتيري",
+      "الوقاية من التهاب الأذن الوسطى المتكرر",
+      "تقليل خطر الإصابة بالتهاب السحايا"
+    ],
+    schedule: "ثلاث جرعات في الشهرين، 4 شهور، 6 شهور، ثم جرعة معززة في عمر 12 شهراً",
+    sideEffects: "حمى خفيفة، احمرار في مكان الحقن، تململ مؤقت",
+    disease: "بكتيريا المكورات الرئوية - تسبب التهابات في الرئة والأذن والدماغ"
+  },
+  {
+    id: "rota",
+    name: "تطعيم فيروس الروتا (Rota)",
+    icon: "fa-stomach",
+    short: "يحمي من الإسهال الشديد الذي يسببه فيروس الروتا",
+    benefits: [
+      "الحماية من الإسهال الشديد والقيء عند الرضع",
+      "تقليل خطر الجفاف الشديد والحاجة لدخول المستشفى",
+      "يُعطى عن طريق الفم (نقط) وليس حقناً"
+    ],
+    schedule: "جرعتان أو ثلاث جرعات في الشهرين، 4 شهور، (6 شهور حسب نوع اللقاح)",
+    sideEffects: "في حالات نادرة قد يسبب اضطراباً بسيطاً في المعدة",
+    disease: "التهاب المعدة والأمعاء الفيروسي - السبب الأول لإسهال الرضع حول العالم"
+  },
+  {
+    id: "mmr",
+    name: "تطعيم الحصبة والحصبة الألمانية والنكاف (MMR)",
+    icon: "fa-face-grin-stars",
+    short: "يحمي من ثلاثة أمراض فيروسية مهمة",
+    benefits: [
+      "الحماية من الحصبة التي قد تسبب مضاعفات خطيرة كالتهاب الدماغ",
+      "الوقاية من الحصبة الألمانية المضرة بالأجنة",
+      "الحماية من النكاف الذي قد يسبب العقم عند الذكور"
+    ],
+    schedule: "الجرعة الأولى في عمر 12 شهراً، والثانية في 18 شهراً",
+    sideEffects: "حمى خفيفة بعد 7-10 أيام، طفح جلدي بسيط أحياناً",
+    disease: "ثلاثة أمراض فيروسية شديدة العدوى، قد تسبب مضاعفات خطيرة"
+  },
+  {
+    id: "varicella",
+    name: "تطعيم الجديري المائي (Varicella)",
+    icon: "fa-virus",
+    short: "يحمي من مرض الجديري المائي (العنقز)",
+    benefits: [
+      "الحماية من الطفح الجلدي المؤلم والحكة الشديدة",
+      "تقليل خطر مضاعفات المرض كالتهابات الجلد",
+      "الوقاية من الإصابة بالحزام الناري مستقبلاً"
+    ],
+    schedule: "جرعة واحدة في عمر 12 شهراً (لجميع الأطفال المولودين في عُمان بعد 2010)",
+    sideEffects: "احمرار في مكان الحقن، حمى خفيفة، طفح جلدي بسيط نادراً",
+    disease: "الجديري المائي - مرض فيروسي يسبب طفحاً جلدياً وحكة شديدة"
+  },
+  {
+    id: "vita",
+    name: "جرعات فيتامين A",
+    icon: "fa-capsules",
+    short: "تعزز المناعة وتحمي صحة العين",
+    benefits: [
+      "تعزيز جهاز المناعة عند الطفل",
+      "الوقاية من نقص فيتامين A الذي يؤثر على البصر",
+      "تقليل خطر الإصابة بالعدوى وأمراض الجهاز التنفسي"
+    ],
+    schedule: "الجرعة الأولى في عمر 9 شهور، والثانية في 18 شهراً",
+    sideEffects: "آمنة تماماً، لا تسبب آثاراً جانبية تذكر",
+    disease: "نقص فيتامين A - قد يسبب ضعف البصر وضعف المناعة"
+  },
+  {
+    id: "bcg",
+    name: "تطعيم الدرن (BCG)",
+    icon: "fa-shield",
+    short: "يحمي من مرض السل (الدرن)",
+    benefits: [
+      "الحماية من السل الرئوي الخطير",
+      "الوقاية من السل السحائي عند الأطفال",
+      "يُعطى عند الولادة كأول تطعيم"
+    ],
+    schedule: "عند الولادة، وجرعة معززة عند دخول المدرسة",
+    sideEffects: "ندبة صغيرة في مكان الحقن (في الذراع)، انتفاخ بسيط",
+    disease: "السل (الدرن) - عدوى بكتيرية تصيب الرئتين بشكل رئيسي"
+  },
+  {
+    id: "men",
+    name: "تطعيم الحمى الشوكية (MenACWY)",
+    icon: "fa-brain",
+    short: "يحمي من التهاب السحايا البكتيري",
+    benefits: [
+      "الحماية من التهاب السحايا الذي قد يكون قاتلاً",
+      "الوقاية من تسمم الدم البكتيري",
+      "حماية من 4 أنواع من بكتيريا المكورات السحائية"
+    ],
+    schedule: "الجرعة الأولى في عمر سنتين، والثانية عند دخول المدرسة",
+    sideEffects: "ألم في مكان الحقن، حمى خفيفة قد تستمر يوماً",
+    disease: "الحمى الشوكية - مرض خطير قد يؤدي للوفاة خلال ساعات"
+  }
+];
+
+// ==================== تعليمات بعد التطعيم ====================
+const postVaccineTips = [
+  {
+    title: "ضعي كمادات باردة",
+    description: "إذا حدث تورم أو احمرار مكان الحقن، استخدمي كمادة باردة لطيفة لمدة 10-15 دقيقة"
+  },
+  {
+    title: "أعطي خافض الحرارة عند الحاجة",
+    description: "في حالة ارتفاع الحرارة، يمكن إعطاء الباراسيتامول حسب وزن الطفل وبعد استشارة الطبيب"
+  },
+  {
+    title: "أكثري من السوائل والرضاعة",
+    description: "احرصي على إرضاع طفلك بشكل متكرر للحفاظ على ترطيبه ودعم جهاز مناعته"
+  },
+  {
+    title: "راقبي الطفل لمدة 24-48 ساعة",
+    description: "لاحظي أي أعراض غير طبيعية واتصلي بالعيادة فوراً عند ظهور أعراض مقلقة"
+  },
+  {
+    title: "ألبسي الطفل ملابس خفيفة",
+    description: "خاصة إذا كان لديه ارتفاع في الحرارة، تجنبي تغطيته بأغطية ثقيلة"
+  },
+  {
+    title: "تجنبي فرك مكان الحقن",
+    description: "اتركي مكان الحقن دون لمس أو فرك، ولا تضعي مراهم إلا بأمر الطبيب"
+  },
+  {
+    title: "حمام دافئ مسموح",
+    description: "يمكنك تحميم الطفل بماء دافئ بشكل طبيعي، ولا تخافي من ابتلال مكان الحقن"
+  },
+  {
+    title: "احفظي بطاقة التطعيمات",
+    description: "احتفظي ببطاقة التطعيمات في مكان آمن وأحضريها معك في كل زيارة للعيادة"
+  }
+];
+
+// ==================== الأعراض الطبيعية ====================
+const normalSymptoms = [
+  "ارتفاع خفيف في درجة الحرارة (أقل من 38.5°م) ليوم أو يومين",
+  "احمرار أو انتفاخ بسيط مكان الحقن",
+  "تململ أو بكاء أكثر من المعتاد لساعات",
+  "قلة الشهية المؤقتة لوجبة أو وجبتين",
+  "نعاس وزيادة ساعات النوم",
+  "طفح جلدي بسيط بعد لقاح MMR (بعد 7-10 أيام)"
+];
+
+// ==================== أعراض مقلقة ====================
+const alertSymptoms = [
+  "حرارة مرتفعة جداً (أعلى من 39°م) لا تستجيب لخافض الحرارة",
+  "بكاء مستمر وغير طبيعي لأكثر من 3 ساعات",
+  "تشنجات أو ارتعاش في الجسم",
+  "صعوبة في التنفس أو ازرقاق الشفاه",
+  "طفح جلدي شديد أو تورم في الوجه (تحسس)",
+  "خمول شديد وعدم استجابة الطفل",
+  "قيء مستمر أو إسهال شديد",
+  "تورم كبير ومتزايد في مكان الحقن"
+];
+
+// ==================== التغذية ====================
+const nutritionItems = [
+  { emoji: "🥛", name: "الرضاعة الطبيعية", desc: "أفضل غذاء للرضع، تعزز المناعة بشكل طبيعي" },
+  { emoji: "🍊", name: "الفواكه الغنية بفيتامين C", desc: "البرتقال، الكيوي، الفراولة لتقوية المناعة" },
+  { emoji: "🥬", name: "الخضروات الورقية", desc: "السبانخ، البروكلي - غنية بالحديد والفيتامينات" },
+  { emoji: "🥚", name: "البيض", desc: "مصدر ممتاز للبروتين والحديد لنمو الطفل" },
+  { emoji: "🐟", name: "السمك", desc: "أوميغا 3 لتطور الدماغ والمناعة" },
+  { emoji: "🥑", name: "الأفوكادو", desc: "دهون صحية لنمو الطفل وتعزيز الطاقة" },
+  { emoji: "🍠", name: "البطاطا الحلوة", desc: "غنية بفيتامين A لصحة العين والمناعة" },
+  { emoji: "🥕", name: "الجزر", desc: "بيتا كاروتين لصحة العين والبشرة" },
+  { emoji: "🍌", name: "الموز", desc: "طاقة سريعة وبوتاسيوم للأطفال" },
+  { emoji: "🍎", name: "التفاح", desc: "ألياف وفيتامينات لصحة الجهاز الهضمي" },
+  { emoji: "💧", name: "الماء الكافي", desc: "للحفاظ على الترطيب خاصة بعد التطعيم" },
+  { emoji: "🥣", name: "الزبادي", desc: "بروبيوتيك لصحة الأمعاء والمناعة" }
+];
+
+// ==================== سجل نقص الحديد - بيانات تجريبية ====================
+let ironRecords = JSON.parse(localStorage.getItem('ironRecords')) || [
+  {
+    id: 1,
+    fileNo: "1001",
+    name: "محمد سالم الحارثي",
+    phone: "99887766",
+    level: 11.5,
+    date: "2026-03-15"
+  },
+  {
+    id: 2,
+    fileNo: "1002",
+    name: "فاطمة علي البوسعيدي",
+    phone: "92345678",
+    level: 10.3,
+    date: "2026-04-10"
+  },
+  {
+    id: 3,
+    fileNo: "1003",
+    name: "أحمد خالد المعمري",
+    phone: "98765432",
+    level: 9.2,
+    date: "2026-04-22"
+  },
+  {
+    id: 4,
+    fileNo: "1004",
+    name: "مريم ناصر الكندي",
+    phone: "97654321",
+    level: 7.8,
+    date: "2026-05-05"
+  },
+  {
+    id: 5,
+    fileNo: "1005",
+    name: "سعيد علي البلوشي",
+    phone: "96543210",
+    level: 11.8,
+    date: "2026-05-12"
+  }
+];
+
+function saveIronRecords() {
+  localStorage.setItem('ironRecords', JSON.stringify(ironRecords));
+}
+
+</script>
+<script>
+// ==================== إدارة الشاشات ====================
+let screenHistory = ['main-screen'];
+
+function openScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if (screenHistory[screenHistory.length - 1] !== id) {
+    screenHistory.push(id);
+  }
+  window.scrollTo(0, 0);
+
+  // عند فتح كل شاشة، تعبئة البيانات إذا لزم
+  if (id === 'vaccination-schedule') renderSchedule();
+  if (id === 'vaccines-info') renderVaccinesInfo();
+  if (id === 'post-vaccine') renderPostTips();
+  if (id === 'symptoms') renderSymptoms();
+  if (id === 'nutrition') renderNutrition();
+  if (id === 'qr-screen') renderQRCode();
+}
+
+function goBack() {
+  if (screenHistory.length > 1) {
+    screenHistory.pop();
+    const prev = screenHistory[screenHistory.length - 1];
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById(prev).classList.add('active');
+    window.scrollTo(0, 0);
+  }
+}
+
+// ==================== WhatsApp ====================
+function openWhatsApp() {
+  const phone = "96825583240"; // 968 = رمز عُمان
+  const message = encodeURIComponent("السلام عليكم، أود الاستفسار عن تطعيمات الأطفال في عيادة التحصينات بمستشفى بدية");
+  window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
+}
+
+function openVideo(url) {
+  window.open(url, '_blank');
+}
+
+// ==================== جدول التطعيمات ====================
+function renderSchedule() {
+  const container = document.getElementById('schedule-timeline');
+  if (container.dataset.loaded === 'true') return;
+  container.dataset.loaded = 'true';
+  container.innerHTML = vaccinationSchedule.map(item => `
+    <div class="timeline-item">
+      <span class="timeline-age"><i class="fas ${item.icon}"></i> ${item.age}</span>
+      <ul class="timeline-vaccines">
+        ${item.vaccines.map(v => `
+          <li class="${v.optional ? 'optional' : ''}">
+            <i class="fas ${v.optional ? 'fa-star' : 'fa-check'}"></i>
+            ${v.name}
+          </li>
+        `).join('')}
+      </ul>
+    </div>
+  `).join('');
+}
+
+// ==================== أنواع التطعيمات ====================
+function renderVaccinesInfo() {
+  const container = document.getElementById('vaccines-list');
+  if (container.dataset.loaded === 'true') return;
+  container.dataset.loaded = 'true';
+  container.innerHTML = vaccinesInfo.map(v => `
+    <div class="vaccine-card" onclick="openVaccineDetail('${v.id}')">
+      <div class="vaccine-card-icon">
+        <i class="fas ${v.icon}"></i>
+      </div>
+      <div class="vaccine-card-content">
+        <h4>${v.name}</h4>
+        <p>${v.short}</p>
+      </div>
+      <div class="vaccine-card-arrow">
+        <i class="fas fa-chevron-left"></i>
+      </div>
+    </div>
+  `).join('');
+}
+
+function openVaccineDetail(id) {
+  const v = vaccinesInfo.find(x => x.id === id);
+  document.getElementById('vd-title').innerHTML = `<i class="fas ${v.icon}"></i> ${v.name}`;
+  document.getElementById('vd-content').innerHTML = `
+    <div class="detail-section">
+      <h3><i class="fas fa-circle-info"></i> عن المرض</h3>
+      <p>${v.disease}</p>
+    </div>
+    <div class="detail-section">
+      <h3><i class="fas fa-heart-circle-check"></i> فوائد التطعيم</h3>
+      <ul>
+        ${v.benefits.map(b => `<li>${b}</li>`).join('')}
+      </ul>
+    </div>
+    <div class="detail-section">
+      <h3><i class="fas fa-calendar"></i> جدول الجرعات</h3>
+      <p>${v.schedule}</p>
+    </div>
+    <div class="detail-section">
+      <h3><i class="fas fa-triangle-exclamation"></i> الآثار الجانبية المحتملة</h3>
+      <p>${v.sideEffects}</p>
+    </div>
+  `;
+  openScreen('vaccine-detail');
+}
+
+// ==================== التعليمات والأعراض ====================
+function renderPostTips() {
+  const container = document.getElementById('post-tips');
+  if (container.dataset.loaded === 'true') return;
+  container.dataset.loaded = 'true';
+  container.innerHTML = postVaccineTips.map((t, i) => `
+    <div class="tip-card">
+      <div class="tip-card-number">${i + 1}</div>
+      <div class="tip-card-content">
+        <h4>${t.title}</h4>
+        <p>${t.description}</p>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderSymptoms() {
+  const normal = document.getElementById('normal-symptoms');
+  const alert = document.getElementById('alert-symptoms');
+  if (normal.dataset.loaded === 'true') return;
+  normal.dataset.loaded = 'true';
+  normal.innerHTML = normalSymptoms.map(s => `
+    <div class="symptom-item normal">
+      <i class="fas fa-check-circle"></i>
+      <span>${s}</span>
+    </div>
+  `).join('');
+  alert.innerHTML = alertSymptoms.map(s => `
+    <div class="symptom-item alert">
+      <i class="fas fa-triangle-exclamation"></i>
+      <span>${s}</span>
+    </div>
+  `).join('');
+}
+
+function renderNutrition() {
+  const container = document.getElementById('nutrition-grid');
+  if (container.dataset.loaded === 'true') return;
+  container.dataset.loaded = 'true';
+  container.innerHTML = nutritionItems.map(n => `
+    <div class="nutrition-card">
+      <div class="nutrition-emoji">${n.emoji}</div>
+      <h4>${n.name}</h4>
+      <p>${n.desc}</p>
+    </div>
+  `).join('');
+}
+
+// ==================== QR Code ====================
+function renderQRCode() {
+  const el = document.getElementById('qrcode');
+  if (el.dataset.loaded === 'true') return;
+  el.dataset.loaded = 'true';
+  const url = window.location.href.split('#')[0];
+  new QRCode(el, {
+    text: url,
+    width: 200,
+    height: 200,
+    colorDark: "#3a4a5c",
+    colorLight: "#ffffff",
+    correctLevel: QRCode.CorrectLevel.H
+  });
+}
+
+// ==================== متابعة نقص الحديد ====================
+let currentUserType = 'parent';
+let nurseLoggedIn = false;
+
+function switchUserType(type) {
+  currentUserType = type;
+  document.getElementById('parent-btn').classList.toggle('active', type === 'parent');
+  document.getElementById('nurse-btn').classList.toggle('active', type === 'nurse');
+  document.getElementById('parent-section').classList.toggle('active', type === 'parent');
+  document.getElementById('nurse-section').classList.toggle('active', type === 'nurse');
+}
+
+function nurseLogin() {
+  const password = document.getElementById('nurse-password').value;
+  if (password === 'nurse123') {
+    nurseLoggedIn = true;
+    document.getElementById('nurse-login').style.display = 'none';
+    document.getElementById('nurse-dashboard').style.display = 'block';
+    renderNurseRecords();
+    showModal('success', 'تم تسجيل الدخول', 'مرحباً بك في لوحة تحكم الممرضة');
+  } else {
+    showModal('error', 'كلمة مرور خاطئة', 'يرجى التحقق من كلمة المرور والمحاولة مرة أخرى');
+  }
+}
+
+function getIronStatus(level) {
+  if (level >= 11.0) return { status: 'normal', text: 'طبيعي' };
+  if (level >= 10.0) return { status: 'mild', text: 'نقص خفيف' };
+  if (level >= 8.0) return { status: 'moderate', text: 'نقص متوسط' };
+  return { status: 'severe', text: 'نقص شديد' };
+}
+
+function renderRecord(r) {
+  const status = getIronStatus(r.level);
+  return `
+    <div class="record-row ${status.status}" style="position:relative;">
+      <div class="record-row-head">
+        <span class="record-name"><i class="fas fa-user"></i> ${r.name}</span>
+        <span class="record-status ${status.status}">${status.text}</span>
+      </div>
+      <div class="record-details">
+        <span><i class="fas fa-folder"></i> رقم الملف: <strong>${r.fileNo}</strong></span>
+        <span><i class="fas fa-phone"></i> الهاتف: <strong>${r.phone}</strong></span>
+        <span><i class="fas fa-droplet"></i> نسبة الحديد: <strong>${r.level} g/dL</strong></span>
+        <span><i class="fas fa-calendar"></i> التاريخ: <strong>${r.date}</strong></span>
+      </div>
+      ${nurseLoggedIn && currentUserType === 'nurse' ? `
+        <button class="record-delete" onclick="deleteRecord(${r.id})">
+          <i class="fas fa-trash"></i>
+        </button>
+      ` : ''}
+    </div>
+  `;
+}
+
+function searchParent() {
+  const query = document.getElementById('parent-search').value.trim();
+  const results = document.getElementById('parent-results');
+  if (!query) {
+    showModal('warning', 'حقل البحث فارغ', 'يرجى إدخال رقم الملف أو رقم الهاتف للبحث');
+    return;
+  }
+  const matches = ironRecords.filter(r =>
+    r.fileNo.includes(query) || r.phone.includes(query)
+  );
+  if (matches.length === 0) {
+    results.innerHTML = `
+      <div class="no-results">
+        <i class="fas fa-search"></i>
+        <h4>لا توجد نتائج</h4>
+        <p>لم يتم العثور على سجلات تطابق البحث.<br>تواصلي مع العيادة للتأكد من رقم الملف.</p>
+      </div>
+    `;
+  } else {
+    results.innerHTML = `
+      <div style="margin-bottom:10px; font-size:13px; color:var(--text-light);">
+        <i class="fas fa-circle-check" style="color:var(--green);"></i>
+        تم العثور على ${matches.length} نتيجة
+      </div>
+      ${matches.map(renderRecord).join('')}
+    `;
+  }
+}
+
+function renderNurseRecords() {
+  const container = document.getElementById('records-table');
+  const query = document.getElementById('nurse-search').value.trim().toLowerCase();
+  let list = ironRecords;
+  if (query) {
+    list = list.filter(r =>
+      r.fileNo.toLowerCase().includes(query) ||
+      r.name.toLowerCase().includes(query) ||
+      r.phone.includes(query)
+    );
+  }
+  // ترتيب بالتاريخ تنازلياً
+  list = [...list].sort((a, b) => new Date(b.date) - new Date(a.date));
+
+  if (list.length === 0) {
+    container.innerHTML = `
+      <div class="no-results">
+        <i class="fas fa-inbox"></i>
+        <h4>لا توجد سجلات</h4>
+        <p>اضغطي على "إضافة فحص جديد" لإدخال أول سجل</p>
+      </div>
+    `;
+  } else {
+    container.innerHTML = `
+      <div style="margin-bottom:10px; font-size:13px; color:var(--text-light);">
+        <i class="fas fa-list"></i> إجمالي السجلات: ${list.length}
+      </div>
+      ${list.map(renderRecord).join('')}
+    `;
+  }
+}
+
+function toggleAddForm() {
+  const form = document.getElementById('add-form');
+  form.style.display = form.style.display === 'none' ? 'block' : 'none';
+  if (form.style.display === 'block') {
+    // ضبط التاريخ الافتراضي
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('new-date').value = today;
+  }
+}
+
+function saveRecord() {
+  const fileNo = document.getElementById('new-file-no').value.trim();
+  const name = document.getElementById('new-name').value.trim();
+  const phone = document.getElementById('new-phone').value.trim();
+  const level = parseFloat(document.getElementById('new-level').value);
+  const date = document.getElementById('new-date').value;
+
+  if (!fileNo || !name || !phone || isNaN(level) || !date) {
+    showModal('error', 'بيانات ناقصة', 'يرجى تعبئة جميع الحقول قبل الحفظ');
+    return;
+  }
+
+  const newRecord = {
+    id: Date.now(),
+    fileNo, name, phone, level, date
+  };
+
+  ironRecords.push(newRecord);
+  saveIronRecords();
+
+  // مسح النموذج
+  ['new-file-no', 'new-name', 'new-phone', 'new-level'].forEach(id =>
+    document.getElementById(id).value = ''
+  );
+
+  toggleAddForm();
+  renderNurseRecords();
+  showModal('success', 'تم الحفظ بنجاح', `تم إضافة سجل الفحص لـ ${name} بنجاح`);
+}
+
+function deleteRecord(id) {
+  if (!confirm('هل أنتِ متأكدة من حذف هذا السجل؟')) return;
+  ironRecords = ironRecords.filter(r => r.id !== id);
+  saveIronRecords();
+  renderNurseRecords();
+  showModal('success', 'تم الحذف', 'تم حذف السجل بنجاح');
+}
+
+// ==================== Modal ====================
+function showModal(type, title, message) {
+  const overlay = document.getElementById('modal-overlay');
+  const iconBox = document.getElementById('modal-icon');
+  const icons = {
+    success: 'fa-circle-check',
+    error: 'fa-circle-xmark',
+    warning: 'fa-triangle-exclamation',
+    info: 'fa-circle-info'
+  };
+  iconBox.className = 'modal-icon ' + type;
+  iconBox.innerHTML = `<i class="fas ${icons[type] || icons.info}"></i>`;
+  document.getElementById('modal-title').textContent = title;
+  document.getElementById('modal-message').textContent = message;
+  overlay.classList.add('active');
+}
+
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('active');
+}
+
+// ==================== التهيئة ====================
+function initApp() {
+  // تحميل كل البيانات مسبقاً
+  try { renderSchedule(); } catch(e) { console.error('Schedule:', e); }
+  try { renderVaccinesInfo(); } catch(e) { console.error('Vaccines:', e); }
+  try { renderPostTips(); } catch(e) { console.error('Tips:', e); }
+  try { renderSymptoms(); } catch(e) { console.error('Symptoms:', e); }
+  try { renderNutrition(); } catch(e) { console.error('Nutrition:', e); }
+  try { renderQRCode(); } catch(e) { console.error('QR:', e); }
+
+  // أحداث Enter
+  const parentSearch = document.getElementById('parent-search');
+  if (parentSearch) {
+    parentSearch.addEventListener('keypress', e => {
+      if (e.key === 'Enter') searchParent();
+    });
+  }
+  const nursePassword = document.getElementById('nurse-password');
+  if (nursePassword) {
+    nursePassword.addEventListener('keypress', e => {
+      if (e.key === 'Enter') nurseLogin();
+    });
+  }
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initApp);
+} else {
+  initApp();
+}
+
+</script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>
