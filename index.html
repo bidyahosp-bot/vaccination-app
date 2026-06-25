@@ -2270,7 +2270,7 @@ function openScreen(id) {
   if (id === 'vaccines-info') renderVaccinesInfo();
   if (id === 'post-vaccine') renderPostTips();
   if (id === 'symptoms') renderSymptoms();
-  if (id === 'nutrition') renderNutrition();
+  //if (id === 'nutrition') renderNutrition();
   if (id === 'qr-screen') renderQRCode();
 }
 
@@ -2397,18 +2397,7 @@ function renderSymptoms() {
   `).join('');
 }
 
-function renderNutrition() {
-  const container = document.getElementById('nutrition-grid');
-  if (container.dataset.loaded === 'true') return;
-  container.dataset.loaded = 'true';
-  container.innerHTML = nutritionItems.map(n => `
-    <div class="nutrition-card">
-      <div class="nutrition-emoji">${n.emoji}</div>
-      <h4>${n.name}</h4>
-      <p>${n.desc}</p>
-    </div>
-  `).join('');
-}
+
 
 // ==================== QR Code ====================
 function renderQRCode() {
