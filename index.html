@@ -1280,7 +1280,82 @@ input, button, textarea, select {
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+/* ==================== تنسيق الفئات العمرية للتغذية ==================== */
+.age-nutrition-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
 
+.age-card {
+  background: white;
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  border-top: 5px solid var(--teal);
+}
+
+.age-card-header {
+  background: linear-gradient(135deg, #d4eef3, #e8f6f5);
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.age-badge {
+  background: var(--teal);
+  color: white;
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.age-card-header h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #2c5f66;
+  margin: 0;
+}
+
+.age-card-content {
+  padding: 16px 18px;
+}
+
+.age-card-content p {
+  font-size: 14px;
+  color: var(--text-dark);
+  margin-bottom: 12px;
+  line-height: 1.6;
+}
+
+.age-card-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.age-card-content ul li {
+  font-size: 13px;
+  color: var(--text-light);
+  padding: 6px 0;
+  border-bottom: 1px dashed #f0f0f0;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.age-card-content ul li:last-child {
+  border-bottom: none;
+}
+
+.age-card-content ul li i {
+  color: var(--teal);
+  margin-top: 3px;
+  flex-shrink: 0;
+}
 </style>
 </head>
 <body>
@@ -1504,6 +1579,7 @@ input, button, textarea, select {
 </div>
 
 <!-- ====== شاشة التغذية ====== -->
+<!-- ====== شاشة التغذية (مقسمة حسب العمر) ====== -->
 <div id="nutrition" class="screen">
   <div class="sub-header teal-bg">
     <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-right"></i></button>
@@ -1512,12 +1588,153 @@ input, button, textarea, select {
   <div class="content-area">
     <div class="info-banner teal">
       <i class="fas fa-apple-whole"></i>
-      <p>أطعمة مفيدة تعزز مناعة طفلك وتساعد في نموه السليم</p>
+      <p>توصيات غذائية حسب عمر طفلك لتعزيز مناعته بعد التطعيم</p>
     </div>
-    <div class="nutrition-grid" id="nutrition-grid"></div>
+
+    <!-- قائمة الفئات العمرية -->
+    <div class="age-nutrition-list">
+
+      <!-- أقل من شهرين -->
+      <div class="age-card">
+        <div class="age-card-header">
+          <span class="age-badge">0 - 2 شهر</span>
+          <h3>رضاعة طبيعية حصرية</h3>
+        </div>
+        <div class="age-card-content">
+          <p>الرضاعة الطبيعية هي المصدر الوحيد والكافي لتغذية طفلك في هذا العمر. لا يُعطى أي طعام أو شراب آخر حتى الماء.</p>
+          <ul>
+            <li><i class="fas fa-check-circle"></i> حليب الأم فقط عند الطلب</li>
+            <li><i class="fas fa-check-circle"></i> لا حاجة لأي سوائل أو أطعمة إضافية</li>
+            <li><i class="fas fa-check-circle"></i> الرضاعة المتكررة تساعد في ترطيب الطفل بعد التطعيم</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 2 - 4 شهور -->
+      <div class="age-card">
+        <div class="age-card-header">
+          <span class="age-badge">2 - 4 شهور</span>
+          <h3>استمرار الرضاعة الطبيعية</h3>
+        </div>
+        <div class="age-card-content">
+          <p>لا يزال حليب الأم كافياً تماماً. لا تقدمي أي أطعمة صلبة قبل عمر 4 أشهر.</p>
+          <ul>
+            <li><i class="fas fa-check-circle"></i> حليب الأم حصراً</li>
+            <li><i class="fas fa-check-circle"></i> تجنبي إدخال أي مهروس أو عصائر</li>
+            <li><i class="fas fa-check-circle"></i> أكثري من الرضاعة لتعويض أي نقص في السوائل بعد التطعيم</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 4 - 6 شهور -->
+      <div class="age-card">
+        <div class="age-card-header">
+          <span class="age-badge">4 - 6 شهور</span>
+          <h3>بداية إدخال الطعام المهروس</h3>
+        </div>
+        <div class="age-card-content">
+          <p>يمكن البدء بإدخال وجبات بسيطة مهروسة مع استمرار الرضاعة.</p>
+          <ul>
+            <li><i class="fas fa-check-circle"></i> <strong>الأرز المهروس</strong> المخصص للأطفال</li>
+            <li><i class="fas fa-check-circle"></i> <strong>الخضروات المهروسة</strong> مثل الجزر والبطاطا الحلوة 🥕</li>
+            <li><i class="fas fa-check-circle"></i> <strong>الفواكه المهروسة</strong> مثل التفاح والموز 🍌</li>
+            <li><i class="fas fa-check-circle"></i> استمري في الرضاعة الطبيعية</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 6 - 8 شهور -->
+      <div class="age-card">
+        <div class="age-card-header">
+          <span class="age-badge">6 - 8 شهور</span>
+          <h3>توسيع قائمة الأطعمة المهروسة</h3>
+        </div>
+        <div class="age-card-content">
+          <p>قدمي أطعمة جديدة تدريجياً، مع الانتباه لعلامات الحساسية.</p>
+          <ul>
+            <li><i class="fas fa-check-circle"></i> <strong>البروتينات المهروسة</strong>: دجاج، صفار بيض، عدس 🥚</li>
+            <li><i class="fas fa-check-circle"></i> <strong>مزيد من الخضار والفواكه</strong>: سبانخ، كوسا، أفوكادو 🥑</li>
+            <li><i class="fas fa-check-circle"></i> <strong>اللبن الزبادي</strong> كامل الدسم غير المحلى 🥣</li>
+            <li><i class="fas fa-check-circle"></i> قدمي الماء مع الوجبات 💧</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 8 - 12 شهر -->
+      <div class="age-card">
+        <div class="age-card-header">
+          <span class="age-badge">8 - 12 شهر</span>
+          <h3>الأطعمة المقطعة والأصابع</h3>
+        </div>
+        <div class="age-card-content">
+          <p>ابدئي بتقديم قطع طرية ليتمكن طفلك من الإمساك بها.</p>
+          <ul>
+            <li><i class="fas fa-check-circle"></i> <strong>خضروات مطبوخة وطرية</strong>: جزر، بروكلي، بطاطا 🥬</li>
+            <li><i class="fas fa-check-circle"></i> <strong>فواكه طرية</strong>: كمثرى، خوخ، بطيخ 🍉</li>
+            <li><i class="fas fa-check-circle"></i> <strong>السمك المطبوخ</strong> منزوع العظم 🐟</li>
+            <li><i class="fas fa-check-circle"></i> <strong>الجبن الطري</strong> غير المملح 🧀</li>
+            <li><i class="fas fa-check-circle"></i> استمري في الرضاعة مع كل وجبة</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 12 - 18 شهر -->
+      <div class="age-card">
+        <div class="age-card-header">
+          <span class="age-badge">12 - 18 شهر</span>
+          <h3>الانتقال إلى طعام العائلة</h3>
+        </div>
+        <div class="age-card-content">
+          <p>يمكن لطفلك الآن تناول معظم الأطعمة التي تأكلها العائلة، مع تعديل القوام.</p>
+          <ul>
+            <li><i class="fas fa-check-circle"></i> <strong>البيض الكامل</strong> (البياض والصفار) 🍳</li>
+            <li><i class="fas fa-check-circle"></i> <strong>الحليب البقري</strong> كامل الدسم (بعد سنة)</li>
+            <li><i class="fas fa-check-circle"></i> <strong>الحبوب الكاملة</strong>: شوفان، خبز، مكرونة</li>
+            <li><i class="fas fa-check-circle"></i> <strong>البقوليات</strong>: حمص، فول، عدس</li>
+            <li><i class="fas fa-check-circle"></i> تجنبي المكسرات الكاملة والعسل حتى عمر سنتين</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 18 - 24 شهر -->
+      <div class="age-card">
+        <div class="age-card-header">
+          <span class="age-badge">18 - 24 شهر</span>
+          <h3>تعزيز العادات الغذائية الصحية</h3>
+        </div>
+        <div class="age-card-content">
+          <p>شجعي طفلك على تناول أطعمة متنوعة من جميع المجموعات.</p>
+          <ul>
+            <li><i class="fas fa-check-circle"></i> <strong>ثلاث وجبات رئيسية + وجبتين خفيفتين</strong></li>
+            <li><i class="fas fa-check-circle"></i> <strong>اللحوم الحمراء</strong> المطهوة جيداً (غنية بالحديد) 🥩</li>
+            <li><i class="fas fa-check-circle"></i> <strong>منتجات الألبان</strong>: لبن، جبن، زبادي 🥛</li>
+            <li><i class="fas fa-check-circle"></i> <strong>المكسرات المطحونة</strong> (زبدة الفول السوداني الناعمة)</li>
+            <li><i class="fas fa-check-circle"></i> قللي من السكر والملح والعصائر المحلاة</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- سنتين فأكثر -->
+      <div class="age-card">
+        <div class="age-card-header">
+          <span class="age-badge">+ سنتين</span>
+          <h3>نظام غذائي متوازن</h3>
+        </div>
+        <div class="age-card-content">
+          <p>اتبعي إرشادات الطبق الصحي العُماني لضمان نمو مثالي.</p>
+          <ul>
+            <li><i class="fas fa-check-circle"></i> <strong>نصف الطبق خضروات وفواكه</strong> 🥗</li>
+            <li><i class="fas fa-check-circle"></i> <strong>ربع الطبق بروتين</strong> (لحم، سمك، دجاج، بيض، بقوليات)</li>
+            <li><i class="fas fa-check-circle"></i> <strong>ربع الطبق نشويات</strong> (أرز، خبز، مكرونة، بطاطا)</li>
+            <li><i class="fas fa-check-circle"></i> <strong>شرب الماء</strong> طوال اليوم 💧</li>
+            <li><i class="fas fa-check-circle"></i> <strong>تجنب الوجبات السريعة والمشروبات الغازية</strong></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
   </div>
 </div>
-
 <!-- ====== شاشة متابعة نقص الحديد ====== -->
 <div id="iron-tracking" class="screen">
   <div class="sub-header pink-bg">
@@ -2069,7 +2286,7 @@ function goBack() {
 
 // ==================== WhatsApp ====================
 function openWhatsApp() {
-  const phone = "96825583240"; // 968 = رمز عُمان
+  const phone = "96825583641"; // 968 = رمز عُمان
   const message = encodeURIComponent("السلام عليكم، أود الاستفسار عن تطعيمات الأطفال في عيادة التحصينات بمستشفى بدية");
   window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
 }
