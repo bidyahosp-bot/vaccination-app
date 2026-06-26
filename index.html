@@ -1507,6 +1507,15 @@ input, button, textarea, select {
   color: #666;
 }  
 </style>
+  <!-- PWA Manifest -->
+<link rel="manifest" href="/vaccination-app/manifest.json">
+
+<!-- أيقونات للشاشات المختلفة -->
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="جواز التحصين">
 </head>
 <body>
 
@@ -2889,5 +2898,19 @@ document.addEventListener('click', function(e) {
     <button class="install-later" onclick="closeInstallModal()">لاحقاً</button>
   </div>
 </div>
+         <script>
+// تسجيل Service Worker لدعم PWA
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/vaccination-app/sw.js')
+      .then((registration) => {
+        console.log('Service Worker registered with scope:', registration.scope);
+      })
+      .catch((error) => {
+        console.log('Service Worker registration failed:', error);
+      });
+  });
+}
+</script>   
           </body>
 </html>
