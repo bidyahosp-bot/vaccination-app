@@ -1356,6 +1356,156 @@ input, button, textarea, select {
   margin-top: 3px;
   flex-shrink: 0;
 }
+/* ==================== نافذة تثبيت التطبيق ==================== */
+.install-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 20px;
+  backdrop-filter: blur(4px);
+}
+.install-modal-overlay.active {
+  display: flex;
+  animation: fadeIn 0.25s ease;
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.install-modal {
+  background: white;
+  border-radius: 28px;
+  padding: clamp(25px, 6vw, 35px) clamp(20px, 5vw, 30px);
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+  position: relative;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+}
+
+.install-close {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #f5f5f5;
+  border: none;
+  color: #999;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+.install-close:hover {
+  background: #eee;
+  color: #666;
+}
+
+.install-icon-wrap {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #7fcec9, #5fb8b3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 18px;
+  font-size: 36px;
+  color: white;
+  box-shadow: 0 8px 25px rgba(127,206,201,0.4);
+}
+
+.install-modal h3 {
+  font-size: clamp(17px, 4.5vw, 21px);
+  font-weight: 800;
+  margin-bottom: 10px;
+  color: #3a4a5c;
+}
+
+.install-modal p {
+  font-size: clamp(13px, 3.5vw, 15px);
+  color: #6b7888;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.install-steps {
+  background: #f8f9fa;
+  border-radius: 16px;
+  padding: 14px 16px;
+  margin-bottom: 20px;
+  text-align: right;
+}
+
+.step-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 0;
+  font-size: clamp(12px, 3.2vw, 14px);
+  color: #3a4a5c;
+}
+
+.step-number {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--mint);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+
+.install-button {
+  width: 100%;
+  padding: clamp(12px, 3.5vw, 16px);
+  background: linear-gradient(135deg, #7fcec9, #5fb8b3);
+  color: white;
+  border: none;
+  border-radius: 16px;
+  font-family: 'Tajawal', sans-serif;
+  font-weight: 700;
+  font-size: clamp(14px, 3.8vw, 17px);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 6px 20px rgba(127,206,201,0.4);
+  transition: all 0.3s;
+}
+.install-button:active {
+  transform: scale(0.97);
+}
+
+.install-later {
+  background: none;
+  border: none;
+  color: #999;
+  font-family: 'Tajawal', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 8px;
+  transition: color 0.2s;
+}
+.install-later:hover {
+  color: #666;
+}  
 </style>
 </head>
 <body>
@@ -2630,8 +2780,114 @@ if (document.readyState === 'loading') {
 } else {
   initApp();
 }
+// ==================== إدارة نافذة التثبيت ====================
+let deferredPrompt = null;
+const INSTALL_MODAL_KEY = 'hideInstallModal';
 
+// الاستماع لحدث beforeinstallprompt (للمتصفحات الداعمة)
+window.addEventListener('beforeinstallprompt', (e) => {
+  // منع ظهور النافذة التلقائية للمتصفح
+  e.preventDefault();
+  // حفظ الحدث لاستخدامه لاحقاً
+  deferredPrompt = e;
+  // إظهار النافذة المخصصة إذا لم يسبق للمستخدم إغلاقها
+  if (!localStorage.getItem(INSTALL_MODAL_KEY)) {
+    showInstallModal();
+  }
+});
+
+// عند تحميل الصفحة، إذا لم يكن هناك حدث PWA، نعرض النافذة بعد ثوانٍ
+window.addEventListener('load', () => {
+  // إذا لم يظهر beforeinstallprompt، نعرض النافذة مع إرشادات يدوية
+  if (!deferredPrompt && !localStorage.getItem(INSTALL_MODAL_KEY)) {
+    // ننتظر قليلاً حتى لا تظهر مباشرة مع التحميل
+    setTimeout(() => {
+      showInstallModal(true); // true يعني عرض الخطوات اليدوية
+    }, 2000);
+  }
+});
+
+function showInstallModal(showManualSteps = false) {
+  const modal = document.getElementById('install-modal');
+  const manualSteps = document.getElementById('install-manual-steps');
+  if (modal) {
+    modal.classList.add('active');
+    if (manualSteps) {
+      manualSteps.style.display = showManualSteps ? 'block' : 'none';
+    }
+  }
+}
+
+function closeInstallModal() {
+  const modal = document.getElementById('install-modal');
+  if (modal) {
+    modal.classList.remove('active');
+  }
+  // تخزين رغبة المستخدم في عدم الإظهار مرة أخرى
+  localStorage.setItem(INSTALL_MODAL_KEY, 'true');
+}
+
+function installApp() {
+  if (deferredPrompt) {
+    // عرض نافذة التثبيت الأصلية من المتصفح
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then((choiceResult) => {
+      if (choiceResult.outcome === 'accepted') {
+        console.log('User accepted the install prompt');
+        closeInstallModal();
+      }
+      deferredPrompt = null;
+    });
+  } else {
+    // لا يدعم التثبيت التلقائي، نعرض الخطوات اليدوية (نقوم بإظهارها إذا كانت مخفية)
+    const manualSteps = document.getElementById('install-manual-steps');
+    if (manualSteps) {
+      manualSteps.style.display = 'block';
+    }
+    // تغيير النص على الزر ليعكس أنه للإرشاد فقط
+    const btn = document.getElementById('install-button');
+    if (btn) {
+      btn.innerHTML = '<i class="fas fa-check-circle"></i> اتبعي الخطوات أعلاه';
+      btn.onclick = () => closeInstallModal(); // إغلاق عند الضغط بعد ذلك
+    }
+  }
+}
+
+// إذا نقر المستخدم خارج النافذة نغلقها
+document.addEventListener('click', function(e) {
+  const overlay = document.getElementById('install-modal');
+  if (e.target === overlay) {
+    closeInstallModal();
+  }
+});
 </script>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
-</body>
+<!-- ====== نافذة تثبيت التطبيق ====== -->
+<div id="install-modal" class="install-modal-overlay">
+  <div class="install-modal">
+    <button class="install-close" onclick="closeInstallModal()">
+      <i class="fas fa-times"></i>
+    </button>
+    <div class="install-icon-wrap">
+      <i class="fas fa-download"></i>
+    </div>
+    <h3>تطبيق جواز التحصين الذكي</h3>
+    <p>أضيفي التطبيق إلى شاشة هاتفك الرئيسية للوصول السريع والمباشر بدون الحاجة لمسح الباركود كل مرة</p>
+    <div class="install-steps" id="install-manual-steps" style="display:none;">
+      <div class="step-item">
+        <span class="step-number">1</span>
+        <span>اضغطي على زر <strong>مشاركة</strong> <i class="fas fa-share-from-square"></i> أسفل المتصفح</span>
+      </div>
+      <div class="step-item">
+        <span class="step-number">2</span>
+        <span>اختاري <strong>إضافة إلى الشاشة الرئيسية</strong></span>
+      </div>
+    </div>
+    <button class="install-button" id="install-button" onclick="installApp()">
+      <i class="fas fa-download"></i> تنزيل التطبيق
+    </button>
+    <button class="install-later" onclick="closeInstallModal()">لاحقاً</button>
+  </div>
+</div>
+          </body>
 </html>
