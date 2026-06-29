@@ -2599,35 +2599,541 @@ function nurseLogin() {
   }
 }
 
+// ==================== نظام تقييم حالة الهيموجلوبين مع التوصيات ====================
 function getIronStatus(level) {
-  if (level >= 11.0) return { status: 'normal', text: 'طبيعي' };
-  if (level >= 10.0) return { status: 'mild', text: 'نقص خفيف' };
-  if (level >= 8.0) return { status: 'moderate', text: 'نقص متوسط' };
-  return { status: 'severe', text: 'نقص شديد' };
+  if (level >= 11.0) return { 
+    status: 'normal', 
+    text: 'طبيعي',
+    color: '#2d7a4a',
+    bgColor: '#d5ebe0',
+    borderColor: '#4caf7d',
+    icon: 'fa-circle-check',
+    severityLevel: 1
+  };
+  if (level >= 10.0) return { 
+    status: 'mild', 
+    text: 'نقص خفيف',
+    color: '#b8901a',
+    bgColor: '#fdf2d4',
+    borderColor: '#e8b94d',
+    icon: 'fa-circle-info',
+    severityLevel: 2
+  };
+  if (level >= 8.0) return { 
+    status: 'moderate', 
+    text: 'نقص متوسط',
+    color: '#c4691a',
+    bgColor: '#fde2c4',
+    borderColor: '#e89a4d',
+    icon: 'fa-triangle-exclamation',
+    severityLevel: 3
+  };
+  return { 
+    status: 'severe', 
+    text: 'نقص شديد - يستدعي التدخل الفوري',
+    color: '#c43a3a',
+    bgColor: '#ffd4d4',
+    borderColor: '#ff5959',
+    icon: 'fa-circle-exclamation',
+    severityLevel: 4
+  };
 }
 
-function renderRecord(r) {
+// ==================== التوصيات حسب كل حالة ====================
+// ==================== التوصيات حسب كل حالة (مطابقة للمعايير الطبية) ====================
+function getRecommendations(level, childName) {
+  const status = getIronStatus(level);
+  const name = childName || 'الطفل';
+  
+  // أطعمة غنية بالحديد
+  const ironRichFoods = [
+    '🥩 اللحوم الحمراء',
+    '🍗 الدجاج',
+    '🐟 الأسماك',
+    '🥬 الكبد (حسب الفئة العمرية والحالة الصحية)',
+    '🥣 البقوليات (العدس، الفاصوليا)',
+    '🥚 صفار البيض',
+    '🥬 السبانخ والورقيات الخضراء',
+    '🍠 البطاطا الحلوة'
+  ];
+  
+  // مصادر فيتامين C لتعزيز الامتصاص
+  const vitaminCFoods = [
+    '🍊 البرتقال',
+    '🍋 الليمون',
+    '🍈 الجوافة',
+    '🫑 الفلفل الحلو',
+    '🍓 الفراولة والكيوي',
+    '🍅 الطماطم'
+  ];
+  
+  // الملاحظة الطبية العامة
+  const medicalNote = '⚠️ القرار لا يعتمد على رقم الهيموجلوبين فقط، بل على الأعراض والحالة السريرية وعمر المريض، لذلك تعد هذه التوصيات إرشادية وليست بديلاً عن التقييم الطبي.';
+  
+  switch (status.status) {
+    // ============ الحالة 4: طبيعي (أكثر من 11 g/dl) ============
+    case 'normal':
+      return {
+        title: `✅ ${name} بصحة جيدة`,
+        summary: 'نسبة الهيموجلوبين طبيعية - استمري في النظام الصحي',
+        message: `مستوى الهيموجلوبين عند ${name} (${level} g/dL) ضمن المعدل الطبيعي.`,
+        action: {
+          title: 'الإجراء الموصى به',
+          items: [
+            'الاستمرار على نمط غذائي صحي ومتوازن',
+            'المتابعة الدورية حسب توصيات الطبيب'
+          ]
+        },
+        note: medicalNote,
+        color: '#2d7a4a',
+        bgColor: '#e8f5e9',
+        borderColor: '#4caf7d',
+        icon: 'fa-face-smile',
+        severity: 'normal'
+      };
+    
+    // ============ الحالة 3: نقص خفيف (10 - 10.9 g/dl) ============
+    case 'mild':
+      return {
+        title: `⚠️ نقص خفيف في الهيموجلوبين`,
+        summary: `النسبة: ${level} g/dL - يوصى بمراجعة عيادة التغذية`,
+        message: `مستوى الهيموجلوبين عند ${name} أقل قليلاً من المعدل الطبيعي. ننصح بمراجعة عيادة التغذية لتحسين المدخول الغذائي من الحديد ومتابعة الفحوصات الطبية.`,
+        action: {
+          title: 'الإجراء الموصى به',
+          items: [
+            'مراجعة عيادة التغذية لتحسين المدخول الغذائي من الحديد',
+            'متابعة الفحوصات الطبية بانتظام'
+          ]
+        },
+        nutritionAdvice: {
+          title: '🥗 توصيات غذائية مختصرة',
+          items: [
+            'زيادة تناول مصادر الحديد مثل اللحوم الحمراء، الدجاج، الأسماك، الكبد (حسب الفئة العمرية والحالة الصحية)',
+            'تناول مصدر لفيتامين C مع الوجبة (البرتقال، الليمون، الجوافة، الفلفل الحلو)',
+            'تجنب الشاي والقهوة لمدة ساعة إلى ساعتين قبل وبعد الوجبات الغنية بالحديد ومكملات الحديد',
+            'تجنب منتجات الألبان لمدة ساعة إلى ساعتين قبل وبعد الوجبات الغنية بالحديد ومكملات الحديد',
+            'الالتزام بمكملات الحديد الموصوفة من الطبيب'
+          ]
+        },
+        ironFoods: ironRichFoods,
+        vitaminFoods: vitaminCFoods,
+        note: medicalNote,
+        color: '#b8901a',
+        bgColor: '#fff8e1',
+        borderColor: '#e8b94d',
+        icon: 'fa-apple-whole',
+        severity: 'mild'
+      };
+    
+    // ============ الحالة 2: نقص متوسط (7 - 9.9 g/dl) ============
+    case 'moderate':
+      return {
+        title: `🔶 نقص في الهيموجلوبين يستدعي التدخل`,
+        summary: `النسبة: ${level} g/dL - يوصى بمراجعة الطبيب`,
+        message: `مستوى الهيموجلوبين عند ${name} منخفض ويحتاج إلى تقييم طبي. ننصح بمراجعة الطبيب خلال أقرب وقت لتقييم السبب والعلاج، مع تحويل لعيادة التغذية عند الحاجة.`,
+        action: {
+          title: 'الإجراء الموصى به',
+          items: [
+            'مراجعة الطبيب خلال أقرب وقت لتقييم السبب والعلاج',
+            'تحويل لعيادة التغذية عند الحاجة'
+          ]
+        },
+        nutritionAdvice: {
+          title: '🥗 توصيات غذائية مختصرة',
+          items: [
+            'زيادة تناول مصادر الحديد مثل اللحوم الحمراء، الدجاج، الأسماك، الكبد (حسب الفئة العمرية والحالة الصحية)',
+            'تناول مصدر لفيتامين C مع الوجبة (البرتقال، الليمون، الجوافة، الفلفل الحلو)',
+            'تجنب الشاي والقهوة لمدة ساعة إلى ساعتين قبل وبعد الوجبات الغنية بالحديد ومكملات الحديد',
+            'تجنب منتجات الألبان لمدة ساعة إلى ساعتين قبل وبعد الوجبات الغنية بالحديد ومكملات الحديد',
+            'الالتزام بمكملات الحديد الموصوفة من الطبيب'
+          ]
+        },
+        ironFoods: ironRichFoods,
+        vitaminFoods: vitaminCFoods,
+        note: medicalNote,
+        color: '#c4691a',
+        bgColor: '#fff3e0',
+        borderColor: '#e89a4d',
+        icon: 'fa-user-doctor',
+        severity: 'moderate',
+        showContact: true
+      };
+    
+    // ============ الحالة 1: نقص شديد (أقل من 7 g/dl) ============
+    case 'severe':
+      return {
+        title: `🚨 نقص شديد في الهيموجلوبين - حالة طارئة`,
+        summary: `النسبة: ${level} g/dL - التوجه للطوارئ فوراً`,
+        message: `مستوى الهيموجلوبين عند ${name} منخفض جداً وخطير. يجب التوجه إلى الطوارئ أو مراجعة المستشفى بشكل عاجل، خاصة عند وجود دوخة شديدة، ضيق تنفس، خفقان، أو إغماء.`,
+        action: {
+          title: '🚑 الإجراء العاجل',
+          items: [
+            'التوجه إلى الطوارئ أو مراجعة المستشفى بشكل عاجل',
+            'خاصة عند وجود: دوخة شديدة، ضيق تنفس، خفقان، أو إغماء',
+            'هذه الحالة تستدعي تدخلاً طبياً فورياً'
+          ]
+        },
+        emergencyContact: {
+          hospital: 'مستشفى بدية',
+          whatsapp: '96825583641'
+        },
+        note: medicalNote,
+        color: '#c43a3a',
+        bgColor: '#ffebee',
+        borderColor: '#ff5959',
+        icon: 'fa-phone-volume',
+        severity: 'severe',
+        isEmergency: true
+      };
+  }
+}
+
+// ==================== عرض النتائج للأمهات مع التوصيات ====================
+function searchParent() {
+  const query = document.getElementById('parent-search').value.trim();
+  const results = document.getElementById('parent-results');
+  if (!query) {
+    showModal('warning', 'حقل البحث فارغ', 'يرجى إدخال رقم الملف أو رقم الهاتف للبحث');
+    return;
+  }
+  const matches = ironRecords.filter(r =>
+    r.fileNo.includes(query) || r.phone.includes(query)
+  );
+  if (matches.length === 0) {
+    results.innerHTML = `
+      <div class="no-results">
+        <i class="fas fa-search"></i>
+        <h4>لا توجد نتائج</h4>
+        <p>لم يتم العثور على سجلات تطابق البحث.<br>تواصلي مع العيادة للتأكد من رقم الملف.</p>
+      </div>
+    `;
+  } else {
+    results.innerHTML = `
+      <div style="margin-bottom:15px; font-size:14px; font-weight:700; color:var(--text-dark);">
+        <i class="fas fa-circle-check" style="color:var(--green);"></i>
+        تم العثور على ${matches.length} نتيجة
+      </div>
+      ${matches.map(renderParentResult).join('')}
+    `;
+  }
+}
+
+// ==================== عرض نتيجة فردية للأم ====================
+// ==================== عرض نتيجة فردية للأم (شكل جديد مطابق للتوصيات) ====================
+function renderParentResult(r) {
   const status = getIronStatus(r.level);
+  const rec = getRecommendations(r.level, r.name);
+  
   return `
-    <div class="record-row ${status.status}" style="position:relative;">
-      <div class="record-row-head">
-        <span class="record-name"><i class="fas fa-user"></i> ${r.name}</span>
-        <span class="record-status ${status.status}">${status.text}</span>
+    <div class="parent-result-card" style="border-right: 5px solid ${status.borderColor}; margin-bottom: 25px; background: white; border-radius: 20px; overflow: hidden; box-shadow: var(--shadow);">
+      
+      <!-- ========== رأس النتيجة - معلومات الطفل ========== -->
+      <div style="padding: 20px; background: ${status.bgColor}; border-bottom: 3px solid ${status.borderColor};">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px;">
+          <div>
+            <h4 style="font-size: 17px; font-weight: 800; color: #3a4a5c; margin: 0;">
+              <i class="fas fa-child"></i> ${r.name}
+            </h4>
+            <p style="font-size: 13px; color: #6b7888; margin: 6px 0 0;">
+              <i class="fas fa-folder"></i> رقم الملف: <strong>${r.fileNo}</strong> &nbsp;|&nbsp; 
+              <i class="fas fa-calendar"></i> تاريخ الفحص: <strong>${r.date}</strong>
+            </p>
+          </div>
+          <span style="
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 14px;
+            background: white;
+            color: ${status.color};
+            border: 2px solid ${status.borderColor};
+            white-space: nowrap;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+          ">
+            <i class="fas ${status.icon}"></i> ${status.text}
+          </span>
+        </div>
+        
+        <!-- قيمة الهيموجلوبين بشكل بارز -->
+        <div style="text-align: center; margin-top: 20px;">
+          <div style="font-size: 42px; font-weight: 800; color: ${status.color}; line-height: 1;">
+            ${r.level} <span style="font-size: 18px; font-weight: 600;">g/dL</span>
+          </div>
+          <div style="font-size: 13px; color: #6b7888; margin-top: 4px;">مستوى الهيموجلوبين</div>
+          
+          <!-- شريط المؤشر البصري -->
+          <div style="
+            height: 14px;
+            background: linear-gradient(to left, #c43a3a 0%, #e89a4d 30%, #e8b94d 55%, #4caf7d 80%, #4caf7d 100%);
+            border-radius: 10px;
+            margin: 12px auto 0;
+            position: relative;
+            overflow: visible;
+            max-width: 100%;
+          ">
+            <div style="
+              position: absolute;
+              top: -7px;
+              right: ${Math.max(1, Math.min(99, ((r.level - 5) / 7) * 100))}%;
+              width: 28px;
+              height: 28px;
+              background: white;
+              border: 4px solid ${status.borderColor};
+              border-radius: 50%;
+              box-shadow: 0 3px 10px rgba(0,0,0,0.25);
+            "></div>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 11px; color: #999; margin-top: 5px; padding: 0 5px;">
+            <span style="color:#c43a3a; font-weight:700;">7-</span>
+            <span>8</span>
+            <span>9</span>
+            <span>10</span>
+            <span style="color:#4caf7d; font-weight:700;">11+</span>
+          </div>
+        </div>
       </div>
-      <div class="record-details">
-        <span><i class="fas fa-folder"></i> رقم الملف: <strong>${r.fileNo}</strong></span>
-        <span><i class="fas fa-phone"></i> الهاتف: <strong>${r.phone}</strong></span>
-        <span><i class="fas fa-droplet"></i> نسبة الحديد: <strong>${r.level} g/dL</strong></span>
-        <span><i class="fas fa-calendar"></i> التاريخ: <strong>${r.date}</strong></span>
+      
+      <!-- ========== محتوى التوصيات ========== -->
+      <div style="padding: 20px;">
+        
+        <!-- رسالة الحالة -->
+        <div style="
+          background: ${rec.bgColor};
+          border-radius: 16px;
+          padding: 18px;
+          margin-bottom: 20px;
+          border-right: 4px solid ${rec.borderColor};
+        ">
+          <h4 style="
+            font-size: 18px;
+            font-weight: 800;
+            color: ${rec.color};
+            margin: 0 0 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+          ">
+            <i class="fas ${rec.icon}"></i>
+            ${rec.title}
+          </h4>
+          <p style="font-size: 15px; color: #3a4a5c; font-weight: 600; margin-bottom: 6px;">${rec.summary}</p>
+          <p style="font-size: 14px; color: #6b7888; line-height: 1.8;">${rec.message}</p>
+        </div>
+        
+        <!-- الإجراء الموصى به -->
+        <div style="margin-bottom: 20px;">
+          <h5 style="
+            font-size: 16px;
+            font-weight: 700;
+            color: #3a4a5c;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+          ">
+            <span style="
+              width: 34px;
+              height: 34px;
+              border-radius: 10px;
+              background: ${rec.bgColor};
+              color: ${rec.color};
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 16px;
+            ">📋</span>
+            ${rec.action.title}
+          </h5>
+          <ul style="list-style: none; padding: 0;">
+            ${rec.action.items.map((item, i) => `
+              <li style="
+                padding: 12px 15px;
+                margin-bottom: 8px;
+                background: #f9fafb;
+                border-radius: 12px;
+                font-size: 14px;
+                color: #3a4a5c;
+                display: flex;
+                align-items: flex-start;
+                gap: 12px;
+                border-right: 4px solid ${rec.borderColor};
+                line-height: 1.6;
+              ">
+                <span style="
+                  width: 26px;
+                  height: 26px;
+                  border-radius: 50%;
+                  background: ${rec.bgColor};
+                  color: ${rec.color};
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  font-weight: 800;
+                  font-size: 12px;
+                  flex-shrink: 0;
+                ">${i + 1}</span>
+                <span>${item}</span>
+              </li>
+            `).join('')}
+          </ul>
+        </div>
+        
+        ${rec.nutritionAdvice ? `
+        <!-- التوصيات الغذائية -->
+        <div style="margin-bottom: 20px; background: #f0faf9; border-radius: 16px; padding: 18px;">
+          <h5 style="
+            font-size: 16px;
+            font-weight: 700;
+            color: #2c5f66;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+          ">
+            <span style="font-size: 22px;">🥗</span>
+            ${rec.nutritionAdvice.title}
+          </h5>
+          <ul style="list-style: none; padding: 0;">
+            ${rec.nutritionAdvice.items.map((item, i) => `
+              <li style="
+                padding: 10px 12px;
+                margin-bottom: 6px;
+                background: white;
+                border-radius: 10px;
+                font-size: 13px;
+                color: #3a4a5c;
+                display: flex;
+                align-items: flex-start;
+                gap: 10px;
+                line-height: 1.6;
+                border-right: 3px solid var(--teal);
+              ">
+                <i class="fas fa-check-circle" style="color: var(--teal); margin-top: 2px; flex-shrink: 0;"></i>
+                <span>${item}</span>
+              </li>
+            `).join('')}
+          </ul>
+        </div>
+        ` : ''}
+        
+        ${rec.ironFoods ? `
+        <!-- الأطعمة الغنية بالحديد -->
+        <div style="margin-bottom: 15px; background: #fef9f7; border-radius: 16px; padding: 16px;">
+          <h5 style="font-size: 14px; font-weight: 700; color: #c4691a; margin-bottom: 10px;">
+            🥩 مصادر الحديد الغذائية
+          </h5>
+          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px;">
+            ${rec.ironFoods.map(f => `
+              <div style="
+                background: white;
+                padding: 10px 12px;
+                border-radius: 10px;
+                font-size: 12px;
+                color: #3a4a5c;
+                box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+              ">${f}</div>
+            `).join('')}
+          </div>
+        </div>
+        
+        <!-- مصادر فيتامين C -->
+        <div style="margin-bottom: 15px; background: #fff8e1; border-radius: 16px; padding: 16px;">
+          <h5 style="font-size: 14px; font-weight: 700; color: #b8901a; margin-bottom: 10px;">
+            🍊 مصادر فيتامين C (تعزز امتصاص الحديد)
+          </h5>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+            ${rec.vitaminFoods.map(v => `
+              <span style="
+                background: white;
+                padding: 8px 14px;
+                border-radius: 20px;
+                font-size: 12px;
+                color: #3a4a5c;
+                box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+              ">${v}</span>
+            `).join('')}
+          </div>
+        </div>
+        ` : ''}
+        
+        ${rec.showContact ? `
+        <!-- زر التواصل مع العيادة -->
+        <div style="
+          background: linear-gradient(135deg, #fef3e0, #fff8e1);
+          border-radius: 16px;
+          padding: 16px;
+          text-align: center;
+          margin-bottom: 15px;
+          border: 2px dashed #e8b94d;
+        ">
+          <p style="font-size: 14px; color: #c4691a; font-weight: 600; margin-bottom: 12px;">
+            <i class="fas fa-phone"></i> للمواعيد والاستشارة الغذائية
+          </p>
+          <button onclick="openWhatsApp()" style="
+            padding: 12px 24px;
+            background: #25d366;
+            color: white;
+            border: none;
+            border-radius: 14px;
+            font-family: 'Tajawal', sans-serif;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(37,211,102,0.3);
+          ">
+            <i class="fab fa-whatsapp"></i> تواصل واتساب
+          </button>
+        </div>
+        ` : ''}
+        
+        ${rec.isEmergency ? `
+        <!-- بطاقة الطوارئ -->
+        <div style="
+          background: linear-gradient(135deg, #ff7878, #ff5959);
+          border-radius: 16px;
+          padding: 20px;
+          text-align: center;
+          color: white;
+          cursor: pointer;
+          box-shadow: 0 8px 25px rgba(255,120,120,0.5);
+          margin-bottom: 15px;
+          animation: pulse 2s infinite;
+        " onclick="openWhatsApp()">
+          <i class="fas fa-phone-volume" style="font-size: 32px; margin-bottom: 10px; display: block;"></i>
+          <strong style="font-size: 18px; display: block; margin-bottom: 4px;">اتصلي بالطوارئ فوراً</strong>
+          <p style="font-size: 14px; opacity: 0.95; margin: 0;">${rec.emergencyContact.hospital}: ${rec.emergencyContact.phone}</p>
+        </div>
+        ` : ''}
+        
+        <!-- الملاحظة الطبية الهامة -->
+        <div style="
+          background: #fff5f5;
+          border-radius: 12px;
+          padding: 14px 16px;
+          border-right: 4px solid #ff7878;
+          margin-top: 10px;
+        ">
+          <p style="
+            font-size: 12px;
+            color: #c43a3a;
+            line-height: 1.7;
+            margin: 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+          ">
+            <i class="fas fa-circle-info" style="margin-top: 2px; flex-shrink: 0;"></i>
+            <span>${rec.note}</span>
+          </p>
+        </div>
       </div>
-      ${nurseLoggedIn && currentUserType === 'nurse' ? `
-        <button class="record-delete" onclick="deleteRecord(${r.id})">
-          <i class="fas fa-trash"></i>
-        </button>
-      ` : ''}
     </div>
   `;
 }
+
+// ==================== تحديث دالة renderRecord للوحة الممرضة (اختياري) ====================
+// يمكنك الإبقاء على renderRecord الحالية كما هي للوحة الممرضة،
+// أو تحديثها لتظهر أيضاً التوصيات الأساسية
 
 function searchParent() {
   const query = document.getElementById('parent-search').value.trim();
