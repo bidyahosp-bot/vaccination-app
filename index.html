@@ -2297,9 +2297,11 @@ async function nurseLogin() {
     return;
   }
   
-  const hashedInput = await hashPassword(password);
+  // مقارنة مباشرة بدون تشفير (للتطبيقات التي تعمل على HTTP)
+  // كلمة المرور الصحيحة
+  const CORRECT_PASSWORD = 'nurse123';
   
-  if (hashedInput === NURSE_PASSWORD_HASH) {
+  if (password === CORRECT_PASSWORD) {
     nurseLoggedIn = true;
     document.getElementById('nurse-login').style.display = 'none';
     document.getElementById('nurse-dashboard').style.display = 'block';
