@@ -8,6 +8,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+
+<!-- PWA Manifest -->
+<link rel="manifest" href="/vaccination-app/manifest.json">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="جواز التحصين">
+
 <style>
 /* ==================== الإعدادات الأساسية ==================== */
 * {
@@ -40,8 +49,6 @@ html {
   --bg-soft: #fef9f7;
   --shadow: 0 4px 20px rgba(0,0,0,0.08);
   --shadow-hover: 0 8px 30px rgba(0,0,0,0.12);
-
-  /* أحجام متغيرة حسب الشاشة */
   --container-width: 100%;
   --max-content: 480px;
   --base-padding: 15px;
@@ -59,7 +66,6 @@ body {
   font-size: clamp(14px, 2.5vw, 16px);
 }
 
-/* ==================== الشاشات ==================== */
 .screen {
   display: none;
   min-height: 100vh;
@@ -80,7 +86,6 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* ==================== الهيدر الرئيسي ==================== */
 .header-banner {
   background: linear-gradient(135deg, #f7a8b8 0%, #fde2e6 100%);
   padding: var(--header-padding);
@@ -126,7 +131,6 @@ body {
   font-weight: 500;
 }
 
-/* ==================== الرسم التوضيحي للطفل ==================== */
 .baby-illustration {
   margin-top: -40px;
   text-align: center;
@@ -177,7 +181,6 @@ body {
   50% { transform: translateY(-15px) scale(1.2); opacity: 1; }
 }
 
-/* ==================== الشعار الترحيبي ==================== */
 .welcome-ribbon {
   background: linear-gradient(90deg, #7fcec9 0%, #6cbac9 100%);
   color: white;
@@ -191,7 +194,6 @@ body {
 .welcome-ribbon p { font-size: clamp(12px, 2.8vw, 14px); font-weight: 500; }
 .welcome-ribbon p.big { font-size: clamp(15px, 3.5vw, 18px); font-weight: 800; margin-top: 3px; }
 
-/* ==================== شبكة البطاقات ==================== */
 .cards-grid {
   display: grid;
   grid-template-columns: repeat(var(--card-cols), 1fr);
@@ -251,7 +253,6 @@ body {
   line-height: 1.4;
 }
 
-/* ==================== شريط التواصل ==================== */
 .contact-bar {
   margin: 25px var(--base-padding) 15px;
   background: linear-gradient(135deg, #fde2e6 0%, #d4f1ef 100%);
@@ -292,7 +293,6 @@ body {
 .contact-text strong { display: block; font-size: clamp(11px, 2.8vw, 13px); color: var(--text-dark); }
 .contact-text small { font-size: clamp(9px, 2.3vw, 11px); color: var(--text-light); }
 
-/* ==================== الفوتر ==================== */
 .footer-banner {
   background: linear-gradient(90deg, #7fcec9 0%, #6cbac9 100%);
   color: white;
@@ -310,7 +310,6 @@ body {
   50% { transform: scale(1.2); }
 }
 
-/* ==================== زر QR العائم ==================== */
 .qr-fab {
   position: fixed;
   bottom: 20px;
@@ -329,7 +328,6 @@ body {
 }
 .qr-fab:active { transform: scale(0.9); }
 
-/* ==================== الشاشات الفرعية ==================== */
 .sub-header {
   background: linear-gradient(135deg, #f7a8b8 0%, #fde2e6 100%);
   color: white;
@@ -385,7 +383,6 @@ body {
   min-height: 70vh;
 }
 
-/* ==================== Info Banner ==================== */
 .info-banner {
   background: white;
   border-radius: 15px;
@@ -412,7 +409,6 @@ body {
 .info-banner.pink { border-right-color: var(--pink); }
 .info-banner.pink i { color: var(--pink); }
 
-/* ==================== Timeline ==================== */
 .timeline {
   position: relative;
   padding-right: 30px;
@@ -478,10 +474,7 @@ body {
   flex-wrap: wrap;
 }
 .timeline-vaccines li:last-child { border-bottom: none; }
-.timeline-vaccines li i {
-  color: var(--mint);
-  font-size: 12px;
-}
+.timeline-vaccines li i { color: var(--mint); font-size: 12px; }
 .timeline-vaccines li.optional i { color: var(--lavender); }
 .timeline-vaccines li.optional::after {
   content: 'اختياري';
@@ -494,7 +487,6 @@ body {
   font-weight: 700;
 }
 
-/* ==================== قائمة التطعيمات ==================== */
 .vaccines-list {
   display: grid;
   gap: 12px;
@@ -544,7 +536,6 @@ body {
   flex-shrink: 0;
 }
 
-/* ==================== تفاصيل التطعيم ==================== */
 .detail-section {
   background: white;
   border-radius: 18px;
@@ -574,7 +565,6 @@ body {
 .detail-section ul { margin-top: 10px; padding-right: 20px; }
 .detail-section ul li { font-size: clamp(12px, 3vw, 14px); line-height: 1.8; color: var(--text-light); }
 
-/* ==================== Tips Grid ==================== */
 .tips-grid {
   display: grid;
   gap: 12px;
@@ -605,7 +595,6 @@ body {
 .tip-card-content h4 { font-size: clamp(13px, 3.3vw, 16px); margin-bottom: 5px; }
 .tip-card-content p { font-size: clamp(11px, 2.8vw, 14px); color: var(--text-light); line-height: 1.5; }
 
-/* ==================== Symptoms ==================== */
 .symptoms-section {
   margin-bottom: 25px;
 }
@@ -666,25 +655,6 @@ body {
 .emergency-card strong { display: block; font-size: clamp(14px, 3.5vw, 17px); margin-bottom: 4px; }
 .emergency-card p { font-size: clamp(12px, 3vw, 14px); opacity: 0.95; }
 
-/* ==================== Nutrition Grid ==================== */
-.nutrition-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-}
-.nutrition-card {
-  background: white;
-  border-radius: 18px;
-  padding: clamp(12px, 3vw, 18px) clamp(8px, 2vw, 12px);
-  text-align: center;
-  box-shadow: var(--shadow);
-  border-top: 4px solid var(--teal);
-}
-.nutrition-emoji { font-size: clamp(32px, 9vw, 48px); margin-bottom: 8px; }
-.nutrition-card h4 { font-size: clamp(12px, 3vw, 15px); margin-bottom: 5px; }
-.nutrition-card p { font-size: clamp(10px, 2.5vw, 13px); color: var(--text-light); line-height: 1.4; }
-
-/* ==================== QR Code ==================== */
 .qr-card {
   background: white;
   border-radius: 25px;
@@ -737,7 +707,6 @@ body {
 .clinic-info strong { display: block; font-size: clamp(12px, 3vw, 14px); }
 .clinic-info small { font-size: clamp(10px, 2.5vw, 12px); color: var(--text-light); }
 
-/* ==================== Iron Tracking ==================== */
 .user-type-selector {
   display: flex;
   gap: 10px;
@@ -842,12 +811,6 @@ body {
   font-weight: 700;
   cursor: pointer;
   font-size: clamp(13px, 3.3vw, 15px);
-}
-.nurse-login-box small {
-  display: block;
-  margin-top: 15px;
-  color: var(--text-light);
-  font-size: clamp(10px, 2.5vw, 12px);
 }
 
 .add-record-btn {
@@ -1015,7 +978,6 @@ body {
 }
 .no-results i { font-size: clamp(32px, 8vw, 46px); margin-bottom: 10px; color: #ddd; display: block; }
 
-/* ==================== Video List ==================== */
 .video-list {
   display: grid;
   gap: 12px;
@@ -1047,7 +1009,6 @@ body {
 .video-meta h4 { font-size: clamp(12px, 3.3vw, 16px); margin-bottom: 4px; }
 .video-meta p { font-size: clamp(10px, 2.7vw, 13px); color: var(--text-light); line-height: 1.4; }
 
-/* ==================== Modal ==================== */
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -1098,7 +1059,6 @@ body {
   font-size: clamp(13px, 3.3vw, 15px);
 }
 
-/* ==================== Wave Shape ==================== */
 .wave-shape {
   position: absolute;
   bottom: -1px;
@@ -1110,176 +1070,6 @@ body {
   border-top-right-radius: 50% 100%;
 }
 
-/* ==================== Media Queries (التجاوب الكامل) ==================== */
-
-/* الجوالات الصغيرة جداً (أقل من 360px) */
-@media (max-width: 359px) {
-  :root {
-    --base-padding: 10px;
-  }
-  .cards-grid { gap: 8px; }
-  .record-details { grid-template-columns: 1fr; }
-}
-
-/* الجوالات الكبيرة (360px - 480px) */
-@media (min-width: 360px) and (max-width: 480px) {
-  :root {
-    --base-padding: 15px;
-  }
-}
-
-/* الجوالات الكبيرة والأجهزة الصغيرة (481px - 768px) */
-@media (min-width: 481px) and (max-width: 768px) {
-  :root {
-    --max-content: 560px;
-    --base-padding: 25px;
-    --card-cols: 3;
-  }
-  .header-banner {
-    padding: 50px 30px 70px;
-    border-bottom-left-radius: 50px;
-    border-bottom-right-radius: 50px;
-  }
-  .nutrition-grid { grid-template-columns: repeat(3, 1fr); }
-  .record-details { grid-template-columns: repeat(2, 1fr); }
-}
-
-/* التابلت (769px - 1024px) */
-@media (min-width: 769px) and (max-width: 1024px) {
-  :root {
-    --max-content: 720px;
-    --base-padding: 35px;
-    --card-cols: 3;
-  }
-  .header-banner {
-    padding: 60px 40px 80px;
-    border-bottom-left-radius: 60px;
-    border-bottom-right-radius: 60px;
-  }
-  .baby-illustration { margin-top: -50px; }
-  .cards-grid { gap: 20px; }
-  .nutrition-grid { grid-template-columns: repeat(3, 1fr); }
-  .vaccines-list { grid-template-columns: repeat(2, 1fr); }
-  .tips-grid { grid-template-columns: repeat(2, 1fr); }
-  .timeline { padding-right: 40px; }
-  .content-area { padding: 30px 35px; }
-}
-
-/* أجهزة الكمبيوتر الصغيرة (1025px - 1366px) */
-@media (min-width: 1025px) and (max-width: 1366px) {
-  :root {
-    --max-content: 900px;
-    --base-padding: 45px;
-    --card-cols: 3;
-  }
-  .header-banner {
-    padding: 70px 50px 90px;
-    border-bottom-left-radius: 70px;
-    border-bottom-right-radius: 70px;
-  }
-  .baby-illustration { margin-top: -60px; }
-  .cards-grid { gap: 22px; }
-  .nutrition-grid { grid-template-columns: repeat(4, 1fr); }
-  .vaccines-list { grid-template-columns: repeat(2, 1fr); }
-  .tips-grid { grid-template-columns: repeat(2, 1fr); }
-  .symptoms-list { grid-template-columns: repeat(2, 1fr); }
-  .timeline { padding-right: 45px; }
-  .content-area { padding: 35px 45px; }
-  .qr-fab {
-    left: calc(50% - 450px + 25px);
-    bottom: 30px;
-  }
-}
-
-/* أجهزة الكمبيوتر الكبيرة (1367px فأكثر) */
-@media (min-width: 1367px) {
-  :root {
-    --max-content: 1100px;
-    --base-padding: 55px;
-    --card-cols: 3;
-  }
-  .header-banner {
-    padding: 80px 60px 100px;
-    border-bottom-left-radius: 80px;
-    border-bottom-right-radius: 80px;
-  }
-  .baby-illustration { margin-top: -70px; }
-  .cards-grid { gap: 25px; grid-template-columns: repeat(3, 1fr); }
-  .nutrition-grid { grid-template-columns: repeat(4, 1fr); }
-  .vaccines-list { grid-template-columns: repeat(2, 1fr); }
-  .tips-grid { grid-template-columns: repeat(2, 1fr); }
-  .symptoms-list { grid-template-columns: repeat(2, 1fr); }
-  .timeline { padding-right: 50px; }
-  .content-area { padding: 40px 55px; }
-  .qr-fab {
-    left: calc(50% - 550px + 30px);
-    bottom: 40px;
-    width: 70px;
-    height: 70px;
-    font-size: 28px;
-  }
-}
-
-/* الشاشات الأفقية للجوال (Landscape) */
-@media (max-height: 500px) and (orientation: landscape) {
-  .header-banner { padding: 20px 20px 40px; }
-  .baby-circle { width: 80px; height: 80px; }
-  .baby-emoji { font-size: 40px; }
-  .header-banner h1 { font-size: 22px; }
-  .baby-illustration { margin-top: -25px; }
-}
-
-/* دعم الطباعة */
-@media print {
-  .qr-fab, .back-btn, .contact-bar { display: none !important; }
-  .screen { box-shadow: none; }
-}
-
-/* تحسين التمرير */
-html {
-  scroll-behavior: smooth;
-}
-
-/* تحسين الإدخال على iOS */
-input, button, textarea, select {
-  font-family: inherit;
-  -webkit-appearance: none;
-  appearance: none;
-}
-
-/* تأكيد إظهار النصوص الطويلة */
-* {
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-}
-
-/* ==================== توقيع المطور ==================== */
-.developer-credit {
-  text-align: center;
-  padding: 12px 15px;
-  margin: 0 15px;
-  font-size: clamp(11px, 2.8vw, 13px);
-  color: var(--text-light);
-  background: rgba(255,255,255,0.6);
-  border-radius: 50px;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 2px 10px rgba(0,0,0,0.04);
-  letter-spacing: 0.5px;
-}
-.developer-credit i {
-  margin-left: 6px;
-  color: var(--lavender);
-  font-size: clamp(10px, 2.5vw, 12px);
-}
-.developer-credit strong {
-  color: var(--pink);
-  font-weight: 800;
-  letter-spacing: 1px;
-  background: linear-gradient(90deg, #f7a8b8, #b8a4d4);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
 /* ==================== تنسيق الفئات العمرية للتغذية ==================== */
 .age-nutrition-list {
   display: flex;
@@ -1356,6 +1146,7 @@ input, button, textarea, select {
   margin-top: 3px;
   flex-shrink: 0;
 }
+
 /* ==================== نافذة تثبيت التطبيق ==================== */
 .install-modal-overlay {
   position: fixed;
@@ -1505,17 +1296,82 @@ input, button, textarea, select {
 }
 .install-later:hover {
   color: #666;
-}  
-</style>
-  <!-- PWA Manifest -->
-<link rel="manifest" href="/vaccination-app/manifest.json">
+}
 
-<!-- أيقونات للشاشات المختلفة -->
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
-<link rel="apple-touch-icon" sizes="180x180" href="icon-180.png">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="جواز التحصين">
+/* ==================== توقيع المطور ==================== */
+.developer-credit {
+  text-align: center;
+  padding: 12px 15px;
+  margin: 0 15px;
+  font-size: clamp(11px, 2.8vw, 13px);
+  color: var(--text-light);
+  background: rgba(255,255,255,0.6);
+  border-radius: 50px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+  letter-spacing: 0.5px;
+}
+.developer-credit i {
+  margin-left: 6px;
+  color: var(--lavender);
+  font-size: clamp(10px, 2.5vw, 12px);
+}
+.developer-credit strong {
+  color: var(--pink);
+  font-weight: 800;
+  letter-spacing: 1px;
+  background: linear-gradient(90deg, #f7a8b8, #b8a4d4);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ==================== Media Queries ==================== */
+@media (max-width: 359px) {
+  :root { --base-padding: 10px; }
+  .cards-grid { gap: 8px; }
+  .record-details { grid-template-columns: 1fr; }
+}
+
+@media (min-width: 360px) and (max-width: 480px) {
+  :root { --base-padding: 15px; }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  :root { --max-content: 560px; --base-padding: 25px; --card-cols: 3; }
+  .header-banner { padding: 50px 30px 70px; border-bottom-left-radius: 50px; border-bottom-right-radius: 50px; }
+  .record-details { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  :root { --max-content: 720px; --base-padding: 35px; --card-cols: 3; }
+  .header-banner { padding: 60px 40px 80px; border-bottom-left-radius: 60px; border-bottom-right-radius: 60px; }
+  .baby-illustration { margin-top: -50px; }
+  .cards-grid { gap: 20px; }
+  .vaccines-list { grid-template-columns: repeat(2, 1fr); }
+  .tips-grid { grid-template-columns: repeat(2, 1fr); }
+  .timeline { padding-right: 40px; }
+  .content-area { padding: 30px 35px; }
+}
+
+@media print {
+  .qr-fab, .back-btn, .contact-bar { display: none !important; }
+  .screen { box-shadow: none; }
+}
+
+html { scroll-behavior: smooth; }
+
+input, button, textarea, select {
+  font-family: inherit;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+* {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+</style>
 </head>
 <body>
 
@@ -1545,76 +1401,48 @@ input, button, textarea, select {
   </div>
 
   <div class="cards-grid">
-    <!-- البطاقة 1: مواعيد التطعيم -->
     <div class="info-card card-mint" onclick="openScreen('vaccination-schedule')">
-      <div class="card-icon-wrap mint">
-        <i class="fas fa-calendar-check"></i>
-      </div>
+      <div class="card-icon-wrap mint"><i class="fas fa-calendar-check"></i></div>
       <h3>مواعيد التطعيمات</h3>
       <p>جدول التطعيمات المعتمد من عمر شهرين إلى 4 سنوات</p>
     </div>
-
-    <!-- البطاقة 2: أسماء التطعيمات -->
     <div class="info-card card-lavender" onclick="openScreen('vaccines-info')">
-      <div class="card-icon-wrap lavender">
-        <i class="fas fa-syringe"></i>
-      </div>
+      <div class="card-icon-wrap lavender"><i class="fas fa-syringe"></i></div>
       <h3>أنواع التطعيمات وفوائدها</h3>
       <p>تعرّف على كل تطعيم وأهميته لصحة طفلك</p>
     </div>
-
-    <!-- البطاقة 3: تعليمات بعد التطعيم -->
     <div class="info-card card-green" onclick="openScreen('post-vaccine')">
-      <div class="card-icon-wrap green">
-        <i class="fas fa-shield-check"></i>
-      </div>
+      <div class="card-icon-wrap green"><i class="fas fa-shield-check"></i></div>
       <h3>تعليمات بعد التطعيم</h3>
       <p>نصائح مهمة للحفاظ على صحة طفلك</p>
     </div>
-
-    <!-- البطاقة 4: الأعراض الطبيعية -->
     <div class="info-card card-yellow" onclick="openScreen('symptoms')">
-      <div class="card-icon-wrap yellow">
-        <i class="fas fa-baby"></i>
-      </div>
+      <div class="card-icon-wrap yellow"><i class="fas fa-baby"></i></div>
       <h3>أعراض طبيعية ومتى تقلق</h3>
       <p>الأعراض الطبيعية ومتى يجب مراجعة الطبيب</p>
     </div>
-
-    <!-- البطاقة 5: التغذية -->
     <div class="info-card card-teal" onclick="openScreen('nutrition')">
-      <div class="card-icon-wrap teal">
-        <i class="fas fa-bowl-food"></i>
-      </div>
+      <div class="card-icon-wrap teal"><i class="fas fa-bowl-food"></i></div>
       <h3>تغذية مناسبة بعد التطعيم</h3>
       <p>أطعمة تعزز مناعة طفلك وتساعد في النمو</p>
     </div>
-
-    <!-- البطاقة 6: متابعة نقص الحديد -->
     <div class="info-card card-pink" onclick="openScreen('iron-tracking')">
-      <div class="card-icon-wrap pink">
-        <i class="fas fa-droplet"></i>
-      </div>
-      <h3>متابعة نقص الحديد</h3>
-      <p>سجل فحوصات الحديد للأطفال</p>
+      <div class="card-icon-wrap pink"><i class="fas fa-droplet"></i></div>
+      <h3>متابعة نقص الهيموجلوبين</h3>
+      <p>سجل فحوصات الهيموجلوبين للأطفال</p>
     </div>
   </div>
 
-  <!-- شريط التواصل السفلي -->
   <div class="contact-bar">
     <div class="contact-item" onclick="openWhatsApp()">
-      <div class="contact-icon whatsapp">
-        <i class="fab fa-whatsapp"></i>
-      </div>
+      <div class="contact-icon whatsapp"><i class="fab fa-whatsapp"></i></div>
       <div class="contact-text">
         <strong>تواصلي معنا</strong>
         <small>واتساب مستشفى بدية</small>
       </div>
     </div>
     <div class="contact-item" onclick="openScreen('awareness-video')">
-      <div class="contact-icon youtube">
-        <i class="fas fa-play"></i>
-      </div>
+      <div class="contact-icon youtube"><i class="fas fa-play"></i></div>
       <div class="contact-text">
         <strong>فيديو توعوي</strong>
         <small>عن أهمية التطعيمات</small>
@@ -1633,7 +1461,6 @@ input, button, textarea, select {
     by: <strong>JOUHARAH.IT</strong>
   </div>
 
-  <!-- زر QR Code -->
   <button class="qr-fab" onclick="openScreen('qr-screen')">
     <i class="fas fa-qrcode"></i>
   </button>
@@ -1673,10 +1500,7 @@ input, button, textarea, select {
       <i class="fas fa-info-circle"></i>
       <p>جدول التطعيمات المعتمد في سلطنة عُمان من وزارة الصحة - من عمر شهرين إلى 4 سنوات</p>
     </div>
-
-    <div class="timeline" id="schedule-timeline">
-      <!-- يتم تعبئتها بالـ JavaScript -->
-    </div>
+    <div class="timeline" id="schedule-timeline"></div>
   </div>
 </div>
 
@@ -1691,9 +1515,7 @@ input, button, textarea, select {
       <i class="fas fa-info-circle"></i>
       <p>تعرّفي على كل تطعيم يُعطى لطفلك وفائدته في حمايته من الأمراض</p>
     </div>
-    <div class="vaccines-list" id="vaccines-list">
-      <!-- يتم تعبئتها بالـ JavaScript -->
-    </div>
+    <div class="vaccines-list" id="vaccines-list"></div>
   </div>
 </div>
 
@@ -1737,8 +1559,7 @@ input, button, textarea, select {
   </div>
 </div>
 
-<!-- ====== شاشة التغذية ====== -->
-<!-- ====== شاشة التغذية (مقسمة حسب العمر) ====== -->
+<!-- ====== شاشة التغذية حسب العمر ====== -->
 <div id="nutrition" class="screen">
   <div class="sub-header teal-bg">
     <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-right"></i></button>
@@ -1749,11 +1570,8 @@ input, button, textarea, select {
       <i class="fas fa-apple-whole"></i>
       <p>توصيات غذائية حسب عمر طفلك لتعزيز مناعته بعد التطعيم</p>
     </div>
-
-    <!-- قائمة الفئات العمرية -->
     <div class="age-nutrition-list">
 
-      <!-- أقل من شهرين -->
       <div class="age-card">
         <div class="age-card-header">
           <span class="age-badge">0 - 2 شهر</span>
@@ -1769,7 +1587,6 @@ input, button, textarea, select {
         </div>
       </div>
 
-      <!-- 2 - 4 شهور -->
       <div class="age-card">
         <div class="age-card-header">
           <span class="age-badge">2 - 4 شهور</span>
@@ -1785,7 +1602,6 @@ input, button, textarea, select {
         </div>
       </div>
 
-      <!-- 4 - 6 شهور -->
       <div class="age-card">
         <div class="age-card-header">
           <span class="age-badge">4 - 6 شهور</span>
@@ -1802,7 +1618,6 @@ input, button, textarea, select {
         </div>
       </div>
 
-      <!-- 6 - 8 شهور -->
       <div class="age-card">
         <div class="age-card-header">
           <span class="age-badge">6 - 8 شهور</span>
@@ -1819,7 +1634,6 @@ input, button, textarea, select {
         </div>
       </div>
 
-      <!-- 8 - 12 شهر -->
       <div class="age-card">
         <div class="age-card-header">
           <span class="age-badge">8 - 12 شهر</span>
@@ -1837,7 +1651,6 @@ input, button, textarea, select {
         </div>
       </div>
 
-      <!-- 12 - 18 شهر -->
       <div class="age-card">
         <div class="age-card-header">
           <span class="age-badge">12 - 18 شهر</span>
@@ -1855,7 +1668,6 @@ input, button, textarea, select {
         </div>
       </div>
 
-      <!-- 18 - 24 شهر -->
       <div class="age-card">
         <div class="age-card-header">
           <span class="age-badge">18 - 24 شهر</span>
@@ -1873,7 +1685,6 @@ input, button, textarea, select {
         </div>
       </div>
 
-      <!-- سنتين فأكثر -->
       <div class="age-card">
         <div class="age-card-header">
           <span class="age-badge">+ سنتين</span>
@@ -1894,11 +1705,12 @@ input, button, textarea, select {
     </div>
   </div>
 </div>
-<!-- ====== شاشة متابعة نقص الحديد ====== -->
+
+<!-- ====== شاشة متابعة نقص الهيموجلوبين ====== -->
 <div id="iron-tracking" class="screen">
   <div class="sub-header pink-bg">
     <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-right"></i></button>
-    <h2><i class="fas fa-droplet"></i> متابعة نقص الحديد</h2>
+    <h2><i class="fas fa-droplet"></i> متابعة نقص الهيموجلوبين</h2>
   </div>
   <div class="content-area">
     <div class="user-type-selector">
@@ -1925,27 +1737,25 @@ input, button, textarea, select {
 
     <!-- قسم الممرضة -->
     <div id="nurse-section" class="user-section">
-      <!-- تسجيل دخول الممرضة -->
       <div id="nurse-login" class="nurse-login-box">
         <i class="fas fa-lock"></i>
         <h3>تسجيل دخول الممرضة</h3>
         <input type="password" id="nurse-password" placeholder="كلمة المرور">
         <button onclick="nurseLogin()"><i class="fas fa-right-to-bracket"></i> دخول</button>
-        <small>كلمة المرور : nu*****3</small>
+        <small style="color:#6b7888; font-size:12px; margin-top:12px; display:block;">للحصول على كلمة المرور، يرجى التواصل مع مشرف النظام</small>
       </div>
 
       <!-- لوحة الممرضة -->
       <div id="nurse-dashboard" style="display:none;">
         <div class="info-banner pink">
           <i class="fas fa-clipboard-list"></i>
-          <p>سجل فحوصات نقص الحديد لجميع الأطفال</p>
+          <p>سجل فحوصات الهيموجلوبين لجميع الأطفال</p>
         </div>
 
         <button class="add-record-btn" onclick="toggleAddForm()">
           <i class="fas fa-plus-circle"></i> إضافة فحص جديد
         </button>
 
-        <!-- نموذج إضافة -->
         <div id="add-form" class="add-form" style="display:none;">
           <h3><i class="fas fa-file-circle-plus"></i> تسجيل فحص جديد</h3>
           <div class="form-grid">
@@ -1962,7 +1772,7 @@ input, button, textarea, select {
               <input type="tel" id="new-phone" placeholder="مثال: 9XXXXXXX">
             </div>
             <div class="form-field">
-              <label>نسبة الحديد (Hb g/dL)</label>
+              <label>نسبة الهيموجلوبين (Hb g/dL)</label>
               <input type="number" step="0.1" id="new-level" placeholder="مثال: 10.5">
             </div>
             <div class="form-field">
@@ -1981,13 +1791,12 @@ input, button, textarea, select {
           <button onclick="renderNurseRecords()"><i class="fas fa-magnifying-glass"></i></button>
         </div>
 
-        <!-- مفتاح الألوان -->
         <div class="legend-box">
           <strong>دلالة الألوان:</strong>
           <span class="legend-item normal">طبيعي (≥ 11.0)</span>
           <span class="legend-item mild">نقص خفيف (10.0 - 10.9)</span>
-          <span class="legend-item moderate">نقص متوسط (8.0 - 9.9)</span>
-          <span class="legend-item severe">نقص شديد (< 8.0)</span>
+          <span class="legend-item moderate">نقص متوسط (7.0 - 9.9)</span>
+          <span class="legend-item severe">نقص شديد (< 7.0)</span>
         </div>
 
         <div id="records-table" class="records-table"></div>
@@ -2018,7 +1827,7 @@ input, button, textarea, select {
       <div class="video-card" onclick="openVideo('https://www.youtube.com/results?search_query=نقص+الحديد+عند+الأطفال')">
         <div class="video-thumb"><i class="fab fa-youtube"></i></div>
         <div class="video-meta">
-          <h4>نقص الحديد عند الأطفال</h4>
+          <h4>نقص الهيموجلوبين عند الأطفال</h4>
           <p>الأسباب، الأعراض، والوقاية من فقر الدم</p>
         </div>
       </div>
@@ -2052,1331 +1861,6 @@ input, button, textarea, select {
   </div>
 </div>
 
-<script>
-// ==================== جدول التطعيمات في سلطنة عُمان ====================
-const vaccinationSchedule = [
-  {
-    age: "عمر شهرين",
-    icon: "fa-baby",
-    vaccines: [
-      { name: "الجرعة الأولى ضد شلل الأطفال (IPV/OPV)", optional: false },
-      { name: "الجرعة الأولى من اللقاح الخماسي (الدفتيريا، التيتانوس، السعال الديكي، الكبد B، المستدمية النزلية)", optional: false },
-      { name: "الجرعة الأولى ضد المكورات الرئوية (PCV)", optional: false },
-      { name: "الجرعة الأولى ضد فيروس الروتا", optional: true }
-    ]
-  },
-  {
-    age: "عمر 4 شهور",
-    icon: "fa-baby",
-    vaccines: [
-      { name: "الجرعة الثانية ضد شلل الأطفال", optional: false },
-      { name: "الجرعة الثانية من اللقاح الخماسي", optional: false },
-      { name: "الجرعة الثانية ضد المكورات الرئوية (PCV)", optional: false },
-      { name: "الجرعة الثانية ضد فيروس الروتا", optional: true }
-    ]
-  },
-  {
-    age: "عمر 6 شهور",
-    icon: "fa-baby",
-    vaccines: [
-      { name: "الجرعة الثالثة ضد شلل الأطفال (OPV)", optional: false },
-      { name: "الجرعة الثالثة من اللقاح الخماسي", optional: false },
-      { name: "الجرعة الثالثة ضد المكورات الرئوية (اختيارية)", optional: true }
-    ]
-  },
-  {
-    age: "عمر 9 شهور",
-    icon: "fa-child",
-    vaccines: [
-      { name: "جرعة فيتامين A الأولى", optional: false }
-    ]
-  },
-  {
-    age: "عمر 12 شهراً (سنة)",
-    icon: "fa-cake-candles",
-    vaccines: [
-      { name: "الجرعة الأولى من الحصبة والحصبة الألمانية والنكاف (MMR-1)", optional: false },
-      { name: "جرعة معززة ضد المكورات الرئوية (PCV Booster)", optional: false },
-      { name: "الجرعة الأولى ضد الجديري المائي (Varicella)", optional: false },
-      { name: "الجرعة الأولى ضد الكبد الوبائي A", optional: true }
-    ]
-  },
-  {
-    age: "عمر 18 شهراً",
-    icon: "fa-child",
-    vaccines: [
-      { name: "جرعة منشطة ضد شلل الأطفال", optional: false },
-      { name: "جرعة منشطة ضد الدفتيريا والتيتانوس والسعال الديكي (DTP)", optional: false },
-      { name: "الجرعة الثانية من الحصبة والحصبة الألمانية والنكاف (MMR-2)", optional: false },
-      { name: "جرعة فيتامين A الثانية", optional: false }
-    ]
-  },
-  {
-    age: "عمر سنتين (24 شهراً)",
-    icon: "fa-child-reaching",
-    vaccines: [
-      { name: "الجرعة الأولى ضد الحمى الشوكية (MenACWY)", optional: true },
-      { name: "الجرعة الثانية ضد الكبد الوبائي A", optional: true }
-    ]
-  },
-  {
-    age: "عمر 4 سنوات (دخول المدرسة)",
-    icon: "fa-school",
-    vaccines: [
-      { name: "جرعة منشطة ضد شلل الأطفال (OPV Booster)", optional: false },
-      { name: "جرعة منشطة من اللقاح الثلاثي (DT)", optional: false },
-      { name: "جرعة منشطة للدرن (BCG)", optional: true },
-      { name: "الجرعة الثانية ضد الحمى الشوكية", optional: true }
-    ]
-  }
-];
-
-// ==================== أنواع التطعيمات وفوائدها ====================
-const vaccinesInfo = [
-  {
-    id: "polio",
-    name: "تطعيم شلل الأطفال (OPV / IPV)",
-    icon: "fa-shield-virus",
-    short: "يحمي من فيروس شلل الأطفال الذي يسبب الشلل الدائم",
-    benefits: [
-      "يحمي طفلك من فيروس شلل الأطفال الذي قد يسبب شللاً دائماً",
-      "يُعطى على عدة جرعات لضمان أعلى مستوى من الحماية",
-      "ساهم في القضاء شبه التام على المرض عالمياً"
-    ],
-    schedule: "يُعطى عند الولادة، شهرين، 4 شهور، 6 شهور، 9 شهور، 18 شهراً، وعند دخول المدرسة",
-    sideEffects: "آمن جداً، نادراً ما يسبب آثاراً جانبية",
-    disease: "شلل الأطفال (Poliomyelitis) - مرض فيروسي يهاجم الجهاز العصبي ويسبب شللاً دائماً"
-  },
-  {
-    id: "dtp",
-    name: "اللقاح الخماسي / الثلاثي (DTP)",
-    icon: "fa-syringe",
-    short: "يحمي من الدفتيريا والتيتانوس والسعال الديكي",
-    benefits: [
-      "الحماية من الدفتيريا التي تسبب التهابات شديدة في الحلق",
-      "الوقاية من التيتانوس (الكزاز) الذي يسبب تشنجات عضلية خطيرة",
-      "الحماية من السعال الديكي الذي يسبب نوبات سعال شديدة عند الرضع"
-    ],
-    schedule: "ثلاث جرعات في الشهرين، 4 شهور، 6 شهور، ثم جرعة معززة في 18 شهراً، وأخرى عند دخول المدرسة",
-    sideEffects: "احمرار خفيف وانتفاخ في مكان الحقن، حمى خفيفة (أعراض طبيعية تزول خلال 24-48 ساعة)",
-    disease: "ثلاثة أمراض بكتيرية خطيرة تهدد حياة الأطفال خصوصاً الرضع"
-  },
-  {
-    id: "hepb",
-    name: "تطعيم الالتهاب الكبدي ب (Hepatitis B)",
-    icon: "fa-shield-heart",
-    short: "يحمي من فيروس الكبد B الذي يسبب تليف وسرطان الكبد",
-    benefits: [
-      "يحمي طفلك من الإصابة بالتهاب الكبد المزمن",
-      "يقلل خطر الإصابة بتليف الكبد وسرطان الكبد مستقبلاً",
-      "حماية تستمر مدى الحياة في معظم الحالات"
-    ],
-    schedule: "ضمن اللقاح الخماسي في الشهرين، 4 شهور، 6 شهور (الجرعة الأولى عند الولادة)",
-    sideEffects: "ألم خفيف في مكان الحقن، نادراً ما يسبب حمى",
-    disease: "التهاب الكبد الفيروسي B - مرض مزمن قد يؤدي لتليف وسرطان الكبد"
-  },
-  {
-    id: "hib",
-    name: "تطعيم المستدمية النزلية (Hib)",
-    icon: "fa-virus-slash",
-    short: "يحمي من بكتيريا تسبب الالتهاب السحائي والالتهاب الرئوي",
-    benefits: [
-      "الحماية من الالتهاب السحائي البكتيري الخطير",
-      "الوقاية من التهاب الرئة والتهاب لسان المزمار",
-      "تقليل خطر الإصابة بعدوى الدم البكتيرية"
-    ],
-    schedule: "ضمن اللقاح الخماسي في الشهرين، 4 شهور، 6 شهور",
-    sideEffects: "احمرار وانتفاخ خفيف في مكان الحقن",
-    disease: "عدوى بكتيرية خطيرة قد تسبب التهاب السحايا وتؤدي للوفاة أو الإعاقة الدائمة"
-  },
-  {
-    id: "pcv",
-    name: "تطعيم المكورات الرئوية (PCV)",
-    icon: "fa-lungs",
-    short: "يحمي من بكتيريا تسبب الالتهاب الرئوي والتهاب الأذن",
-    benefits: [
-      "الحماية من الالتهاب الرئوي البكتيري",
-      "الوقاية من التهاب الأذن الوسطى المتكرر",
-      "تقليل خطر الإصابة بالتهاب السحايا"
-    ],
-    schedule: "ثلاث جرعات في الشهرين، 4 شهور، 6 شهور، ثم جرعة معززة في عمر 12 شهراً",
-    sideEffects: "حمى خفيفة، احمرار في مكان الحقن، تململ مؤقت",
-    disease: "بكتيريا المكورات الرئوية - تسبب التهابات في الرئة والأذن والدماغ"
-  },
-  {
-    id: "rota",
-    name: "تطعيم فيروس الروتا (Rota)",
-    icon: "fa-stomach",
-    short: "يحمي من الإسهال الشديد الذي يسببه فيروس الروتا",
-    benefits: [
-      "الحماية من الإسهال الشديد والقيء عند الرضع",
-      "تقليل خطر الجفاف الشديد والحاجة لدخول المستشفى",
-      "يُعطى عن طريق الفم (نقط) وليس حقناً"
-    ],
-    schedule: "جرعتان أو ثلاث جرعات في الشهرين، 4 شهور، (6 شهور حسب نوع اللقاح)",
-    sideEffects: "في حالات نادرة قد يسبب اضطراباً بسيطاً في المعدة",
-    disease: "التهاب المعدة والأمعاء الفيروسي - السبب الأول لإسهال الرضع حول العالم"
-  },
-  {
-    id: "mmr",
-    name: "تطعيم الحصبة والحصبة الألمانية والنكاف (MMR)",
-    icon: "fa-face-grin-stars",
-    short: "يحمي من ثلاثة أمراض فيروسية مهمة",
-    benefits: [
-      "الحماية من الحصبة التي قد تسبب مضاعفات خطيرة كالتهاب الدماغ",
-      "الوقاية من الحصبة الألمانية المضرة بالأجنة",
-      "الحماية من النكاف الذي قد يسبب العقم عند الذكور"
-    ],
-    schedule: "الجرعة الأولى في عمر 12 شهراً، والثانية في 18 شهراً",
-    sideEffects: "حمى خفيفة بعد 7-10 أيام، طفح جلدي بسيط أحياناً",
-    disease: "ثلاثة أمراض فيروسية شديدة العدوى، قد تسبب مضاعفات خطيرة"
-  },
-  {
-    id: "varicella",
-    name: "تطعيم الجديري المائي (Varicella)",
-    icon: "fa-virus",
-    short: "يحمي من مرض الجديري المائي (العنقز)",
-    benefits: [
-      "الحماية من الطفح الجلدي المؤلم والحكة الشديدة",
-      "تقليل خطر مضاعفات المرض كالتهابات الجلد",
-      "الوقاية من الإصابة بالحزام الناري مستقبلاً"
-    ],
-    schedule: "جرعة واحدة في عمر 12 شهراً (لجميع الأطفال المولودين في عُمان بعد 2010)",
-    sideEffects: "احمرار في مكان الحقن، حمى خفيفة، طفح جلدي بسيط نادراً",
-    disease: "الجديري المائي - مرض فيروسي يسبب طفحاً جلدياً وحكة شديدة"
-  },
-  {
-    id: "vita",
-    name: "جرعات فيتامين A",
-    icon: "fa-capsules",
-    short: "تعزز المناعة وتحمي صحة العين",
-    benefits: [
-      "تعزيز جهاز المناعة عند الطفل",
-      "الوقاية من نقص فيتامين A الذي يؤثر على البصر",
-      "تقليل خطر الإصابة بالعدوى وأمراض الجهاز التنفسي"
-    ],
-    schedule: "الجرعة الأولى في عمر 9 شهور، والثانية في 18 شهراً",
-    sideEffects: "آمنة تماماً، لا تسبب آثاراً جانبية تذكر",
-    disease: "نقص فيتامين A - قد يسبب ضعف البصر وضعف المناعة"
-  },
-  {
-    id: "bcg",
-    name: "تطعيم الدرن (BCG)",
-    icon: "fa-shield",
-    short: "يحمي من مرض السل (الدرن)",
-    benefits: [
-      "الحماية من السل الرئوي الخطير",
-      "الوقاية من السل السحائي عند الأطفال",
-      "يُعطى عند الولادة كأول تطعيم"
-    ],
-    schedule: "عند الولادة، وجرعة معززة عند دخول المدرسة",
-    sideEffects: "ندبة صغيرة في مكان الحقن (في الذراع)، انتفاخ بسيط",
-    disease: "السل (الدرن) - عدوى بكتيرية تصيب الرئتين بشكل رئيسي"
-  },
-  {
-    id: "men",
-    name: "تطعيم الحمى الشوكية (MenACWY)",
-    icon: "fa-brain",
-    short: "يحمي من التهاب السحايا البكتيري",
-    benefits: [
-      "الحماية من التهاب السحايا الذي قد يكون قاتلاً",
-      "الوقاية من تسمم الدم البكتيري",
-      "حماية من 4 أنواع من بكتيريا المكورات السحائية"
-    ],
-    schedule: "الجرعة الأولى في عمر سنتين، والثانية عند دخول المدرسة",
-    sideEffects: "ألم في مكان الحقن، حمى خفيفة قد تستمر يوماً",
-    disease: "الحمى الشوكية - مرض خطير قد يؤدي للوفاة خلال ساعات"
-  }
-];
-
-// ==================== تعليمات بعد التطعيم ====================
-const postVaccineTips = [
-  {
-    title: "ضعي كمادات باردة",
-    description: "إذا حدث تورم أو احمرار مكان الحقن، استخدمي كمادة باردة لطيفة لمدة 10-15 دقيقة"
-  },
-  {
-    title: "أعطي خافض الحرارة عند الحاجة",
-    description: "في حالة ارتفاع الحرارة، يمكن إعطاء الباراسيتامول حسب وزن الطفل وبعد استشارة الطبيب"
-  },
-  {
-    title: "أكثري من السوائل والرضاعة",
-    description: "احرصي على إرضاع طفلك بشكل متكرر للحفاظ على ترطيبه ودعم جهاز مناعته"
-  },
-  {
-    title: "راقبي الطفل لمدة 24-48 ساعة",
-    description: "لاحظي أي أعراض غير طبيعية واتصلي بالعيادة فوراً عند ظهور أعراض مقلقة"
-  },
-  {
-    title: "ألبسي الطفل ملابس خفيفة",
-    description: "خاصة إذا كان لديه ارتفاع في الحرارة، تجنبي تغطيته بأغطية ثقيلة"
-  },
-  {
-    title: "تجنبي فرك مكان الحقن",
-    description: "اتركي مكان الحقن دون لمس أو فرك، ولا تضعي مراهم إلا بأمر الطبيب"
-  },
-  {
-    title: "حمام دافئ مسموح",
-    description: "يمكنك تحميم الطفل بماء دافئ بشكل طبيعي، ولا تخافي من ابتلال مكان الحقن"
-  },
-  {
-    title: "احفظي بطاقة التطعيمات",
-    description: "احتفظي ببطاقة التطعيمات في مكان آمن وأحضريها معك في كل زيارة للعيادة"
-  }
-];
-
-// ==================== الأعراض الطبيعية ====================
-const normalSymptoms = [
-  "ارتفاع خفيف في درجة الحرارة (أقل من 38.5°م) ليوم أو يومين",
-  "احمرار أو انتفاخ بسيط مكان الحقن",
-  "تململ أو بكاء أكثر من المعتاد لساعات",
-  "قلة الشهية المؤقتة لوجبة أو وجبتين",
-  "نعاس وزيادة ساعات النوم",
-  "طفح جلدي بسيط بعد لقاح MMR (بعد 7-10 أيام)"
-];
-
-// ==================== أعراض مقلقة ====================
-const alertSymptoms = [
-  "حرارة مرتفعة جداً (أعلى من 39°م) لا تستجيب لخافض الحرارة",
-  "بكاء مستمر وغير طبيعي لأكثر من 3 ساعات",
-  "تشنجات أو ارتعاش في الجسم",
-  "صعوبة في التنفس أو ازرقاق الشفاه",
-  "طفح جلدي شديد أو تورم في الوجه (تحسس)",
-  "خمول شديد وعدم استجابة الطفل",
-  "قيء مستمر أو إسهال شديد",
-  "تورم كبير ومتزايد في مكان الحقن"
-];
-
-// ==================== التغذية ====================
-const nutritionItems = [
-  { emoji: "🥛", name: "الرضاعة الطبيعية", desc: "أفضل غذاء للرضع، تعزز المناعة بشكل طبيعي" },
-  { emoji: "🍊", name: "الفواكه الغنية بفيتامين C", desc: "البرتقال، الكيوي، الفراولة لتقوية المناعة" },
-  { emoji: "🥬", name: "الخضروات الورقية", desc: "السبانخ، البروكلي - غنية بالحديد والفيتامينات" },
-  { emoji: "🥚", name: "البيض", desc: "مصدر ممتاز للبروتين والحديد لنمو الطفل" },
-  { emoji: "🐟", name: "السمك", desc: "أوميغا 3 لتطور الدماغ والمناعة" },
-  { emoji: "🥑", name: "الأفوكادو", desc: "دهون صحية لنمو الطفل وتعزيز الطاقة" },
-  { emoji: "🍠", name: "البطاطا الحلوة", desc: "غنية بفيتامين A لصحة العين والمناعة" },
-  { emoji: "🥕", name: "الجزر", desc: "بيتا كاروتين لصحة العين والبشرة" },
-  { emoji: "🍌", name: "الموز", desc: "طاقة سريعة وبوتاسيوم للأطفال" },
-  { emoji: "🍎", name: "التفاح", desc: "ألياف وفيتامينات لصحة الجهاز الهضمي" },
-  { emoji: "💧", name: "الماء الكافي", desc: "للحفاظ على الترطيب خاصة بعد التطعيم" },
-  { emoji: "🥣", name: "الزبادي", desc: "بروبيوتيك لصحة الأمعاء والمناعة" }
-];
-
-// ==================== سجل نقص الحديد - بيانات تجريبية ====================
-let ironRecords = JSON.parse(localStorage.getItem('ironRecords')) || [
-  {
-    id: 1,
-    fileNo: "1001",
-    name: "محمد سالم الحارثي",
-    phone: "99887766",
-    level: 11.5,
-    date: "2026-03-15"
-  },
-  {
-    id: 2,
-    fileNo: "1002",
-    name: "فاطمة علي البوسعيدي",
-    phone: "92345678",
-    level: 10.3,
-    date: "2026-04-10"
-  },
-  {
-    id: 3,
-    fileNo: "1003",
-    name: "أحمد خالد المعمري",
-    phone: "98765432",
-    level: 9.2,
-    date: "2026-04-22"
-  },
-  {
-    id: 4,
-    fileNo: "1004",
-    name: "مريم ناصر الكندي",
-    phone: "97654321",
-    level: 7.8,
-    date: "2026-05-05"
-  },
-  {
-    id: 5,
-    fileNo: "1005",
-    name: "سعيد علي البلوشي",
-    phone: "96543210",
-    level: 11.8,
-    date: "2026-05-12"
-  }
-];
-
-function saveIronRecords() {
-  localStorage.setItem('ironRecords', JSON.stringify(ironRecords));
-}
-
-</script>
-<script>
-// ==================== إدارة الشاشات ====================
-let screenHistory = ['main-screen'];
-
-function openScreen(id) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  if (screenHistory[screenHistory.length - 1] !== id) {
-    screenHistory.push(id);
-  }
-  window.scrollTo(0, 0);
-
-  // عند فتح كل شاشة، تعبئة البيانات إذا لزم
-  if (id === 'vaccination-schedule') renderSchedule();
-  if (id === 'vaccines-info') renderVaccinesInfo();
-  if (id === 'post-vaccine') renderPostTips();
-  if (id === 'symptoms') renderSymptoms();
-  //if (id === 'nutrition') renderNutrition();
-  if (id === 'qr-screen') renderQRCode();
-}
-
-function goBack() {
-  if (screenHistory.length > 1) {
-    screenHistory.pop();
-    const prev = screenHistory[screenHistory.length - 1];
-    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-    document.getElementById(prev).classList.add('active');
-    window.scrollTo(0, 0);
-  }
-}
-
-// ==================== WhatsApp ====================
-function openWhatsApp() {
-  const phone = "96825583641"; // 968 = رمز عُمان
-  const message = encodeURIComponent("السلام عليكم، أود الاستفسار عن تطعيمات الأطفال في عيادة التحصينات بمستشفى بدية");
-  window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
-}
-
-function openVideo(url) {
-  window.open(url, '_blank');
-}
-
-// ==================== جدول التطعيمات ====================
-function renderSchedule() {
-  const container = document.getElementById('schedule-timeline');
-  if (container.dataset.loaded === 'true') return;
-  container.dataset.loaded = 'true';
-  container.innerHTML = vaccinationSchedule.map(item => `
-    <div class="timeline-item">
-      <span class="timeline-age"><i class="fas ${item.icon}"></i> ${item.age}</span>
-      <ul class="timeline-vaccines">
-        ${item.vaccines.map(v => `
-          <li class="${v.optional ? 'optional' : ''}">
-            <i class="fas ${v.optional ? 'fa-star' : 'fa-check'}"></i>
-            ${v.name}
-          </li>
-        `).join('')}
-      </ul>
-    </div>
-  `).join('');
-}
-
-// ==================== أنواع التطعيمات ====================
-function renderVaccinesInfo() {
-  const container = document.getElementById('vaccines-list');
-  if (container.dataset.loaded === 'true') return;
-  container.dataset.loaded = 'true';
-  container.innerHTML = vaccinesInfo.map(v => `
-    <div class="vaccine-card" onclick="openVaccineDetail('${v.id}')">
-      <div class="vaccine-card-icon">
-        <i class="fas ${v.icon}"></i>
-      </div>
-      <div class="vaccine-card-content">
-        <h4>${v.name}</h4>
-        <p>${v.short}</p>
-      </div>
-      <div class="vaccine-card-arrow">
-        <i class="fas fa-chevron-left"></i>
-      </div>
-    </div>
-  `).join('');
-}
-
-function openVaccineDetail(id) {
-  const v = vaccinesInfo.find(x => x.id === id);
-  document.getElementById('vd-title').innerHTML = `<i class="fas ${v.icon}"></i> ${v.name}`;
-  document.getElementById('vd-content').innerHTML = `
-    <div class="detail-section">
-      <h3><i class="fas fa-circle-info"></i> عن المرض</h3>
-      <p>${v.disease}</p>
-    </div>
-    <div class="detail-section">
-      <h3><i class="fas fa-heart-circle-check"></i> فوائد التطعيم</h3>
-      <ul>
-        ${v.benefits.map(b => `<li>${b}</li>`).join('')}
-      </ul>
-    </div>
-    <div class="detail-section">
-      <h3><i class="fas fa-calendar"></i> جدول الجرعات</h3>
-      <p>${v.schedule}</p>
-    </div>
-    <div class="detail-section">
-      <h3><i class="fas fa-triangle-exclamation"></i> الآثار الجانبية المحتملة</h3>
-      <p>${v.sideEffects}</p>
-    </div>
-  `;
-  openScreen('vaccine-detail');
-}
-
-// ==================== التعليمات والأعراض ====================
-function renderPostTips() {
-  const container = document.getElementById('post-tips');
-  if (container.dataset.loaded === 'true') return;
-  container.dataset.loaded = 'true';
-  container.innerHTML = postVaccineTips.map((t, i) => `
-    <div class="tip-card">
-      <div class="tip-card-number">${i + 1}</div>
-      <div class="tip-card-content">
-        <h4>${t.title}</h4>
-        <p>${t.description}</p>
-      </div>
-    </div>
-  `).join('');
-}
-
-function renderSymptoms() {
-  const normal = document.getElementById('normal-symptoms');
-  const alert = document.getElementById('alert-symptoms');
-  if (normal.dataset.loaded === 'true') return;
-  normal.dataset.loaded = 'true';
-  normal.innerHTML = normalSymptoms.map(s => `
-    <div class="symptom-item normal">
-      <i class="fas fa-check-circle"></i>
-      <span>${s}</span>
-    </div>
-  `).join('');
-  alert.innerHTML = alertSymptoms.map(s => `
-    <div class="symptom-item alert">
-      <i class="fas fa-triangle-exclamation"></i>
-      <span>${s}</span>
-    </div>
-  `).join('');
-}
-
-
-
-// ==================== QR Code ====================
-function renderQRCode() {
-  const el = document.getElementById('qrcode');
-  if (el.dataset.loaded === 'true') return;
-  el.dataset.loaded = 'true';
-  const url = window.location.href.split('#')[0];
-  new QRCode(el, {
-    text: url,
-    width: 200,
-    height: 200,
-    colorDark: "#3a4a5c",
-    colorLight: "#ffffff",
-    correctLevel: QRCode.CorrectLevel.H
-  });
-}
-
-// ==================== متابعة نقص الحديد ====================
-let currentUserType = 'parent';
-let nurseLoggedIn = false;
-
-function switchUserType(type) {
-  currentUserType = type;
-  document.getElementById('parent-btn').classList.toggle('active', type === 'parent');
-  document.getElementById('nurse-btn').classList.toggle('active', type === 'nurse');
-  document.getElementById('parent-section').classList.toggle('active', type === 'parent');
-  document.getElementById('nurse-section').classList.toggle('active', type === 'nurse');
-}
-
-function nurseLogin() {
-  const password = document.getElementById('nurse-password').value;
-  if (password === 'nurse123') {
-    nurseLoggedIn = true;
-    document.getElementById('nurse-login').style.display = 'none';
-    document.getElementById('nurse-dashboard').style.display = 'block';
-    renderNurseRecords();
-    showModal('success', 'تم تسجيل الدخول', 'مرحباً بك في لوحة تحكم الممرضة');
-  } else {
-    showModal('error', 'كلمة مرور خاطئة', 'يرجى التحقق من كلمة المرور والمحاولة مرة أخرى');
-  }
-}
-
-// ==================== نظام تقييم حالة الهيموجلوبين مع التوصيات ====================
-function getIronStatus(level) {
-  if (level >= 11.0) return { 
-    status: 'normal', 
-    text: 'طبيعي',
-    color: '#2d7a4a',
-    bgColor: '#d5ebe0',
-    borderColor: '#4caf7d',
-    icon: 'fa-circle-check',
-    severityLevel: 1
-  };
-  if (level >= 10.0) return { 
-    status: 'mild', 
-    text: 'نقص خفيف',
-    color: '#b8901a',
-    bgColor: '#fdf2d4',
-    borderColor: '#e8b94d',
-    icon: 'fa-circle-info',
-    severityLevel: 2
-  };
-  if (level >= 8.0) return { 
-    status: 'moderate', 
-    text: 'نقص متوسط',
-    color: '#c4691a',
-    bgColor: '#fde2c4',
-    borderColor: '#e89a4d',
-    icon: 'fa-triangle-exclamation',
-    severityLevel: 3
-  };
-  return { 
-    status: 'severe', 
-    text: 'نقص شديد - يستدعي التدخل الفوري',
-    color: '#c43a3a',
-    bgColor: '#ffd4d4',
-    borderColor: '#ff5959',
-    icon: 'fa-circle-exclamation',
-    severityLevel: 4
-  };
-}
-
-// ==================== التوصيات حسب كل حالة ====================
-// ==================== التوصيات حسب كل حالة (مطابقة للمعايير الطبية) ====================
-function getRecommendations(level, childName) {
-  const status = getIronStatus(level);
-  const name = childName || 'الطفل';
-  
-  // أطعمة غنية بالحديد
-  const ironRichFoods = [
-    '🥩 اللحوم الحمراء',
-    '🍗 الدجاج',
-    '🐟 الأسماك',
-    '🥬 الكبد (حسب الفئة العمرية والحالة الصحية)',
-    '🥣 البقوليات (العدس، الفاصوليا)',
-    '🥚 صفار البيض',
-    '🥬 السبانخ والورقيات الخضراء',
-    '🍠 البطاطا الحلوة'
-  ];
-  
-  // مصادر فيتامين C لتعزيز الامتصاص
-  const vitaminCFoods = [
-    '🍊 البرتقال',
-    '🍋 الليمون',
-    '🍈 الجوافة',
-    '🫑 الفلفل الحلو',
-    '🍓 الفراولة والكيوي',
-    '🍅 الطماطم'
-  ];
-  
-  // الملاحظة الطبية العامة
-  const medicalNote = '⚠️ القرار لا يعتمد على رقم الهيموجلوبين فقط، بل على الأعراض والحالة السريرية وعمر المريض، لذلك تعد هذه التوصيات إرشادية وليست بديلاً عن التقييم الطبي.';
-  
-  switch (status.status) {
-    // ============ الحالة 4: طبيعي (أكثر من 11 g/dl) ============
-    case 'normal':
-      return {
-        title: `✅ ${name} بصحة جيدة`,
-        summary: 'نسبة الهيموجلوبين طبيعية - استمري في النظام الصحي',
-        message: `مستوى الهيموجلوبين عند ${name} (${level} g/dL) ضمن المعدل الطبيعي.`,
-        action: {
-          title: 'الإجراء الموصى به',
-          items: [
-            'الاستمرار على نمط غذائي صحي ومتوازن',
-            'المتابعة الدورية حسب توصيات الطبيب'
-          ]
-        },
-        note: medicalNote,
-        color: '#2d7a4a',
-        bgColor: '#e8f5e9',
-        borderColor: '#4caf7d',
-        icon: 'fa-face-smile',
-        severity: 'normal'
-      };
-    
-    // ============ الحالة 3: نقص خفيف (10 - 10.9 g/dl) ============
-    case 'mild':
-      return {
-        title: `⚠️ نقص خفيف في الهيموجلوبين`,
-        summary: `النسبة: ${level} g/dL - يوصى بمراجعة عيادة التغذية`,
-        message: `مستوى الهيموجلوبين عند ${name} أقل قليلاً من المعدل الطبيعي. ننصح بمراجعة عيادة التغذية لتحسين المدخول الغذائي من الحديد ومتابعة الفحوصات الطبية.`,
-        action: {
-          title: 'الإجراء الموصى به',
-          items: [
-            'مراجعة عيادة التغذية لتحسين المدخول الغذائي من الحديد',
-            'متابعة الفحوصات الطبية بانتظام'
-          ]
-        },
-        nutritionAdvice: {
-          title: '🥗 توصيات غذائية مختصرة',
-          items: [
-            'زيادة تناول مصادر الحديد مثل اللحوم الحمراء، الدجاج، الأسماك، الكبد (حسب الفئة العمرية والحالة الصحية)',
-            'تناول مصدر لفيتامين C مع الوجبة (البرتقال، الليمون، الجوافة، الفلفل الحلو)',
-            'تجنب الشاي والقهوة لمدة ساعة إلى ساعتين قبل وبعد الوجبات الغنية بالحديد ومكملات الحديد',
-            'تجنب منتجات الألبان لمدة ساعة إلى ساعتين قبل وبعد الوجبات الغنية بالحديد ومكملات الحديد',
-            'الالتزام بمكملات الحديد الموصوفة من الطبيب'
-          ]
-        },
-        ironFoods: ironRichFoods,
-        vitaminFoods: vitaminCFoods,
-        note: medicalNote,
-        color: '#b8901a',
-        bgColor: '#fff8e1',
-        borderColor: '#e8b94d',
-        icon: 'fa-apple-whole',
-        severity: 'mild'
-      };
-    
-    // ============ الحالة 2: نقص متوسط (7 - 9.9 g/dl) ============
-    case 'moderate':
-      return {
-        title: `🔶 نقص في الهيموجلوبين يستدعي التدخل`,
-        summary: `النسبة: ${level} g/dL - يوصى بمراجعة الطبيب`,
-        message: `مستوى الهيموجلوبين عند ${name} منخفض ويحتاج إلى تقييم طبي. ننصح بمراجعة الطبيب خلال أقرب وقت لتقييم السبب والعلاج، مع تحويل لعيادة التغذية عند الحاجة.`,
-        action: {
-          title: 'الإجراء الموصى به',
-          items: [
-            'مراجعة الطبيب خلال أقرب وقت لتقييم السبب والعلاج',
-            'تحويل لعيادة التغذية عند الحاجة'
-          ]
-        },
-        nutritionAdvice: {
-          title: '🥗 توصيات غذائية مختصرة',
-          items: [
-            'زيادة تناول مصادر الحديد مثل اللحوم الحمراء، الدجاج، الأسماك، الكبد (حسب الفئة العمرية والحالة الصحية)',
-            'تناول مصدر لفيتامين C مع الوجبة (البرتقال، الليمون، الجوافة، الفلفل الحلو)',
-            'تجنب الشاي والقهوة لمدة ساعة إلى ساعتين قبل وبعد الوجبات الغنية بالحديد ومكملات الحديد',
-            'تجنب منتجات الألبان لمدة ساعة إلى ساعتين قبل وبعد الوجبات الغنية بالحديد ومكملات الحديد',
-            'الالتزام بمكملات الحديد الموصوفة من الطبيب'
-          ]
-        },
-        ironFoods: ironRichFoods,
-        vitaminFoods: vitaminCFoods,
-        note: medicalNote,
-        color: '#c4691a',
-        bgColor: '#fff3e0',
-        borderColor: '#e89a4d',
-        icon: 'fa-user-doctor',
-        severity: 'moderate',
-        showContact: true
-      };
-    
-    // ============ الحالة 1: نقص شديد (أقل من 7 g/dl) ============
-    case 'severe':
-      return {
-        title: `🚨 نقص شديد في الهيموجلوبين - حالة طارئة`,
-        summary: `النسبة: ${level} g/dL - التوجه للطوارئ فوراً`,
-        message: `مستوى الهيموجلوبين عند ${name} منخفض جداً وخطير. يجب التوجه إلى الطوارئ أو مراجعة المستشفى بشكل عاجل، خاصة عند وجود دوخة شديدة، ضيق تنفس، خفقان، أو إغماء.`,
-        action: {
-          title: '🚑 الإجراء العاجل',
-          items: [
-            'التوجه إلى الطوارئ أو مراجعة المستشفى بشكل عاجل',
-            'خاصة عند وجود: دوخة شديدة، ضيق تنفس، خفقان، أو إغماء',
-            'هذه الحالة تستدعي تدخلاً طبياً فورياً'
-          ]
-        },
-        emergencyContact: {
-          hospital: 'مستشفى بدية',
-          whatsapp: '96825583641'
-        },
-        note: medicalNote,
-        color: '#c43a3a',
-        bgColor: '#ffebee',
-        borderColor: '#ff5959',
-        icon: 'fa-phone-volume',
-        severity: 'severe',
-        isEmergency: true
-      };
-  }
-}
-
-// ==================== عرض النتائج للأمهات مع التوصيات ====================
-function searchParent() {
-  const query = document.getElementById('parent-search').value.trim();
-  const results = document.getElementById('parent-results');
-  if (!query) {
-    showModal('warning', 'حقل البحث فارغ', 'يرجى إدخال رقم الملف أو رقم الهاتف للبحث');
-    return;
-  }
-  const matches = ironRecords.filter(r =>
-    r.fileNo.includes(query) || r.phone.includes(query)
-  );
-  if (matches.length === 0) {
-    results.innerHTML = `
-      <div class="no-results">
-        <i class="fas fa-search"></i>
-        <h4>لا توجد نتائج</h4>
-        <p>لم يتم العثور على سجلات تطابق البحث.<br>تواصلي مع العيادة للتأكد من رقم الملف.</p>
-      </div>
-    `;
-  } else {
-    results.innerHTML = `
-      <div style="margin-bottom:15px; font-size:14px; font-weight:700; color:var(--text-dark);">
-        <i class="fas fa-circle-check" style="color:var(--green);"></i>
-        تم العثور على ${matches.length} نتيجة
-      </div>
-      ${matches.map(renderParentResult).join('')}
-    `;
-  }
-}
-
-// ==================== عرض نتيجة فردية للأم ====================
-// ==================== عرض نتيجة فردية للأم (شكل جديد مطابق للتوصيات) ====================
-function renderParentResult(r) {
-  const status = getIronStatus(r.level);
-  const rec = getRecommendations(r.level, r.name);
-  
-  return `
-    <div class="parent-result-card" style="border-right: 5px solid ${status.borderColor}; margin-bottom: 25px; background: white; border-radius: 20px; overflow: hidden; box-shadow: var(--shadow);">
-      
-      <!-- ========== رأس النتيجة - معلومات الطفل ========== -->
-      <div style="padding: 20px; background: ${status.bgColor}; border-bottom: 3px solid ${status.borderColor};">
-        <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px;">
-          <div>
-            <h4 style="font-size: 17px; font-weight: 800; color: #3a4a5c; margin: 0;">
-              <i class="fas fa-child"></i> ${r.name}
-            </h4>
-            <p style="font-size: 13px; color: #6b7888; margin: 6px 0 0;">
-              <i class="fas fa-folder"></i> رقم الملف: <strong>${r.fileNo}</strong> &nbsp;|&nbsp; 
-              <i class="fas fa-calendar"></i> تاريخ الفحص: <strong>${r.date}</strong>
-            </p>
-          </div>
-          <span style="
-            padding: 10px 18px;
-            border-radius: 25px;
-            font-weight: 700;
-            font-size: 14px;
-            background: white;
-            color: ${status.color};
-            border: 2px solid ${status.borderColor};
-            white-space: nowrap;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-          ">
-            <i class="fas ${status.icon}"></i> ${status.text}
-          </span>
-        </div>
-        
-        <!-- قيمة الهيموجلوبين بشكل بارز -->
-        <div style="text-align: center; margin-top: 20px;">
-          <div style="font-size: 42px; font-weight: 800; color: ${status.color}; line-height: 1;">
-            ${r.level} <span style="font-size: 18px; font-weight: 600;">g/dL</span>
-          </div>
-          <div style="font-size: 13px; color: #6b7888; margin-top: 4px;">مستوى الهيموجلوبين</div>
-          
-          <!-- شريط المؤشر البصري -->
-          <div style="
-            height: 14px;
-            background: linear-gradient(to left, #c43a3a 0%, #e89a4d 30%, #e8b94d 55%, #4caf7d 80%, #4caf7d 100%);
-            border-radius: 10px;
-            margin: 12px auto 0;
-            position: relative;
-            overflow: visible;
-            max-width: 100%;
-          ">
-            <div style="
-              position: absolute;
-              top: -7px;
-              right: ${Math.max(1, Math.min(99, ((r.level - 5) / 7) * 100))}%;
-              width: 28px;
-              height: 28px;
-              background: white;
-              border: 4px solid ${status.borderColor};
-              border-radius: 50%;
-              box-shadow: 0 3px 10px rgba(0,0,0,0.25);
-            "></div>
-          </div>
-          <div style="display: flex; justify-content: space-between; font-size: 11px; color: #999; margin-top: 5px; padding: 0 5px;">
-            <span style="color:#c43a3a; font-weight:700;">7-</span>
-            <span>8</span>
-            <span>9</span>
-            <span>10</span>
-            <span style="color:#4caf7d; font-weight:700;">11+</span>
-          </div>
-        </div>
-      </div>
-      
-      <!-- ========== محتوى التوصيات ========== -->
-      <div style="padding: 20px;">
-        
-        <!-- رسالة الحالة -->
-        <div style="
-          background: ${rec.bgColor};
-          border-radius: 16px;
-          padding: 18px;
-          margin-bottom: 20px;
-          border-right: 4px solid ${rec.borderColor};
-        ">
-          <h4 style="
-            font-size: 18px;
-            font-weight: 800;
-            color: ${rec.color};
-            margin: 0 0 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-          ">
-            <i class="fas ${rec.icon}"></i>
-            ${rec.title}
-          </h4>
-          <p style="font-size: 15px; color: #3a4a5c; font-weight: 600; margin-bottom: 6px;">${rec.summary}</p>
-          <p style="font-size: 14px; color: #6b7888; line-height: 1.8;">${rec.message}</p>
-        </div>
-        
-        <!-- الإجراء الموصى به -->
-        <div style="margin-bottom: 20px;">
-          <h5 style="
-            font-size: 16px;
-            font-weight: 700;
-            color: #3a4a5c;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-          ">
-            <span style="
-              width: 34px;
-              height: 34px;
-              border-radius: 10px;
-              background: ${rec.bgColor};
-              color: ${rec.color};
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              font-size: 16px;
-            ">📋</span>
-            ${rec.action.title}
-          </h5>
-          <ul style="list-style: none; padding: 0;">
-            ${rec.action.items.map((item, i) => `
-              <li style="
-                padding: 12px 15px;
-                margin-bottom: 8px;
-                background: #f9fafb;
-                border-radius: 12px;
-                font-size: 14px;
-                color: #3a4a5c;
-                display: flex;
-                align-items: flex-start;
-                gap: 12px;
-                border-right: 4px solid ${rec.borderColor};
-                line-height: 1.6;
-              ">
-                <span style="
-                  width: 26px;
-                  height: 26px;
-                  border-radius: 50%;
-                  background: ${rec.bgColor};
-                  color: ${rec.color};
-                  display: flex;
-                  align-items: center;
-                  justify-content: center;
-                  font-weight: 800;
-                  font-size: 12px;
-                  flex-shrink: 0;
-                ">${i + 1}</span>
-                <span>${item}</span>
-              </li>
-            `).join('')}
-          </ul>
-        </div>
-        
-        ${rec.nutritionAdvice ? `
-        <!-- التوصيات الغذائية -->
-        <div style="margin-bottom: 20px; background: #f0faf9; border-radius: 16px; padding: 18px;">
-          <h5 style="
-            font-size: 16px;
-            font-weight: 700;
-            color: #2c5f66;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-          ">
-            <span style="font-size: 22px;">🥗</span>
-            ${rec.nutritionAdvice.title}
-          </h5>
-          <ul style="list-style: none; padding: 0;">
-            ${rec.nutritionAdvice.items.map((item, i) => `
-              <li style="
-                padding: 10px 12px;
-                margin-bottom: 6px;
-                background: white;
-                border-radius: 10px;
-                font-size: 13px;
-                color: #3a4a5c;
-                display: flex;
-                align-items: flex-start;
-                gap: 10px;
-                line-height: 1.6;
-                border-right: 3px solid var(--teal);
-              ">
-                <i class="fas fa-check-circle" style="color: var(--teal); margin-top: 2px; flex-shrink: 0;"></i>
-                <span>${item}</span>
-              </li>
-            `).join('')}
-          </ul>
-        </div>
-        ` : ''}
-        
-        ${rec.ironFoods ? `
-        <!-- الأطعمة الغنية بالحديد -->
-        <div style="margin-bottom: 15px; background: #fef9f7; border-radius: 16px; padding: 16px;">
-          <h5 style="font-size: 14px; font-weight: 700; color: #c4691a; margin-bottom: 10px;">
-            🥩 مصادر الحديد الغذائية
-          </h5>
-          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px;">
-            ${rec.ironFoods.map(f => `
-              <div style="
-                background: white;
-                padding: 10px 12px;
-                border-radius: 10px;
-                font-size: 12px;
-                color: #3a4a5c;
-                box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-              ">${f}</div>
-            `).join('')}
-          </div>
-        </div>
-        
-        <!-- مصادر فيتامين C -->
-        <div style="margin-bottom: 15px; background: #fff8e1; border-radius: 16px; padding: 16px;">
-          <h5 style="font-size: 14px; font-weight: 700; color: #b8901a; margin-bottom: 10px;">
-            🍊 مصادر فيتامين C (تعزز امتصاص الحديد)
-          </h5>
-          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
-            ${rec.vitaminFoods.map(v => `
-              <span style="
-                background: white;
-                padding: 8px 14px;
-                border-radius: 20px;
-                font-size: 12px;
-                color: #3a4a5c;
-                box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-              ">${v}</span>
-            `).join('')}
-          </div>
-        </div>
-        ` : ''}
-        
-        ${rec.showContact ? `
-        <!-- زر التواصل مع العيادة -->
-        <div style="
-          background: linear-gradient(135deg, #fef3e0, #fff8e1);
-          border-radius: 16px;
-          padding: 16px;
-          text-align: center;
-          margin-bottom: 15px;
-          border: 2px dashed #e8b94d;
-        ">
-          <p style="font-size: 14px; color: #c4691a; font-weight: 600; margin-bottom: 12px;">
-            <i class="fas fa-phone"></i> للمواعيد والاستشارة الغذائية
-          </p>
-          <button onclick="openWhatsApp()" style="
-            padding: 12px 24px;
-            background: #25d366;
-            color: white;
-            border: none;
-            border-radius: 14px;
-            font-family: 'Tajawal', sans-serif;
-            font-weight: 700;
-            font-size: 15px;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(37,211,102,0.3);
-          ">
-            <i class="fab fa-whatsapp"></i> تواصل واتساب
-          </button>
-        </div>
-        ` : ''}
-        
-        ${rec.isEmergency ? `
-        <!-- بطاقة الطوارئ -->
-        <div style="
-          background: linear-gradient(135deg, #ff7878, #ff5959);
-          border-radius: 16px;
-          padding: 20px;
-          text-align: center;
-          color: white;
-          cursor: pointer;
-          box-shadow: 0 8px 25px rgba(255,120,120,0.5);
-          margin-bottom: 15px;
-          animation: pulse 2s infinite;
-        " onclick="openWhatsApp()">
-          <i class="fas fa-phone-volume" style="font-size: 32px; margin-bottom: 10px; display: block;"></i>
-          <strong style="font-size: 18px; display: block; margin-bottom: 4px;">اتصلي بالطوارئ فوراً</strong>
-          <p style="font-size: 14px; opacity: 0.95; margin: 0;">${rec.emergencyContact.hospital}: ${rec.emergencyContact.phone}</p>
-        </div>
-        ` : ''}
-        
-        <!-- الملاحظة الطبية الهامة -->
-        <div style="
-          background: #fff5f5;
-          border-radius: 12px;
-          padding: 14px 16px;
-          border-right: 4px solid #ff7878;
-          margin-top: 10px;
-        ">
-          <p style="
-            font-size: 12px;
-            color: #c43a3a;
-            line-height: 1.7;
-            margin: 0;
-            display: flex;
-            align-items: flex-start;
-            gap: 8px;
-          ">
-            <i class="fas fa-circle-info" style="margin-top: 2px; flex-shrink: 0;"></i>
-            <span>${rec.note}</span>
-          </p>
-        </div>
-      </div>
-    </div>
-  `;
-}
-
-// ==================== تحديث دالة renderRecord للوحة الممرضة (اختياري) ====================
-// يمكنك الإبقاء على renderRecord الحالية كما هي للوحة الممرضة،
-// أو تحديثها لتظهر أيضاً التوصيات الأساسية
-
-function searchParent() {
-  const query = document.getElementById('parent-search').value.trim();
-  const results = document.getElementById('parent-results');
-  if (!query) {
-    showModal('warning', 'حقل البحث فارغ', 'يرجى إدخال رقم الملف أو رقم الهاتف للبحث');
-    return;
-  }
-  const matches = ironRecords.filter(r =>
-    r.fileNo.includes(query) || r.phone.includes(query)
-  );
-  if (matches.length === 0) {
-    results.innerHTML = `
-      <div class="no-results">
-        <i class="fas fa-search"></i>
-        <h4>لا توجد نتائج</h4>
-        <p>لم يتم العثور على سجلات تطابق البحث.<br>تواصلي مع العيادة للتأكد من رقم الملف.</p>
-      </div>
-    `;
-  } else {
-    results.innerHTML = `
-      <div style="margin-bottom:10px; font-size:13px; color:var(--text-light);">
-        <i class="fas fa-circle-check" style="color:var(--green);"></i>
-        تم العثور على ${matches.length} نتيجة
-      </div>
-      ${matches.map(renderRecord).join('')}
-    `;
-  }
-}
-
-function renderNurseRecords() {
-  const container = document.getElementById('records-table');
-  const query = document.getElementById('nurse-search').value.trim().toLowerCase();
-  let list = ironRecords;
-  if (query) {
-    list = list.filter(r =>
-      r.fileNo.toLowerCase().includes(query) ||
-      r.name.toLowerCase().includes(query) ||
-      r.phone.includes(query)
-    );
-  }
-  // ترتيب بالتاريخ تنازلياً
-  list = [...list].sort((a, b) => new Date(b.date) - new Date(a.date));
-
-  if (list.length === 0) {
-    container.innerHTML = `
-      <div class="no-results">
-        <i class="fas fa-inbox"></i>
-        <h4>لا توجد سجلات</h4>
-        <p>اضغطي على "إضافة فحص جديد" لإدخال أول سجل</p>
-      </div>
-    `;
-  } else {
-    container.innerHTML = `
-      <div style="margin-bottom:10px; font-size:13px; color:var(--text-light);">
-        <i class="fas fa-list"></i> إجمالي السجلات: ${list.length}
-      </div>
-      ${list.map(renderRecord).join('')}
-    `;
-  }
-}
-
-function toggleAddForm() {
-  const form = document.getElementById('add-form');
-  form.style.display = form.style.display === 'none' ? 'block' : 'none';
-  if (form.style.display === 'block') {
-    // ضبط التاريخ الافتراضي
-    const today = new Date().toISOString().split('T')[0];
-    document.getElementById('new-date').value = today;
-  }
-}
-
-function saveRecord() {
-  const fileNo = document.getElementById('new-file-no').value.trim();
-  const name = document.getElementById('new-name').value.trim();
-  const phone = document.getElementById('new-phone').value.trim();
-  const level = parseFloat(document.getElementById('new-level').value);
-  const date = document.getElementById('new-date').value;
-
-  if (!fileNo || !name || !phone || isNaN(level) || !date) {
-    showModal('error', 'بيانات ناقصة', 'يرجى تعبئة جميع الحقول قبل الحفظ');
-    return;
-  }
-
-  const newRecord = {
-    id: Date.now(),
-    fileNo, name, phone, level, date
-  };
-
-  ironRecords.push(newRecord);
-  saveIronRecords();
-
-  // مسح النموذج
-  ['new-file-no', 'new-name', 'new-phone', 'new-level'].forEach(id =>
-    document.getElementById(id).value = ''
-  );
-
-  toggleAddForm();
-  renderNurseRecords();
-  showModal('success', 'تم الحفظ بنجاح', `تم إضافة سجل الفحص لـ ${name} بنجاح`);
-}
-
-function deleteRecord(id) {
-  if (!confirm('هل أنتِ متأكدة من حذف هذا السجل؟')) return;
-  ironRecords = ironRecords.filter(r => r.id !== id);
-  saveIronRecords();
-  renderNurseRecords();
-  showModal('success', 'تم الحذف', 'تم حذف السجل بنجاح');
-}
-
-// ==================== Modal ====================
-function showModal(type, title, message) {
-  const overlay = document.getElementById('modal-overlay');
-  const iconBox = document.getElementById('modal-icon');
-  const icons = {
-    success: 'fa-circle-check',
-    error: 'fa-circle-xmark',
-    warning: 'fa-triangle-exclamation',
-    info: 'fa-circle-info'
-  };
-  iconBox.className = 'modal-icon ' + type;
-  iconBox.innerHTML = `<i class="fas ${icons[type] || icons.info}"></i>`;
-  document.getElementById('modal-title').textContent = title;
-  document.getElementById('modal-message').textContent = message;
-  overlay.classList.add('active');
-}
-
-function closeModal() {
-  document.getElementById('modal-overlay').classList.remove('active');
-}
-
-// ==================== التهيئة ====================
-function initApp() {
-  // تحميل كل البيانات مسبقاً
-  try { renderSchedule(); } catch(e) { console.error('Schedule:', e); }
-  try { renderVaccinesInfo(); } catch(e) { console.error('Vaccines:', e); }
-  try { renderPostTips(); } catch(e) { console.error('Tips:', e); }
-  try { renderSymptoms(); } catch(e) { console.error('Symptoms:', e); }
-  try { renderNutrition(); } catch(e) { console.error('Nutrition:', e); }
-  try { renderQRCode(); } catch(e) { console.error('QR:', e); }
-
-  // أحداث Enter
-  const parentSearch = document.getElementById('parent-search');
-  if (parentSearch) {
-    parentSearch.addEventListener('keypress', e => {
-      if (e.key === 'Enter') searchParent();
-    });
-  }
-  const nursePassword = document.getElementById('nurse-password');
-  if (nursePassword) {
-    nursePassword.addEventListener('keypress', e => {
-      if (e.key === 'Enter') nurseLogin();
-    });
-  }
-}
-
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initApp);
-} else {
-  initApp();
-}
-// ==================== إدارة نافذة التثبيت ====================
-let deferredPrompt = null;
-const INSTALL_MODAL_KEY = 'hideInstallModal';
-
-// الاستماع لحدث beforeinstallprompt (للمتصفحات الداعمة)
-window.addEventListener('beforeinstallprompt', (e) => {
-  // منع ظهور النافذة التلقائية للمتصفح
-  e.preventDefault();
-  // حفظ الحدث لاستخدامه لاحقاً
-  deferredPrompt = e;
-  // إظهار النافذة المخصصة إذا لم يسبق للمستخدم إغلاقها
-  if (!localStorage.getItem(INSTALL_MODAL_KEY)) {
-    showInstallModal();
-  }
-});
-
-// عند تحميل الصفحة، إذا لم يكن هناك حدث PWA، نعرض النافذة بعد ثوانٍ
-window.addEventListener('load', () => {
-  // إذا لم يظهر beforeinstallprompt، نعرض النافذة مع إرشادات يدوية
-  if (!deferredPrompt && !localStorage.getItem(INSTALL_MODAL_KEY)) {
-    // ننتظر قليلاً حتى لا تظهر مباشرة مع التحميل
-    setTimeout(() => {
-      showInstallModal(true); // true يعني عرض الخطوات اليدوية
-    }, 2000);
-  }
-});
-
-function showInstallModal(showManualSteps = false) {
-  const modal = document.getElementById('install-modal');
-  const manualSteps = document.getElementById('install-manual-steps');
-  if (modal) {
-    modal.classList.add('active');
-    if (manualSteps) {
-      manualSteps.style.display = showManualSteps ? 'block' : 'none';
-    }
-  }
-}
-
-function closeInstallModal() {
-  const modal = document.getElementById('install-modal');
-  if (modal) {
-    modal.classList.remove('active');
-  }
-  // تخزين رغبة المستخدم في عدم الإظهار مرة أخرى
-  localStorage.setItem(INSTALL_MODAL_KEY, 'true');
-}
-
-function installApp() {
-  if (deferredPrompt) {
-    // عرض نافذة التثبيت الأصلية من المتصفح
-    deferredPrompt.prompt();
-    deferredPrompt.userChoice.then((choiceResult) => {
-      if (choiceResult.outcome === 'accepted') {
-        console.log('User accepted the install prompt');
-        closeInstallModal();
-      }
-      deferredPrompt = null;
-    });
-  } else {
-    // لا يدعم التثبيت التلقائي، نعرض الخطوات اليدوية (نقوم بإظهارها إذا كانت مخفية)
-    const manualSteps = document.getElementById('install-manual-steps');
-    if (manualSteps) {
-      manualSteps.style.display = 'block';
-    }
-    // تغيير النص على الزر ليعكس أنه للإرشاد فقط
-    const btn = document.getElementById('install-button');
-    if (btn) {
-      btn.innerHTML = '<i class="fas fa-check-circle"></i> اتبعي الخطوات أعلاه';
-      btn.onclick = () => closeInstallModal(); // إغلاق عند الضغط بعد ذلك
-    }
-  }
-}
-
-// إذا نقر المستخدم خارج النافذة نغلقها
-document.addEventListener('click', function(e) {
-  const overlay = document.getElementById('install-modal');
-  if (e.target === overlay) {
-    closeInstallModal();
-  }
-});
-</script>
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 <!-- ====== نافذة تثبيت التطبيق ====== -->
 <div id="install-modal" class="install-modal-overlay">
   <div class="install-modal">
@@ -3404,19 +1888,657 @@ document.addEventListener('click', function(e) {
     <button class="install-later" onclick="closeInstallModal()">لاحقاً</button>
   </div>
 </div>
-         <script>
-// تسجيل Service Worker لدعم PWA
+
+<script>
+// ==================== قاعدة البيانات ====================
+const vaccinationSchedule = [
+  {
+    age: "عمر شهرين", icon: "fa-baby",
+    vaccines: [
+      { name: "الجرعة الأولى ضد شلل الأطفال (IPV/OPV)", optional: false },
+      { name: "الجرعة الأولى من اللقاح الخماسي (الدفتيريا، التيتانوس، السعال الديكي، الكبد B، المستدمية النزلية)", optional: false },
+      { name: "الجرعة الأولى ضد المكورات الرئوية (PCV)", optional: false },
+      { name: "الجرعة الأولى ضد فيروس الروتا", optional: true }
+    ]
+  },
+  {
+    age: "عمر 4 شهور", icon: "fa-baby",
+    vaccines: [
+      { name: "الجرعة الثانية ضد شلل الأطفال", optional: false },
+      { name: "الجرعة الثانية من اللقاح الخماسي", optional: false },
+      { name: "الجرعة الثانية ضد المكورات الرئوية (PCV)", optional: false },
+      { name: "الجرعة الثانية ضد فيروس الروتا", optional: true }
+    ]
+  },
+  {
+    age: "عمر 6 شهور", icon: "fa-baby",
+    vaccines: [
+      { name: "الجرعة الثالثة ضد شلل الأطفال (OPV)", optional: false },
+      { name: "الجرعة الثالثة من اللقاح الخماسي", optional: false },
+      { name: "الجرعة الثالثة ضد المكورات الرئوية (اختيارية)", optional: true }
+    ]
+  },
+  {
+    age: "عمر 9 شهور", icon: "fa-child",
+    vaccines: [
+      { name: "جرعة فيتامين A الأولى", optional: false }
+    ]
+  },
+  {
+    age: "عمر 12 شهراً (سنة)", icon: "fa-cake-candles",
+    vaccines: [
+      { name: "الجرعة الأولى من الحصبة والحصبة الألمانية والنكاف (MMR-1)", optional: false },
+      { name: "جرعة معززة ضد المكورات الرئوية (PCV Booster)", optional: false },
+      { name: "الجرعة الأولى ضد الجديري المائي (Varicella)", optional: false },
+      { name: "الجرعة الأولى ضد الكبد الوبائي A", optional: true }
+    ]
+  },
+  {
+    age: "عمر 18 شهراً", icon: "fa-child",
+    vaccines: [
+      { name: "جرعة منشطة ضد شلل الأطفال", optional: false },
+      { name: "جرعة منشطة ضد الدفتيريا والتيتانوس والسعال الديكي (DTP)", optional: false },
+      { name: "الجرعة الثانية من الحصبة والحصبة الألمانية والنكاف (MMR-2)", optional: false },
+      { name: "جرعة فيتامين A الثانية", optional: false }
+    ]
+  },
+  {
+    age: "عمر سنتين (24 شهراً)", icon: "fa-child-reaching",
+    vaccines: [
+      { name: "الجرعة الأولى ضد الحمى الشوكية (MenACWY)", optional: true },
+      { name: "الجرعة الثانية ضد الكبد الوبائي A", optional: true }
+    ]
+  },
+  {
+    age: "عمر 4 سنوات (دخول المدرسة)", icon: "fa-school",
+    vaccines: [
+      { name: "جرعة منشطة ضد شلل الأطفال (OPV Booster)", optional: false },
+      { name: "جرعة منشطة من اللقاح الثلاثي (DT)", optional: false },
+      { name: "جرعة منشطة للدرن (BCG)", optional: true },
+      { name: "الجرعة الثانية ضد الحمى الشوكية", optional: true }
+    ]
+  }
+];
+
+const vaccinesInfo = [
+  {
+    id: "polio", name: "تطعيم شلل الأطفال (OPV / IPV)", icon: "fa-shield-virus",
+    short: "يحمي من فيروس شلل الأطفال الذي يسبب الشلل الدائم",
+    benefits: ["يحمي طفلك من فيروس شلل الأطفال الذي قد يسبب شللاً دائماً", "يُعطى على عدة جرعات لضمان أعلى مستوى من الحماية", "ساهم في القضاء شبه التام على المرض عالمياً"],
+    schedule: "يُعطى عند الولادة، شهرين، 4 شهور، 6 شهور، 9 شهور، 18 شهراً، وعند دخول المدرسة",
+    sideEffects: "آمن جداً، نادراً ما يسبب آثاراً جانبية",
+    disease: "شلل الأطفال (Poliomyelitis) - مرض فيروسي يهاجم الجهاز العصبي ويسبب شللاً دائماً"
+  },
+  {
+    id: "dtp", name: "اللقاح الخماسي / الثلاثي (DTP)", icon: "fa-syringe",
+    short: "يحمي من الدفتيريا والتيتانوس والسعال الديكي",
+    benefits: ["الحماية من الدفتيريا التي تسبب التهابات شديدة في الحلق", "الوقاية من التيتانوس (الكزاز) الذي يسبب تشنجات عضلية خطيرة", "الحماية من السعال الديكي الذي يسبب نوبات سعال شديدة عند الرضع"],
+    schedule: "ثلاث جرعات في الشهرين، 4 شهور، 6 شهور، ثم جرعة معززة في 18 شهراً، وأخرى عند دخول المدرسة",
+    sideEffects: "احمرار خفيف وانتفاخ في مكان الحقن، حمى خفيفة (أعراض طبيعية تزول خلال 24-48 ساعة)",
+    disease: "ثلاثة أمراض بكتيرية خطيرة تهدد حياة الأطفال خصوصاً الرضع"
+  },
+  {
+    id: "hepb", name: "تطعيم الالتهاب الكبدي ب (Hepatitis B)", icon: "fa-shield-heart",
+    short: "يحمي من فيروس الكبد B الذي يسبب تليف وسرطان الكبد",
+    benefits: ["يحمي طفلك من الإصابة بالتهاب الكبد المزمن", "يقلل خطر الإصابة بتليف الكبد وسرطان الكبد مستقبلاً", "حماية تستمر مدى الحياة في معظم الحالات"],
+    schedule: "ضمن اللقاح الخماسي في الشهرين، 4 شهور، 6 شهور (الجرعة الأولى عند الولادة)",
+    sideEffects: "ألم خفيف في مكان الحقن، نادراً ما يسبب حمى",
+    disease: "التهاب الكبد الفيروسي B - مرض مزمن قد يؤدي لتليف وسرطان الكبد"
+  },
+  {
+    id: "hib", name: "تطعيم المستدمية النزلية (Hib)", icon: "fa-virus-slash",
+    short: "يحمي من بكتيريا تسبب الالتهاب السحائي والالتهاب الرئوي",
+    benefits: ["الحماية من الالتهاب السحائي البكتيري الخطير", "الوقاية من التهاب الرئة والتهاب لسان المزمار", "تقليل خطر الإصابة بعدوى الدم البكتيرية"],
+    schedule: "ضمن اللقاح الخماسي في الشهرين، 4 شهور، 6 شهور",
+    sideEffects: "احمرار وانتفاخ خفيف في مكان الحقن",
+    disease: "عدوى بكتيرية خطيرة قد تسبب التهاب السحايا وتؤدي للوفاة أو الإعاقة الدائمة"
+  },
+  {
+    id: "pcv", name: "تطعيم المكورات الرئوية (PCV)", icon: "fa-lungs",
+    short: "يحمي من بكتيريا تسبب الالتهاب الرئوي والتهاب الأذن",
+    benefits: ["الحماية من الالتهاب الرئوي البكتيري", "الوقاية من التهاب الأذن الوسطى المتكرر", "تقليل خطر الإصابة بالتهاب السحايا"],
+    schedule: "ثلاث جرعات في الشهرين، 4 شهور، 6 شهور، ثم جرعة معززة في عمر 12 شهراً",
+    sideEffects: "حمى خفيفة، احمرار في مكان الحقن، تململ مؤقت",
+    disease: "بكتيريا المكورات الرئوية - تسبب التهابات في الرئة والأذن والدماغ"
+  },
+  {
+    id: "rota", name: "تطعيم فيروس الروتا (Rota)", icon: "fa-stomach",
+    short: "يحمي من الإسهال الشديد الذي يسببه فيروس الروتا",
+    benefits: ["الحماية من الإسهال الشديد والقيء عند الرضع", "تقليل خطر الجفاف الشديد والحاجة لدخول المستشفى", "يُعطى عن طريق الفم (نقط) وليس حقناً"],
+    schedule: "جرعتان أو ثلاث جرعات في الشهرين، 4 شهور، (6 شهور حسب نوع اللقاح)",
+    sideEffects: "في حالات نادرة قد يسبب اضطراباً بسيطاً في المعدة",
+    disease: "التهاب المعدة والأمعاء الفيروسي - السبب الأول لإسهال الرضع حول العالم"
+  },
+  {
+    id: "mmr", name: "تطعيم الحصبة والحصبة الألمانية والنكاف (MMR)", icon: "fa-face-grin-stars",
+    short: "يحمي من ثلاثة أمراض فيروسية مهمة",
+    benefits: ["الحماية من الحصبة التي قد تسبب مضاعفات خطيرة كالتهاب الدماغ", "الوقاية من الحصبة الألمانية المضرة بالأجنة", "الحماية من النكاف الذي قد يسبب العقم عند الذكور"],
+    schedule: "الجرعة الأولى في عمر 12 شهراً، والثانية في 18 شهراً",
+    sideEffects: "حمى خفيفة بعد 7-10 أيام، طفح جلدي بسيط أحياناً",
+    disease: "ثلاثة أمراض فيروسية شديدة العدوى، قد تسبب مضاعفات خطيرة"
+  },
+  {
+    id: "varicella", name: "تطعيم الجديري المائي (Varicella)", icon: "fa-virus",
+    short: "يحمي من مرض الجديري المائي (العنقز)",
+    benefits: ["الحماية من الطفح الجلدي المؤلم والحكة الشديدة", "تقليل خطر مضاعفات المرض كالتهابات الجلد", "الوقاية من الإصابة بالحزام الناري مستقبلاً"],
+    schedule: "جرعة واحدة في عمر 12 شهراً (لجميع الأطفال المولودين في عُمان بعد 2010)",
+    sideEffects: "احمرار في مكان الحقن، حمى خفيفة، طفح جلدي بسيط نادراً",
+    disease: "الجديري المائي - مرض فيروسي يسبب طفحاً جلدياً وحكة شديدة"
+  },
+  {
+    id: "vita", name: "جرعات فيتامين A", icon: "fa-capsules",
+    short: "تعزز المناعة وتحمي صحة العين",
+    benefits: ["تعزيز جهاز المناعة عند الطفل", "الوقاية من نقص فيتامين A الذي يؤثر على البصر", "تقليل خطر الإصابة بالعدوى وأمراض الجهاز التنفسي"],
+    schedule: "الجرعة الأولى في عمر 9 شهور، والثانية في 18 شهراً",
+    sideEffects: "آمنة تماماً، لا تسبب آثاراً جانبية تذكر",
+    disease: "نقص فيتامين A - قد يسبب ضعف البصر وضعف المناعة"
+  },
+  {
+    id: "bcg", name: "تطعيم الدرن (BCG)", icon: "fa-shield",
+    short: "يحمي من مرض السل (الدرن)",
+    benefits: ["الحماية من السل الرئوي الخطير", "الوقاية من السل السحائي عند الأطفال", "يُعطى عند الولادة كأول تطعيم"],
+    schedule: "عند الولادة، وجرعة معززة عند دخول المدرسة",
+    sideEffects: "ندبة صغيرة في مكان الحقن (في الذراع)، انتفاخ بسيط",
+    disease: "السل (الدرن) - عدوى بكتيرية تصيب الرئتين بشكل رئيسي"
+  },
+  {
+    id: "men", name: "تطعيم الحمى الشوكية (MenACWY)", icon: "fa-brain",
+    short: "يحمي من التهاب السحايا البكتيري",
+    benefits: ["الحماية من التهاب السحايا الذي قد يكون قاتلاً", "الوقاية من تسمم الدم البكتيري", "حماية من 4 أنواع من بكتيريا المكورات السحائية"],
+    schedule: "الجرعة الأولى في عمر سنتين، والثانية عند دخول المدرسة",
+    sideEffects: "ألم في مكان الحقن، حمى خفيفة قد تستمر يوماً",
+    disease: "الحمى الشوكية - مرض خطير قد يؤدي للوفاة خلال ساعات"
+  }
+];
+
+const postVaccineTips = [
+  { title: "ضعي كمادات باردة", description: "إذا حدث تورم أو احمرار مكان الحقن، استخدمي كمادة باردة لطيفة لمدة 10-15 دقيقة" },
+  { title: "أعطي خافض الحرارة عند الحاجة", description: "في حالة ارتفاع الحرارة، يمكن إعطاء الباراسيتامول حسب وزن الطفل وبعد استشارة الطبيب" },
+  { title: "أكثري من السوائل والرضاعة", description: "احرصي على إرضاع طفلك بشكل متكرر للحفاظ على ترطيبه ودعم جهاز مناعته" },
+  { title: "راقبي الطفل لمدة 24-48 ساعة", description: "لاحظي أي أعراض غير طبيعية واتصلي بالعيادة فوراً عند ظهور أعراض مقلقة" },
+  { title: "ألبسي الطفل ملابس خفيفة", description: "خاصة إذا كان لديه ارتفاع في الحرارة، تجنبي تغطيته بأغطية ثقيلة" },
+  { title: "تجنبي فرك مكان الحقن", description: "اتركي مكان الحقن دون لمس أو فرك، ولا تضعي مراهم إلا بأمر الطبيب" },
+  { title: "حمام دافئ مسموح", description: "يمكنك تحميم الطفل بماء دافئ بشكل طبيعي، ولا تخافي من ابتلال مكان الحقن" },
+  { title: "احفظي بطاقة التطعيمات", description: "احتفظي ببطاقة التطعيمات في مكان آمن وأحضريها معك في كل زيارة للعيادة" }
+];
+
+const normalSymptoms = [
+  "ارتفاع خفيف في درجة الحرارة (أقل من 38.5°م) ليوم أو يومين",
+  "احمرار أو انتفاخ بسيط مكان الحقن",
+  "تململ أو بكاء أكثر من المعتاد لساعات",
+  "قلة الشهية المؤقتة لوجبة أو وجبتين",
+  "نعاس وزيادة ساعات النوم",
+  "طفح جلدي بسيط بعد لقاح MMR (بعد 7-10 أيام)"
+];
+
+const alertSymptoms = [
+  "حرارة مرتفعة جداً (أعلى من 39°م) لا تستجيب لخافض الحرارة",
+  "بكاء مستمر وغير طبيعي لأكثر من 3 ساعات",
+  "تشنجات أو ارتعاش في الجسم",
+  "صعوبة في التنفس أو ازرقاق الشفاه",
+  "طفح جلدي شديد أو تورم في الوجه (تحسس)",
+  "خمول شديد وعدم استجابة الطفل",
+  "قيء مستمر أو إسهال شديد",
+  "تورم كبير ومتزايد في مكان الحقن"
+];
+
+// ==================== متغيرات عامة ====================
+let screenHistory = ['main-screen'];
+let currentUserType = 'parent';
+let nurseLoggedIn = false;
+let ironRecords = [];
+
+// كلمة المرور مخزنة بشكل غير ظاهر في الكود
+const NURSE_PASSWORD_HASH = '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918'; // SHA256 لكلمة nurse123
+
+// ==================== نظام الهيموجلوبين ====================
+function loadIronRecords() {
+  try {
+    const stored = localStorage.getItem('ironRecords');
+    if (stored) {
+      ironRecords = JSON.parse(stored);
+      if (!Array.isArray(ironRecords)) ironRecords = [];
+    }
+  } catch (e) {
+    console.error('خطأ في تحميل السجلات:', e);
+    ironRecords = [];
+  }
+  
+  if (ironRecords.length === 0) {
+    ironRecords = [
+      { id: 10001, fileNo: "1001", name: "محمد سالم الحارثي", phone: "99887766", level: 11.5, date: "2026-03-15" },
+      { id: 10002, fileNo: "1002", name: "فاطمة علي البوسعيدي", phone: "92345678", level: 10.3, date: "2026-04-10" },
+      { id: 10003, fileNo: "1003", name: "أحمد خالد المعمري", phone: "98765432", level: 9.2, date: "2026-04-22" },
+      { id: 10004, fileNo: "1004", name: "مريم ناصر الكندي", phone: "97654321", level: 7.8, date: "2026-05-05" },
+      { id: 10005, fileNo: "1005", name: "سعيد علي البلوشي", phone: "96543210", level: 11.8, date: "2026-05-12" }
+    ];
+    saveIronRecords();
+  }
+}
+
+function saveIronRecords() {
+  try {
+    localStorage.setItem('ironRecords', JSON.stringify(ironRecords));
+    console.log('✅ تم حفظ السجلات بنجاح. عدد السجلات:', ironRecords.length);
+    return true;
+  } catch (e) {
+    console.error('❌ فشل حفظ السجلات:', e);
+    showModal('error', 'خطأ في الحفظ', 'تعذر حفظ البيانات. قد تكون ذاكرة المتصفح ممتلئة.');
+    return false;
+  }
+}
+
+async function hashPassword(password) {
+  const msgBuffer = new TextEncoder().encode(password);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+function getIronStatus(level) {
+  if (level >= 11.0) return { status: 'normal', text: 'طبيعي', color: '#2d7a4a', bgColor: '#d5ebe0', borderColor: '#4caf7d', icon: 'fa-circle-check', severityLevel: 1 };
+  if (level >= 10.0) return { status: 'mild', text: 'نقص خفيف', color: '#b8901a', bgColor: '#fdf2d4', borderColor: '#e8b94d', icon: 'fa-circle-info', severityLevel: 2 };
+  if (level >= 7.0) return { status: 'moderate', text: 'نقص متوسط', color: '#c4691a', bgColor: '#fde2c4', borderColor: '#e89a4d', icon: 'fa-triangle-exclamation', severityLevel: 3 };
+  return { status: 'severe', text: 'نقص شديد - يستدعي التدخل الفوري', color: '#c43a3a', bgColor: '#ffd4d4', borderColor: '#ff5959', icon: 'fa-circle-exclamation', severityLevel: 4 };
+}
+
+function getRecommendations(level, childName) {
+  const status = getIronStatus(level);
+  const name = childName || 'الطفل';
+  
+  const ironRichFoods = ['🥩 اللحوم الحمراء', '🍗 الدجاج', '🐟 الأسماك', '🥬 الكبد (حسب الفئة العمرية والحالة الصحية)', '🥣 البقوليات (العدس، الفاصوليا)', '🥚 صفار البيض', '🥬 السبانخ والورقيات الخضراء', '🍠 البطاطا الحلوة'];
+  const vitaminCFoods = ['🍊 البرتقال', '🍋 الليمون', '🍈 الجوافة', '🫑 الفلفل الحلو', '🍓 الفراولة والكيوي', '🍅 الطماطم'];
+  const medicalNote = '⚠️ القرار لا يعتمد على رقم الهيموجلوبين فقط، بل على الأعراض والحالة السريرية وعمر المريض، لذلك تعد هذه التوصيات إرشادية وليست بديلاً عن التقييم الطبي.';
+  
+  switch (status.status) {
+    case 'normal':
+      return {
+        title: `✅ ${name} بصحة جيدة`, summary: 'نسبة الهيموجلوبين طبيعية - استمري في النظام الصحي',
+        message: `مستوى الهيموجلوبين عند ${name} (${level} g/dL) ضمن المعدل الطبيعي.`,
+        action: { title: 'الإجراء الموصى به', items: ['الاستمرار على نمط غذائي صحي ومتوازن', 'المتابعة الدورية حسب توصيات الطبيب'] },
+        note: medicalNote, color: '#2d7a4a', bgColor: '#e8f5e9', borderColor: '#4caf7d', icon: 'fa-face-smile', severity: 'normal'
+      };
+    case 'mild':
+      return {
+        title: `⚠️ نقص خفيف في الهيموجلوبين`, summary: `النسبة: ${level} g/dL - يوصى بمراجعة عيادة التغذية`,
+        message: `مستوى الهيموجلوبين عند ${name} أقل قليلاً من المعدل الطبيعي. ننصح بمراجعة عيادة التغذية لتحسين المدخول الغذائي من الحديد ومتابعة الفحوصات الطبية.`,
+        action: { title: 'الإجراء الموصى به', items: ['مراجعة عيادة التغذية لتحسين المدخول الغذائي من الحديد', 'متابعة الفحوصات الطبية بانتظام'] },
+        nutritionAdvice: { title: '🥗 توصيات غذائية مختصرة', items: ['زيادة تناول مصادر الحديد مثل اللحوم الحمراء، الدجاج، الأسماك، الكبد (حسب الفئة العمرية والحالة الصحية)', 'تناول مصدر لفيتامين C مع الوجبة (البرتقال، الليمون، الجوافة، الفلفل الحلو)', 'تجنب الشاي والقهوة لمدة ساعة إلى ساعتين قبل وبعد الوجبات الغنية بالحديد ومكملات الحديد', 'تجنب منتجات الألبان لمدة ساعة إلى ساعتين قبل وبعد الوجبات الغنية بالحديد ومكملات الحديد', 'الالتزام بمكملات الحديد الموصوفة من الطبيب'] },
+        ironFoods: ironRichFoods, vitaminFoods: vitaminCFoods, note: medicalNote, color: '#b8901a', bgColor: '#fff8e1', borderColor: '#e8b94d', icon: 'fa-apple-whole', severity: 'mild'
+      };
+    case 'moderate':
+      return {
+        title: `🔶 نقص في الهيموجلوبين يستدعي التدخل`, summary: `النسبة: ${level} g/dL - يوصى بمراجعة الطبيب`,
+        message: `مستوى الهيموجلوبين عند ${name} منخفض ويحتاج إلى تقييم طبي. ننصح بمراجعة الطبيب خلال أقرب وقت لتقييم السبب والعلاج، مع تحويل لعيادة التغذية عند الحاجة.`,
+        action: { title: 'الإجراء الموصى به', items: ['مراجعة الطبيب خلال أقرب وقت لتقييم السبب والعلاج', 'تحويل لعيادة التغذية عند الحاجة'] },
+        nutritionAdvice: { title: '🥗 توصيات غذائية مختصرة', items: ['زيادة تناول مصادر الحديد مثل اللحوم الحمراء، الدجاج، الأسماك، الكبد (حسب الفئة العمرية والحالة الصحية)', 'تناول مصدر لفيتامين C مع الوجبة (البرتقال، الليمون، الجوافة، الفلفل الحلو)', 'تجنب الشاي والقهوة لمدة ساعة إلى ساعتين قبل وبعد الوجبات الغنية بالحديد ومكملات الحديد', 'تجنب منتجات الألبان لمدة ساعة إلى ساعتين قبل وبعد الوجبات الغنية بالحديد ومكملات الحديد', 'الالتزام بمكملات الحديد الموصوفة من الطبيب'] },
+        ironFoods: ironRichFoods, vitaminFoods: vitaminCFoods, note: medicalNote, color: '#c4691a', bgColor: '#fff3e0', borderColor: '#e89a4d', icon: 'fa-user-doctor', severity: 'moderate', showContact: true
+      };
+    case 'severe':
+      return {
+        title: `🚨 نقص شديد في الهيموجلوبين - حالة طارئة`, summary: `النسبة: ${level} g/dL - التوجه للطوارئ فوراً`,
+        message: `مستوى الهيموجلوبين عند ${name} منخفض جداً وخطير. يجب التوجه إلى الطوارئ أو مراجعة المستشفى بشكل عاجل، خاصة عند وجود دوخة شديدة، ضيق تنفس، خفقان، أو إغماء.`,
+        action: { title: '🚑 الإجراء العاجل', items: ['التوجه إلى الطوارئ أو مراجعة المستشفى بشكل عاجل', 'خاصة عند وجود: دوخة شديدة، ضيق تنفس، خفقان، أو إغماء', 'هذه الحالة تستدعي تدخلاً طبياً فورياً'] },
+        emergencyContact: { hospital: 'مستشفى بدية', phone: '25583641', whatsapp: '96825583641' },
+        note: medicalNote, color: '#c43a3a', bgColor: '#ffebee', borderColor: '#ff5959', icon: 'fa-phone-volume', severity: 'severe', isEmergency: true
+      };
+  }
+}
+
+// ==================== دوال إدارة الشاشات ====================
+function openScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  const target = document.getElementById(id);
+  if (target) {
+    target.classList.add('active');
+    if (screenHistory[screenHistory.length - 1] !== id) screenHistory.push(id);
+    window.scrollTo(0, 0);
+    if (id === 'vaccination-schedule') renderSchedule();
+    if (id === 'vaccines-info') renderVaccinesInfo();
+    if (id === 'post-vaccine') renderPostTips();
+    if (id === 'symptoms') renderSymptoms();
+    if (id === 'qr-screen') renderQRCode();
+  }
+}
+
+function goBack() {
+  if (screenHistory.length > 1) {
+    screenHistory.pop();
+    const prev = screenHistory[screenHistory.length - 1];
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    const prevScreen = document.getElementById(prev);
+    if (prevScreen) prevScreen.classList.add('active');
+    window.scrollTo(0, 0);
+  }
+}
+
+function openWhatsApp() {
+  window.open('https://wa.me/96825583641?text=' + encodeURIComponent("السلام عليكم، أود الاستفسار عن تطعيمات الأطفال في عيادة التحصينات بمستشفى بدية"), '_blank');
+}
+
+function openVideo(url) { window.open(url, '_blank'); }
+
+// ==================== دوال العرض ====================
+function renderSchedule() {
+  const container = document.getElementById('schedule-timeline');
+  if (!container || container.dataset.loaded === 'true') return;
+  container.dataset.loaded = 'true';
+  container.innerHTML = vaccinationSchedule.map(item => `
+    <div class="timeline-item">
+      <span class="timeline-age"><i class="fas ${item.icon}"></i> ${item.age}</span>
+      <ul class="timeline-vaccines">
+        ${item.vaccines.map(v => `<li class="${v.optional ? 'optional' : ''}"><i class="fas ${v.optional ? 'fa-star' : 'fa-check'}"></i>${v.name}</li>`).join('')}
+      </ul>
+    </div>`).join('');
+}
+
+function renderVaccinesInfo() {
+  const container = document.getElementById('vaccines-list');
+  if (!container || container.dataset.loaded === 'true') return;
+  container.dataset.loaded = 'true';
+  container.innerHTML = vaccinesInfo.map(v => `
+    <div class="vaccine-card" onclick="openVaccineDetail('${v.id}')">
+      <div class="vaccine-card-icon"><i class="fas ${v.icon}"></i></div>
+      <div class="vaccine-card-content"><h4>${v.name}</h4><p>${v.short}</p></div>
+      <div class="vaccine-card-arrow"><i class="fas fa-chevron-left"></i></div>
+    </div>`).join('');
+}
+
+function openVaccineDetail(id) {
+  const v = vaccinesInfo.find(x => x.id === id);
+  if (!v) return;
+  document.getElementById('vd-title').innerHTML = `<i class="fas ${v.icon}"></i> ${v.name}`;
+  document.getElementById('vd-content').innerHTML = `
+    <div class="detail-section"><h3><i class="fas fa-circle-info"></i> عن المرض</h3><p>${v.disease}</p></div>
+    <div class="detail-section"><h3><i class="fas fa-heart-circle-check"></i> فوائد التطعيم</h3><ul>${v.benefits.map(b => `<li>${b}</li>`).join('')}</ul></div>
+    <div class="detail-section"><h3><i class="fas fa-calendar"></i> جدول الجرعات</h3><p>${v.schedule}</p></div>
+    <div class="detail-section"><h3><i class="fas fa-triangle-exclamation"></i> الآثار الجانبية المحتملة</h3><p>${v.sideEffects}</p></div>`;
+  openScreen('vaccine-detail');
+}
+
+function renderPostTips() {
+  const container = document.getElementById('post-tips');
+  if (!container || container.dataset.loaded === 'true') return;
+  container.dataset.loaded = 'true';
+  container.innerHTML = postVaccineTips.map((t, i) => `
+    <div class="tip-card"><div class="tip-card-number">${i + 1}</div><div class="tip-card-content"><h4>${t.title}</h4><p>${t.description}</p></div></div>`).join('');
+}
+
+function renderSymptoms() {
+  const normal = document.getElementById('normal-symptoms');
+  const alert = document.getElementById('alert-symptoms');
+  if (normal && !normal.dataset.loaded) {
+    normal.dataset.loaded = 'true';
+    normal.innerHTML = normalSymptoms.map(s => `<div class="symptom-item normal"><i class="fas fa-check-circle"></i><span>${s}</span></div>`).join('');
+    alert.innerHTML = alertSymptoms.map(s => `<div class="symptom-item alert"><i class="fas fa-triangle-exclamation"></i><span>${s}</span></div>`).join('');
+  }
+}
+
+function renderQRCode() {
+  const el = document.getElementById('qrcode');
+  if (!el || el.dataset.loaded === 'true') return;
+  el.dataset.loaded = 'true';
+  new QRCode(el, { text: window.location.href.split('#')[0], width: 200, height: 200, colorDark: "#3a4a5c", colorLight: "#ffffff", correctLevel: QRCode.CorrectLevel.H });
+}
+
+// ==================== نظام الممرضة ====================
+function switchUserType(type) {
+  currentUserType = type;
+  document.getElementById('parent-btn').classList.toggle('active', type === 'parent');
+  document.getElementById('nurse-btn').classList.toggle('active', type === 'nurse');
+  document.getElementById('parent-section').classList.toggle('active', type === 'parent');
+  document.getElementById('nurse-section').classList.toggle('active', type === 'nurse');
+}
+
+async function nurseLogin() {
+  const password = document.getElementById('nurse-password').value;
+  if (!password) {
+    showModal('error', 'حقل فارغ', 'يرجى إدخال كلمة المرور');
+    return;
+  }
+  
+  const hashedInput = await hashPassword(password);
+  
+  if (hashedInput === NURSE_PASSWORD_HASH) {
+    nurseLoggedIn = true;
+    document.getElementById('nurse-login').style.display = 'none';
+    document.getElementById('nurse-dashboard').style.display = 'block';
+    renderNurseRecords();
+    showModal('success', 'تم تسجيل الدخول', 'مرحباً بك في لوحة تحكم الممرضة');
+  } else {
+    showModal('error', 'كلمة مرور خاطئة', 'يرجى التحقق من كلمة المرور والمحاولة مرة أخرى');
+  }
+}
+
+function toggleAddForm() {
+  const form = document.getElementById('add-form');
+  if (!form) return;
+  const isHidden = form.style.display === 'none' || form.style.display === '';
+  form.style.display = isHidden ? 'block' : 'none';
+  if (isHidden) {
+    document.getElementById('new-date').value = new Date().toISOString().split('T')[0];
+    ['new-file-no', 'new-name', 'new-phone', 'new-level'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+    form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+}
+
+function saveRecord() {
+  const fileNo = document.getElementById('new-file-no')?.value?.trim();
+  const name = document.getElementById('new-name')?.value?.trim();
+  const phone = document.getElementById('new-phone')?.value?.trim();
+  const levelStr = document.getElementById('new-level')?.value?.trim();
+  const date = document.getElementById('new-date')?.value;
+  
+  if (!fileNo || !name || !phone || !levelStr || isNaN(parseFloat(levelStr)) || !date) {
+    showModal('error', 'بيانات ناقصة', 'يرجى تعبئة جميع الحقول قبل الحفظ');
+    return;
+  }
+  
+  const level = parseFloat(levelStr);
+  if (level < 1 || level > 25) {
+    showModal('error', 'قيمة غير صالحة', 'نسبة الهيموجلوبين يجب أن تكون بين 1 و 25');
+    return;
+  }
+  
+  const existingIndex = ironRecords.findIndex(r => r.fileNo === fileNo && r.date === date);
+  const newRecord = { id: Date.now(), fileNo, name, phone, level, date };
+  
+  if (existingIndex >= 0) {
+    ironRecords[existingIndex] = { ...ironRecords[existingIndex], ...newRecord };
+  } else {
+    ironRecords.push(newRecord);
+  }
+  
+  if (saveIronRecords()) {
+    ['new-file-no', 'new-name', 'new-phone', 'new-level'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+    document.getElementById('add-form').style.display = 'none';
+    renderNurseRecords();
+    showModal('success', 'تم الحفظ بنجاح', `تم ${existingIndex >= 0 ? 'تحديث' : 'إضافة'} سجل الفحص لـ ${name} بنجاح\nنسبة الهيموجلوبين: ${level} g/dL`);
+  }
+}
+
+function deleteRecord(id) {
+  const record = ironRecords.find(r => r.id === id);
+  if (!record) return;
+  
+  ironRecords = ironRecords.filter(r => r.id !== id);
+  if (saveIronRecords()) {
+    renderNurseRecords();
+    showModal('success', 'تم الحذف', 'تم حذف السجل بنجاح');
+  }
+}
+
+function renderNurseRecords() {
+  const container = document.getElementById('records-table');
+  if (!container) return;
+  
+  const query = document.getElementById('nurse-search')?.value?.trim()?.toLowerCase() || '';
+  let list = [...ironRecords];
+  if (query) list = list.filter(r => r.fileNo?.toLowerCase().includes(query) || r.name?.toLowerCase().includes(query) || r.phone?.includes(query));
+  list.sort((a, b) => new Date(b.date) - new Date(a.date));
+  
+  if (list.length === 0) {
+    container.innerHTML = `<div class="no-results"><i class="fas fa-inbox"></i><h4>${query ? 'لا توجد نتائج مطابقة' : 'لا توجد سجلات'}</h4><p>${query ? 'جربي البحث بكلمة أخرى' : 'اضغطي على "إضافة فحص جديد" لإدخال أول سجل'}</p></div>`;
+  } else {
+    container.innerHTML = `<div style="margin-bottom:15px;font-size:14px;font-weight:700;color:var(--text-dark);background:white;padding:12px 15px;border-radius:12px;"><span><i class="fas fa-list"></i> إجمالي السجلات: <strong>${list.length}</strong></span></div>${list.map(r => {
+      const st = getIronStatus(r.level);
+      return `<div class="record-row ${st.status}"><div class="record-row-head"><span class="record-name"><i class="fas fa-user"></i> ${r.name}</span><span class="record-status ${st.status}">${st.text}</span></div><div class="record-details"><span><i class="fas fa-folder"></i> رقم الملف: <strong>${r.fileNo}</strong></span><span><i class="fas fa-phone"></i> الهاتف: <strong>${r.phone}</strong></span><span><i class="fas fa-droplet"></i> الهيموجلوبين: <strong>${r.level} g/dL</strong></span><span><i class="fas fa-calendar"></i> التاريخ: <strong>${r.date}</strong></span></div><button class="record-delete" onclick="deleteRecord(${r.id})"><i class="fas fa-trash"></i></button></div>`;
+    }).join('')}`;
+  }
+}
+
+// ==================== نظام بحث الأهالي ====================
+function searchParent() {
+  const query = document.getElementById('parent-search')?.value?.trim();
+  const results = document.getElementById('parent-results');
+  if (!query) { showModal('warning', 'حقل البحث فارغ', 'يرجى إدخال رقم الملف أو رقم الهاتف للبحث'); return; }
+  
+  const matches = ironRecords.filter(r => r.fileNo.includes(query) || r.phone.includes(query));
+  if (matches.length === 0) {
+    results.innerHTML = `<div class="no-results"><i class="fas fa-search"></i><h4>لا توجد نتائج</h4><p>لم يتم العثور على سجلات تطابق البحث.<br>تواصلي مع العيادة للتأكد من رقم الملف.</p></div>`;
+  } else {
+    results.innerHTML = `<div style="margin-bottom:15px;font-size:14px;font-weight:700;color:var(--text-dark);"><i class="fas fa-circle-check" style="color:var(--green);"></i> تم العثور على ${matches.length} نتيجة</div>${matches.map(r => renderParentResult(r)).join('')}`;
+  }
+}
+
+function renderParentResult(r) {
+  const status = getIronStatus(r.level);
+  const rec = getRecommendations(r.level, r.name);
+  
+  return `<div class="parent-result-card" style="border-right:5px solid ${status.borderColor};margin-bottom:25px;background:white;border-radius:20px;overflow:hidden;box-shadow:var(--shadow);">
+    <div style="padding:20px;background:${status.bgColor};border-bottom:3px solid ${status.borderColor};">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;">
+        <div><h4 style="font-size:17px;font-weight:800;color:#3a4a5c;margin:0;"><i class="fas fa-child"></i> ${r.name}</h4>
+        <p style="font-size:13px;color:#6b7888;margin:6px 0 0;"><i class="fas fa-folder"></i> رقم الملف: <strong>${r.fileNo}</strong> &nbsp;|&nbsp; <i class="fas fa-calendar"></i> تاريخ الفحص: <strong>${r.date}</strong></p></div>
+        <span style="padding:10px 18px;border-radius:25px;font-weight:700;font-size:14px;background:white;color:${status.color};border:2px solid ${status.borderColor};white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,0.08);"><i class="fas ${status.icon}"></i> ${status.text}</span>
+      </div>
+      <div style="text-align:center;margin-top:20px;">
+        <div style="font-size:42px;font-weight:800;color:${status.color};line-height:1;">${r.level} <span style="font-size:18px;font-weight:600;">g/dL</span></div>
+        <div style="font-size:13px;color:#6b7888;margin-top:4px;">مستوى الهيموجلوبين</div>
+        <div style="height:14px;background:linear-gradient(to left, #c43a3a 0%, #e89a4d 30%, #e8b94d 55%, #4caf7d 80%, #4caf7d 100%);border-radius:10px;margin:12px auto 0;position:relative;overflow:visible;max-width:100%;">
+          <div style="position:absolute;top:-7px;right:${Math.max(1, Math.min(99, ((r.level - 5) / 7) * 100))}%;width:28px;height:28px;background:white;border:4px solid ${status.borderColor};border-radius:50%;box-shadow:0 3px 10px rgba(0,0,0,0.25);"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;color:#999;margin-top:5px;padding:0 5px;"><span style="color:#c43a3a;font-weight:700;">7-</span><span>8</span><span>9</span><span>10</span><span style="color:#4caf7d;font-weight:700;">11+</span></div>
+      </div>
+    </div>
+    <div style="padding:20px;">
+      <div style="background:${rec.bgColor};border-radius:16px;padding:18px;margin-bottom:20px;border-right:4px solid ${rec.borderColor};">
+        <h4 style="font-size:18px;font-weight:800;color:${rec.color};margin:0 0 10px;display:flex;align-items:center;gap:10px;"><i class="fas ${rec.icon}"></i>${rec.title}</h4>
+        <p style="font-size:15px;color:#3a4a5c;font-weight:600;margin-bottom:6px;">${rec.summary}</p>
+        <p style="font-size:14px;color:#6b7888;line-height:1.8;">${rec.message}</p>
+      </div>
+      <div style="margin-bottom:20px;">
+        <h5 style="font-size:16px;font-weight:700;color:#3a4a5c;margin-bottom:12px;display:flex;align-items:center;gap:8px;"><span style="width:34px;height:34px;border-radius:10px;background:${rec.bgColor};color:${rec.color};display:flex;align-items:center;justify-content:center;font-size:16px;">📋</span>${rec.action.title}</h5>
+        <ul style="list-style:none;padding:0;">${rec.action.items.map((item, i) => `<li style="padding:12px 15px;margin-bottom:8px;background:#f9fafb;border-radius:12px;font-size:14px;color:#3a4a5c;display:flex;align-items:flex-start;gap:12px;border-right:4px solid ${rec.borderColor};line-height:1.6;"><span style="width:26px;height:26px;border-radius:50%;background:${rec.bgColor};color:${rec.color};display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;flex-shrink:0;">${i + 1}</span><span>${item}</span></li>`).join('')}</ul>
+      </div>
+      ${rec.nutritionAdvice ? `<div style="margin-bottom:20px;background:#f0faf9;border-radius:16px;padding:18px;"><h5 style="font-size:16px;font-weight:700;color:#2c5f66;margin-bottom:12px;display:flex;align-items:center;gap:8px;"><span style="font-size:22px;">🥗</span>${rec.nutritionAdvice.title}</h5><ul style="list-style:none;padding:0;">${rec.nutritionAdvice.items.map(item => `<li style="padding:10px 12px;margin-bottom:6px;background:white;border-radius:10px;font-size:13px;color:#3a4a5c;display:flex;align-items:flex-start;gap:10px;line-height:1.6;border-right:3px solid var(--teal);"><i class="fas fa-check-circle" style="color:var(--teal);margin-top:2px;flex-shrink:0;"></i><span>${item}</span></li>`).join('')}</ul></div>` : ''}
+      ${rec.ironFoods ? `<div style="margin-bottom:15px;background:#fef9f7;border-radius:16px;padding:16px;"><h5 style="font-size:14px;font-weight:700;color:#c4691a;margin-bottom:10px;">🥩 مصادر الحديد الغذائية</h5><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;">${rec.ironFoods.map(f => `<div style="background:white;padding:10px 12px;border-radius:10px;font-size:12px;color:#3a4a5c;box-shadow:0 1px 3px rgba(0,0,0,0.05);">${f}</div>`).join('')}</div></div><div style="margin-bottom:15px;background:#fff8e1;border-radius:16px;padding:16px;"><h5 style="font-size:14px;font-weight:700;color:#b8901a;margin-bottom:10px;">🍊 مصادر فيتامين C (تعزز امتصاص الحديد)</h5><div style="display:flex;flex-wrap:wrap;gap:8px;">${rec.vitaminFoods.map(v => `<span style="background:white;padding:8px 14px;border-radius:20px;font-size:12px;color:#3a4a5c;box-shadow:0 1px 3px rgba(0,0,0,0.05);">${v}</span>`).join('')}</div></div>` : ''}
+      ${rec.showContact ? `<div style="background:linear-gradient(135deg,#fef3e0,#fff8e1);border-radius:16px;padding:16px;text-align:center;margin-bottom:15px;border:2px dashed #e8b94d;"><p style="font-size:14px;color:#c4691a;font-weight:600;margin-bottom:12px;"><i class="fas fa-phone"></i> للمواعيد والاستشارة الغذائية</p><button onclick="openWhatsApp()" style="padding:12px 24px;background:#25d366;color:white;border:none;border-radius:14px;font-family:'Tajawal',sans-serif;font-weight:700;font-size:15px;cursor:pointer;box-shadow:0 4px 15px rgba(37,211,102,0.3);"><i class="fab fa-whatsapp"></i> تواصل واتساب</button></div>` : ''}
+      ${rec.isEmergency ? `<div style="background:linear-gradient(135deg,#ff7878,#ff5959);border-radius:16px;padding:20px;text-align:center;color:white;cursor:pointer;box-shadow:0 8px 25px rgba(255,120,120,0.5);margin-bottom:15px;animation:pulse 2s infinite;" onclick="openWhatsApp()"><i class="fas fa-phone-volume" style="font-size:32px;margin-bottom:10px;display:block;"></i><strong style="font-size:18px;display:block;margin-bottom:4px;">اتصلي بالطوارئ فوراً</strong><p style="font-size:14px;opacity:0.95;margin:0;">${rec.emergencyContact.hospital}: ${rec.emergencyContact.phone}</p></div>` : ''}
+      <div style="background:#fff5f5;border-radius:12px;padding:14px 16px;border-right:4px solid #ff7878;margin-top:10px;"><p style="font-size:12px;color:#c43a3a;line-height:1.7;margin:0;display:flex;align-items:flex-start;gap:8px;"><i class="fas fa-circle-info" style="margin-top:2px;flex-shrink:0;"></i><span>${rec.note}</span></p></div>
+    </div>
+  </div>`;
+}
+
+// ==================== Modal ====================
+function showModal(type, title, message) {
+  const overlay = document.getElementById('modal-overlay');
+  const iconBox = document.getElementById('modal-icon');
+  const icons = { success: 'fa-circle-check', error: 'fa-circle-xmark', warning: 'fa-triangle-exclamation', info: 'fa-circle-info' };
+  iconBox.className = 'modal-icon ' + type;
+  iconBox.innerHTML = `<i class="fas ${icons[type] || icons.info}"></i>`;
+  document.getElementById('modal-title').textContent = title;
+  document.getElementById('modal-message').textContent = message;
+  overlay.classList.add('active');
+}
+
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('active');
+}
+
+// ==================== نافذة التثبيت ====================
+let deferredPrompt = null;
+const INSTALL_MODAL_KEY = 'hideInstallModal';
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  if (!localStorage.getItem(INSTALL_MODAL_KEY)) showInstallModal();
+});
+
+window.addEventListener('load', () => {
+  if (!deferredPrompt && !localStorage.getItem(INSTALL_MODAL_KEY)) {
+    setTimeout(() => showInstallModal(true), 2000);
+  }
+});
+
+function showInstallModal(showManualSteps = false) {
+  const modal = document.getElementById('install-modal');
+  const manualSteps = document.getElementById('install-manual-steps');
+  if (modal) {
+    modal.classList.add('active');
+    if (manualSteps) manualSteps.style.display = showManualSteps ? 'block' : 'none';
+  }
+}
+
+function closeInstallModal() {
+  const modal = document.getElementById('install-modal');
+  if (modal) modal.classList.remove('active');
+  localStorage.setItem(INSTALL_MODAL_KEY, 'true');
+}
+
+function installApp() {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then((choiceResult) => {
+      if (choiceResult.outcome === 'accepted') closeInstallModal();
+      deferredPrompt = null;
+    });
+  } else {
+    const manualSteps = document.getElementById('install-manual-steps');
+    if (manualSteps) manualSteps.style.display = 'block';
+    const btn = document.getElementById('install-button');
+    if (btn) { btn.innerHTML = '<i class="fas fa-check-circle"></i> اتبعي الخطوات أعلاه'; btn.onclick = () => closeInstallModal(); }
+  }
+}
+
+document.addEventListener('click', function(e) {
+  const overlay = document.getElementById('install-modal');
+  if (e.target === overlay) closeInstallModal();
+});
+
+// ==================== التهيئة ====================
+function initApp() {
+  loadIronRecords();
+  try { renderSchedule(); } catch(e) {}
+  try { renderVaccinesInfo(); } catch(e) {}
+  try { renderPostTips(); } catch(e) {}
+  try { renderSymptoms(); } catch(e) {}
+  try { renderQRCode(); } catch(e) {}
+  
+  const parentSearch = document.getElementById('parent-search');
+  if (parentSearch) parentSearch.addEventListener('keypress', e => { if (e.key === 'Enter') searchParent(); });
+  const nursePassword = document.getElementById('nurse-password');
+  if (nursePassword) nursePassword.addEventListener('keypress', e => { if (e.key === 'Enter') nurseLogin(); });
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initApp);
+} else {
+  initApp();
+}
+</script>
+
+<!-- Service Worker -->
+<script>
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/vaccination-app/sw.js')
-      .then((registration) => {
-        console.log('Service Worker registered with scope:', registration.scope);
-      })
-      .catch((error) => {
-        console.log('Service Worker registration failed:', error);
-      });
+      .then(registration => console.log('Service Worker registered'))
+      .catch(error => console.log('Service Worker registration failed:', error));
   });
 }
-</script>   
-          </body>
+</script>
+
+</body>
 </html>
